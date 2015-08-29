@@ -1,113 +1,99 @@
-{% extends 'base.html' %}
+{% extends 'backend.html' %}
 
-{% block content %}
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
+{% block app %}
 
-	<div class="container">
-		<div class="row">
+<div class="row">
+	<div class="col-md-6">
+		<h2>Clientes</h2>
+		<div class="separator-2"></div>
+	</div>
+	<div class="col-md-6">
+		<div class="text-right">
+			<a href="{% url 'customer_form' %}" class="btn btn-default">Novo Cliente</a>
+		</div>
+	</div>
+</div>
 
-			<!-- main start -->
-			<!-- ================ -->
-			<div class="main col-md-12">
+<div class="sorting-filters">
+	<form class="form-inline">
+		<div class="form-group">
+			<label>Nome do usuário</label>
+			<input type="text" class="form-control">
+		</div>
+		<div class="form-group">
+			<label>CPF/CNPJ</label>
+			<input type="text" class="form-control">
+		</div>
 
-				<div class="row">
-					<div class="col-md-6">
-						<h2>Clientes</h2>
-						<div class="separator-2"></div>
-					</div>
-					<div class="col-md-6">
-						<div class="text-right">
-							<a href="{% url 'customer_form' %}" class="btn btn-default">Novo Cliente</a>
-						</div>
-					</div>
-				</div>
+		<div class="form-group">
+			<label>Está Ativo?</label>
+			<select class="form-control">
+				<option>SIM</option>
+				<option>NÃO</option>
+			</select>
+		</div>
 
-				<div class="sorting-filters">
-					<form class="form-inline">
-						<div class="form-group">
-							<label>Nome do usuário</label>
-							<input type="text" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>CPF/CNPJ</label>
-							<input type="text" class="form-control">
-						</div>
-
-						<div class="form-group">
-							<label>Está Ativo?</label>
-							<select class="form-control">
-								<option>SIM</option>
-								<option>NÃO</option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<button class="btn btn-default">Filtrar</button>
-						</div>
-					</form>
-				</div>
+		<div class="form-group">
+			<button class="btn btn-default">Filtrar</button>
+		</div>
+	</form>
+</div>
 
 
-				<table class="table table-striped table-bordared table-hover">
-					<thead>
-						<tr>
-							<th>Usuário</th>
-							<th>Nome</th>
-							<th>Sobrenome</th>
-							<th>E-mail</th>
-							<th>Ativo?</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><strong><a href="{% url 'customer_form' %}">eh_meu_cavalheiro</a></strong></td>
-							<td>Fulano</td>
-							<td>de Tal</td>
-							<td>fulano@detail.com</td>
-							<td><i class="fa fa-check text-success"></i></td>
-						</tr>
-						<tr>
-							<td><strong><a href="{% url 'customer_form' %}">john_due</a></strong></td>
-							<td>John</td>
-							<td>Due</td>
-							<td>john.due@gmail.com</td>
-							<td><i class="fa fa-close text-danger"></i></td>
-						</tr>
-						<tr>
-							<td><strong><a href="{% url 'customer_form' %}">patricia</a></strong></td>
-							<td>Patricia</td>
-							<td>Insp</td>
-							<td>patricia.insp@gmail.com</td>
-							<td><i class="fa fa-close text-danger"></i></td>
-						</tr>
+<table class="table table-striped table-bordared table-hover">
+	<thead>
+		<tr>
+			<th>Usuário</th>
+			<th>Nome</th>
+			<th>Sobrenome</th>
+			<th>E-mail</th>
+			<th>Ativo?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong><a href="{% url 'customer_form' %}">eh_meu_cavalheiro</a></strong></td>
+			<td>Fulano</td>
+			<td>de Tal</td>
+			<td>fulano@detail.com</td>
+			<td><i class="fa fa-check text-success"></i></td>
+		</tr>
+		<tr>
+			<td><strong><a href="{% url 'customer_form' %}">john_due</a></strong></td>
+			<td>John</td>
+			<td>Due</td>
+			<td>john.due@gmail.com</td>
+			<td><i class="fa fa-close text-danger"></i></td>
+		</tr>
+		<tr>
+			<td><strong><a href="{% url 'customer_form' %}">patricia</a></strong></td>
+			<td>Patricia</td>
+			<td>Insp</td>
+			<td>patricia.insp@gmail.com</td>
+			<td><i class="fa fa-close text-danger"></i></td>
+		</tr>
 
-					</tbody>
-				</table>
+	</tbody>
+</table>
 
-				<div class="row">
-					<div class="col-md-6">
+<div class="row">
+	<div class="col-md-6">
 
-						<ul class="pagination">
-							<li><a href="#">Anterior</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">Próximo</a></li>
-						</ul>
-					</div>
+		<ul class="pagination">
+			<li><a href="#">Anterior</a></li>
+			<li class="active"><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">Próximo</a></li>
+		</ul>
+	</div>
 
-					<div class="col-md-6" style="margin: 20px 0 40px;">
-						<p class="text-right">12567 Clientes</p>
-					</div>
+	<div class="col-md-6" style="margin: 20px 0 40px;">
+		<p class="text-right">12567 Clientes</p>
+	</div>
+</div>
 
-			</div>
+</div><!-- /.row -->
 
-		</div><!-- /.row -->
-	</div><!-- /.container -->
-
-</section>
-
-{% endblock content %}
+{% endblock app %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+			<!-- main start -->
+			<!-- ================ -->
+			<div class="main col-md-12">
+
+				<div class="row">
+					<div class="col-md-3">
+						<h3 class="title">Opções</h3>
+						<div class="separator-2"></div>
+						<nav>
+							<ul class="nav nav-pills nav-stacked">
+								<li class="active"><a href="{% url 'customer_list' %}">Clientes</a></li>
+								<li><a href="#">Produtos</a></li>
+								<li><a href="#">Categorias</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-9">
+						{% block app %}{% endblock app %}
+					</div>
+				</div><!-- /.row -->
+
+
+			</div><!-- /.main -->
+
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+
+</section>
+
+{% endblock content %}
+
