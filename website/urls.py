@@ -9,6 +9,10 @@ urlpatterns = patterns('',
         view = 'website.views.product',
         name = 'product',
     ),
+    url(regex=r'^cadastrar$',
+        view = 'website.views.signin',
+        name = 'signin',
+    ),
 )
 
 

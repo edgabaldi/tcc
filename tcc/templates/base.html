@@ -46,7 +46,7 @@
 
 								<!-- logo -->
 								<div class="logo">
-									<a href="index.html"><img id="logo" src="{% static 'images/logo.png' %}"></a>
+									<a href="{% url 'index' %}"><img id="logo" src="{% static 'images/logo.png' %}"></a>
 								</div>
 
 							</div>
@@ -82,7 +82,7 @@
 											<div class="collapse navbar-collapse" id="navbar-collapse-1">
 												<ul class="nav navbar-nav navbar-right">
 													<li class="dropdown active">
-														<a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Cadastre-se</a>
+														<a href="{% url 'signin' %}" class="dropdown-toggle" data-toggle="dropdown">Cadastre-se</a>
 													</li>
 												</ul>
 											</div>

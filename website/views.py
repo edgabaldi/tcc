@@ -5,3 +5,6 @@ def index(request):
 
 def product(request):
     return render_to_response('website/product.html')
+
+def signin(request):
+    return render_to_response('website/signin.html')
