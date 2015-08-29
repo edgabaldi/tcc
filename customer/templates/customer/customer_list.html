@@ -19,7 +19,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="text-right">
-							<a href="#" class="btn btn-default">Novo Cliente</a>
+							<a href="{% url 'customer_form' %}" class="btn btn-default">Novo Cliente</a>
 						</div>
 					</div>
 				</div>
@@ -62,21 +62,21 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><strong><a href="#">eh_meu_cavalheiro</a></strong></td>
+							<td><strong><a href="{% url 'customer_form' %}">eh_meu_cavalheiro</a></strong></td>
 							<td>Fulano</td>
 							<td>de Tal</td>
 							<td>fulano@detail.com</td>
 							<td><i class="fa fa-check text-success"></i></td>
 						</tr>
 						<tr>
-							<td><strong><a href="#">john_due</a></strong></td>
+							<td><strong><a href="{% url 'customer_form' %}">john_due</a></strong></td>
 							<td>John</td>
 							<td>Due</td>
 							<td>john.due@gmail.com</td>
 							<td><i class="fa fa-close text-danger"></i></td>
 						</tr>
 						<tr>
-							<td><strong><a href="#">patricia</a></strong></td>
+							<td><strong><a href="{% url 'customer_form' %}">patricia</a></strong></td>
 							<td>Patricia</td>
 							<td>Insp</td>
 							<td>patricia.insp@gmail.com</td>
@@ -86,14 +86,23 @@
 					</tbody>
 				</table>
 
-				<ul class="pagination">
-					<li><a href="#">Anterior</a></li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">Próximo</a></li>
-				</ul>
+				<div class="row">
+					<div class="col-md-6">
+
+						<ul class="pagination">
+							<li><a href="#">Anterior</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">Próximo</a></li>
+						</ul>
+					</div>
+
+					<div class="col-md-6" style="margin: 20px 0 40px;">
+						<p class="text-right">12567 Clientes</p>
+					</div>
+
 			</div>
 
 		</div><!-- /.row -->
