@@ -17,7 +17,10 @@ urlpatterns = patterns('',
         view = 'website.views.login',
         name = 'login',
     ),
-
+    url(regex=r'^sistema/dashboard/$',
+        view = 'website.views.dashboard',
+        name = 'dashboard',
+    ),
 )
 
 

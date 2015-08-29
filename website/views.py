@@ -11,3 +11,6 @@ def signin(request):
 
 def login(request):
     return render_to_response('website/login.html')
+
+def dashboard(request):
+    return render_to_response('website/dashboard.html')

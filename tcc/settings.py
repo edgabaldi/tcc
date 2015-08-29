@@ -40,6 +40,8 @@ INSTALLED_APPS = (
 
     'tcc',
     'website',
+    'customer',
+    'product',
 )
 
 MIDDLEWARE_CLASSES = (
