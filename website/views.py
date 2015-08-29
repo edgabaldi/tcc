@@ -8,3 +8,6 @@ def product(request):
 
 def signin(request):
     return render_to_response('website/signin.html')
+
+def login(request):
+    return render_to_response('website/login.html')
