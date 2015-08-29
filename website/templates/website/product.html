@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+			<!-- main start -->
+			<!-- ================ -->
+			<div class="main col-md-12">
+
+				<!-- page-title start -->
+				<!-- ================ -->
+				<h1 class="page-title margin-top-clear">NISSAN FRONTIER 4X4 SE 2005/2005 LRQ1343</h1>
+				<!-- page-title end -->
+
+				<div class="row">
+					<div class="col-md-4">
+						<!-- Nav tabs -->
+						<ul class="nav nav-pills white space-top" role="tablist">
+							<li class="active"><a href="#product-images" role="tab" data-toggle="tab" title="images"><i class="fa fa-camera pr-5"></i>Fotos</a></li>
+						</ul>
+
+						<!-- Tab panes start-->
+						<div class="tab-content clear-style">
+							<div class="tab-pane active" id="product-images">
+								<div class="owl-carousel content-slider-with-controls-bottom">
+									<div class="overlay-container">
+										<img src="{% static 'fotos/foto1.JPG' %}" alt="">
+										<a href="{% static 'fotos/foto1.JPG' %}" class="popup-img overlay" title="image title"><i class="fa fa-search-plus"></i></a>
+									</div>
+									<div class="overlay-container">
+										<img src="{% static 'fotos/foto2.JPG' %}" alt="">
+										<a href="{% static 'fotos/foto2.JPG' %}" class="popup-img overlay" title="image title"><i class="fa fa-search-plus"></i></a>
+									</div>
+									<div class="overlay-container">
+										<img src="{% static 'fotos/foto3.JPG' %}" alt="">
+										<a href="{% static 'fotos/foto3.JPG' %}" class="popup-img overlay" title="image title"><i class="fa fa-search-plus"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Tab panes end-->
+						<hr>
+
+						<span class="price">R$15.000.00</span>
+						<div class="clearfix"></div>
+						<hr>
+						<div class="row">
+
+							<form role="form">
+								<div class="col-md-8">
+									<div class="form-group">
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<input type="submit" value="Dê um Lance!" class="btn btn-default">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<!-- product side start -->
+					<aside class="col-md-8">
+						<div class="sidebar">
+							<div class="side product-item vertical-divider-left">
+								<div class="tabs-style-2">
+									<!-- Nav tabs -->
+									<ul class="nav nav-tabs" role="tablist">
+										<li class="active"><a href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-5"></i>Descrição</a></li>
+										<li><a href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-users pr-5"></i>Histórico de Lances</a></li>
+									</ul>
+									<!-- Tab panes -->
+									<div class="tab-content padding-top-clear padding-bottom-clear">
+										<div class="tab-pane fade in active" id="h2tab2">
+											<h4 class="space-top">Descritivo do Lote</h4>
+											<hr>
+
+											<dl class="dl-horizontal">
+												<dt>Ano</dt>
+												<dd>2005/2005</dd>
+												<dt>Avaliador</dt>
+												<dd>N/I</dd>
+												<dt>Categorias</dt>
+												<dd>MÉDIO</dd>
+												<dt>Combustível</dt>
+												<dd>Diesel</dd>
+												<dt>Cor</dt>
+												<dd>Preta</dd>
+												<dt>Depósito</dt>
+												<dd>RECREIO (SEOP)</dd>
+												<dt>Estado Geral</dt>
+												<dd>Veículo Recuperável</dd>
+												<dt>Modelo</dt>
+												<dd>FRONTIER 4X4 SE</dd>
+											</dl>
+											<hr>
+										</div>
+										<div class="tab-pane fade" id="h2tab3">
+
+											<h4 class="space-top">Histórico de Lances</h4>
+											<hr>
+
+											<table class="table cart table-hover table-striped">
+												<thead>
+													<tr>
+														<th>Data/Hora</th>
+														<th>Usuário</th>
+														<th>Lance</th>
+													</tr>
+												</thead>
+
+												<tbody>
+													<tr>
+														<td>20/10/2015 10:22:34</td>
+														<td>joao</td>
+														<td><span class="pull-right">R$ 8.890,00</span></td>
+													</tr>
+													<tr>
+														<td>20/10/2015 10:22:34</td>
+														<td>joao</td>
+														<td><span class="pull-right">R$ 8.890,00</span></td>
+													</tr>
+													<tr>
+														<td>20/10/2015 10:22:34</td>
+														<td>joao</td>
+														<td><span class="pull-right">R$ 8.890,00</span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</aside>
+					<!-- product side end -->
+				</div>
+
+			</div>
+			<!-- main end -->
+
+		</div>
+	</div>
+</section>
+<!-- main-container end -->
+
+{% include 'website/product_related_products.html' %}
+
+
+{% endblock %}
