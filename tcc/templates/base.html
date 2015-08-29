@@ -78,12 +78,11 @@
 												</button>
 											</div>
 
-											<!-- Collect the nav links, forms, and other content for toggling -->
-											<div class="collapse navbar-collapse" id="navbar-collapse-1">
-												<ul class="nav navbar-nav navbar-right">
-													<li class="dropdown active">
-														<a href="{% url 'signin' %}" class="dropdown-toggle" data-toggle="dropdown">Cadastre-se</a>
-													</li>
+											<div class="pull-right">
+												<ul class="nav nav-pills">
+													<li class="active"><a href="{% url 'signin' %}">Cadastre-se</a></li>
+													<li><a href="{% url 'login' %}">Entrar</a></li>
+													<li><a href="{% url 'dashboard' %}">Administrar</a></li>
 												</ul>
 											</div>
 
