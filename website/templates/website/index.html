@@ -1,1 +1,60 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+			<!-- main start -->
+			<!-- ================ -->
+			<div class="main col-md-12">
+
+				<!-- page-title start -->
+				<!-- ================ -->
+				<h1 class="page-title">Agenda de Leilões</h1>
+				<p class="lead">Confira nossa programação</p>
+				<div class="separator-2"></div>
+
+
+			<!-- page-title end -->
+				
+				<!-- shop items start -->
+				<div class="masonry-grid-fitrows row grid-space-20">
+
+					{% include 'website/index_carta.html' %}
+					{% include 'website/index_carta.html' %}
+					{% include 'website/index_carta.html' %}
+					{% include 'website/index_carta.html' %}
+					{% include 'website/index_carta.html' %}
+					{% include 'website/index_carta.html' %}
+					{% include 'website/index_carta.html' %}
+					{% include 'website/index_carta.html' %}
+				</div>
+				
+				<div class="clearfix"></div>
+
+				<!-- pagination start -->
+				<ul class="pagination">
+					<li><a href="#">«</a></li>
+					<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">»</a></li>
+				</ul>
+				<!-- pagination end -->
+
+			</div>
+			<!-- main end -->
+
+		</div>
+	</div>
+</section>
+<!-- main-container end -->
+
+{% endblock content %}
