@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('website.urls')),
     url(r'^customer/', include('customer.urls')),
+    url(r'^product/', include('product.urls')),
 ]

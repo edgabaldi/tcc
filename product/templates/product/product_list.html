@@ -1,0 +1,110 @@
+{% extends 'backend.html' %}
+
+{% block app %}
+
+<div class="row">
+	<div class="col-md-6">
+		<h2>Lotes</h2>
+		<div class="separator-2"></div>
+	</div>
+	<div class="col-md-6">
+		<div class="text-right">
+			<a href="#" class="btn btn-default">Novo Lote</a>
+		</div>
+	</div>
+</div>
+
+<div class="sorting-filters">
+	<form class="form-inline">
+		<div class="form-group">
+			<label>Número do Lote</label>
+			<input type="text" class="form-control">
+		</div>
+		<div class="form-group">
+			<label>CPF/CNPJ</label>
+			<input type="text" class="form-control">
+		</div>
+
+		<div class="form-group">
+			<label>Categoria</label>
+			<select class="form-control">
+				<option>LEVE</option>
+				<option>MÉDIO</option>
+				<option>PESADO</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-default">Filtrar</button>
+		</div>
+	</form>
+</div>
+
+<table class="table table-striped table-bordared table-hover">
+	<thead>
+		<tr>
+			<th>Lote</th>
+			<th>Descrição</th>
+			<th>Marca</th>
+			<th>Modelo</th>
+			<th>Valor Atual</th>
+			<th>Categoria</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong><a href="#">123</a></strong></td>
+			<td>NISSAN FRONTIER 4X4 SE 2005/2005</td>
+			<td>NISSAN</td>
+			<td>FRONTIER 4X4</td>
+			<td class="text-right">22.000,00</td>
+			<td>VEICULO COM MOTOR</td>
+		</tr>
+		<tr>
+			<td><strong><a href="#">124</a></strong></td>
+			<td>IMP HYUNDAI TUCSON GL 20L</td>
+			<td>HYUNDAI</td>
+			<td>TUCSON GL 20L</td>
+			<td class="text-right">25.750,00</td>
+			<td>VEICULO SEM MOTOR</td>
+		</tr>
+		<tr>
+			<td><strong><a href="#">125</a></strong></td>
+			<td>IMP FIAT SIENA EL 1.0 FLEX</td>
+			<td>FIAT</td>
+			<td>SIENA EL 1.0 FLEX</td>
+			<td class="text-right">12.200,00</td>
+			<td>SUCATA</td>
+		</tr>
+		<tr>
+			<td><strong><a href="#">126</a></strong></td>
+			<td>IMP CHERY FACE 1.3</td>
+			<td>CHERY</td>
+			<td>FACE 1.3</td>
+			<td class="text-right">7.000,00</td>
+			<td>VEICULO COM MOTOR</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="row">
+	<div class="col-md-6">
+
+		<ul class="pagination">
+			<li><a href="#">Anterior</a></li>
+			<li class="active"><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">Próximo</a></li>
+		</ul>
+	</div>
+
+	<div class="col-md-6" style="margin: 20px 0 40px;">
+		<p class="text-right">12567 Lotes</p>
+	</div>
+</div>
+
+</div><!-- /.row -->
+
+{% endblock app %}

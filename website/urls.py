@@ -5,7 +5,7 @@ urlpatterns = patterns('',
         view = 'website.views.index',
         name = 'index'
     ),
-    url(regex=r'^product/$',
+    url(regex=r'^show_product/$',
         view = 'website.views.product',
         name = 'product',
     ),
