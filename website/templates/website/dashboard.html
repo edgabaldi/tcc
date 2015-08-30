@@ -1,40 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'backend.html' %}
 
-{% block content %}
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
+{% block app %}
+<h1 class="title">Alguns Números</h1>
+<div class="separator-2"></div>
 
-	<div class="container">
-		<div class="row">
+<div class="stats row grid-space-10">
 
-			<!-- main start -->
-			<!-- ================ -->
-			<div class="main col-md-12">
+	<div class="col-md-3 col-sm-6">
+		<div class="box-style-1">
+			<h2 class="title">Clientes</h2>
+			<i class="fa fa-users"></i>
+			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
+		</div>
+	</div>
 
-				<div class="row">
-					<div class="col-md-4">
-						<h3 class="title">Opções</h3>
-						<div class="separator-2"></div>
-						<nav>
-							<ul class="nav nav-pills nav-stacked">
-								<li class="active"><a href="{% url 'customer_list' %}">Clientes</a></li>
-								<li><a href="#">Produtos</a></li>
-								<li><a href="#">Categorias</a></li>
-							</ul>
-						</nav>
-					</div>
-					<div class="col-md-8">
-					</div>
-				</div><!-- /.row -->
+	<div class="col-md-3 col-sm-6">
+		<div class="box-style-1">
+			<h2 class="title">Lotes</h2>
+			<i class="fa fa-car"></i>
+			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
+		</div>
+	</div>
 
+	<div class="col-md-3 col-sm-6">
+		<div class="box-style-1">
+			<h2 class="title">Lances</h2>
+			<i class="fa fa-gavel"></i>
+			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
+		</div>
+	</div>
 
-			</div><!-- /.main -->
-
-		</div><!-- /.row -->
-	</div><!-- /.container -->
-
-</section>
-
-{% endblock content %}
+	<div class="col-md-3 col-sm-6">
+		<div class="box-style-1">
+			<h2 class="title">Visualizações</h2>
+			<i class="fa fa-eye"></i>
+			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
+		</div>
+	</div>
+</div><br><br><br>
+{% endblock app %}
 
