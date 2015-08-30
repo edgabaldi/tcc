@@ -1,0 +1,9 @@
+NOTES:
+
+1) Collect preferences
+2) Find similarities
+3) make recommendations
+
+http://www.mickaellegal.com/blog/2014/1/30/how-to-build-a-recommender
+https://github.com/edgabaldi/cluster-tanimotos
+http://nbviewer.ipython.org/gist/mickaellegal/8764952
