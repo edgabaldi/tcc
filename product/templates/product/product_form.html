@@ -1,0 +1,85 @@
+{% extends 'backend.html' %}
+
+{% block app %}
+<!-- main-container start -->
+<!-- ================ -->
+
+<h2 class="title">Lote</h2>
+<div class="separator-2"></div>
+
+<fieldset>
+	<legend>Dados do Veiculo</legend>
+
+	<div class="form-group">
+		<label class="control-label">Descrição</label>
+		<input type="password" class="form-control">
+	</div>
+
+	<div class="form-group">
+		<label class="control-label">Modelo</label>
+		<select class="form-control">
+			<option>GOL</option>
+			<option>UNO</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label">Cor</label>
+		<input type="text" class="form-control">
+	</div>
+
+	<div class="form-group">
+		<label class="control-label">Ano</label>
+		<input type="text" class="form-control">
+	</div>
+
+</fieldset>
+
+<fieldset>
+	<legend>Atributos do Lote</legend>
+
+	<div class="form-group">
+		<label class="control-label">Número do Lote</label>
+		<input type="text" class="form-control">
+	</div>
+
+	<div class="form-group">
+		<label class="control-label">Categoria</label>
+		<select class="form-control">
+			<option>VEÍCULO</option>
+			<option>SUCATA</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label">Valor da Avalização</label>
+		<input type="text" class="form-control">
+	</div>
+
+</fieldset>
+
+<h2 class="title">Fotos do Lote</h2>
+<div class="separator-2"></div>
+
+
+<table class="table table-bordered table-striped table-hover">
+	<thead>
+		<tr>
+			<th>Foto</th>
+			<th>Arquivo</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>(nenhum)</td>
+			<td><input type="file"></td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="text-right">
+	<button class="btn btn-default">Salvar</button>
+</div>
+
+{% endblock app %}
+
