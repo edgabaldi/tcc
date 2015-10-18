@@ -32,17 +32,14 @@
 				
 				<div class="clearfix"></div>
 
-				<!-- pagination start -->
 				<ul class="pagination">
-					<li><a href="#">«</a></li>
-					<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">»</a></li>
+					{% if page_obj.has_previous %}
+						<li><a href="?page={{page_obj.previous_page_number}}"><i class="fa fa-angle-double-left"></i> Anterior</a></li>
+					{% endif %}
+					{% if page_obj.has_next %}
+						<li><a href="?page={{page_obj.next_page_number}}">Próxima<i class="fa fa-angle-double-right"></i></a></li>
+					{% endif %}
 				</ul>
-				<!-- pagination end -->
 
 			</div>
 			<!-- main end -->
