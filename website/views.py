@@ -1,7 +1,10 @@
+#coding:utf-8
 from django.shortcuts import render_to_response
 from django.views.generic.list import ListView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
+from django.core.urlresolvers import reverse_lazy
+from django.contrib import messages
 
 from product.models import Product
 from account.models import User
@@ -23,6 +26,12 @@ class SignUpCreateView(CreateView):
     model = User
     form_class = SignUpModelForm
     template_name = 'website/signup.html'
+    success_url = reverse_lazy('index')
+    success_msg = u'Usuário Cadastrado, Aguarde a ativação!'
+
+    def form_valid(self, form):
+        messages.info(self.request, self.success_msg)
+        return super(SignUpCreateView, self).form_valid(form)
 
 
 def login(request):
