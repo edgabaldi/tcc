@@ -25,7 +25,7 @@
 				<div class="masonry-grid-fitrows row grid-space-20">
 
 					{% for product in object_list %}
-						{% include 'website/index_carta.html' %}
+						{% include 'website/index_carta.html' with product=product %}
 					{% endfor %}
 
 				</div>

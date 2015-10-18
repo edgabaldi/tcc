@@ -5,11 +5,11 @@
 			<a href="{% url 'product' %}"><img src="{% static 'fotos/foto1.JPG' %}"></a>
 		</div>
 		<div class="listing-item-body clearfix">
-			<h3 class="title"><a href="shop-product.html">Lote 2</a></h3>
-			<p>HYUNDAI TUCSON GL 20L 2008/2009</p>
-			<span class="price">R$ 19.000,00</span>
+			<h3 class="title"><a href="{% url 'product' ">Lote {{product.product_number}}</a></h3>
+			<p>{{product.description}}</p>
+			<span class="price">R$ {{product.initial_price}}</span>
 			<div class="elements-list pull-right">
-				<a href="#"><i class="fa fa-gavel pr-10"></i>Ver</a>
+				<a href="{% url 'product' %}"><i class="fa fa-gavel pr-10"></i>Ver</a>
 			</div>
 		</div>
 	</div>
