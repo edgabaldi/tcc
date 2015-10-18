@@ -10,7 +10,7 @@ from model_mommy import mommy
 
 class ProductTestCase(TestCase):
 
-    @skip('try this before import right data')
+    @skip('try this after import right data')
     def test_last_bid(self):
         self._setup_bids()
         self.assertEqual(self.last_bid, self.product.last_bid)
