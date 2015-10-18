@@ -19,21 +19,15 @@
 				<h1 class="page-title">Próximos Lotes</h1>
 				<p class="lead">Confira nossas ofertas</p>
 				<div class="separator-2"></div>
-
-
-			<!-- page-title end -->
+				<!-- page-title end -->
 				
 				<!-- shop items start -->
 				<div class="masonry-grid-fitrows row grid-space-20">
 
-					{% include 'website/index_carta.html' %}
-					{% include 'website/index_carta.html' %}
-					{% include 'website/index_carta.html' %}
-					{% include 'website/index_carta.html' %}
-					{% include 'website/index_carta.html' %}
-					{% include 'website/index_carta.html' %}
-					{% include 'website/index_carta.html' %}
-					{% include 'website/index_carta.html' %}
+					{% for product in object_list %}
+						{% include 'website/index_carta.html' %}
+					{% endfor %}
+
 				</div>
 				
 				<div class="clearfix"></div>
