@@ -68,11 +68,11 @@
 													<br>
 													<dl class="dl-horizontal">
 														<dt>Lance atual</dt>
-														<dd>R$ 15.000,00</dd>
+														<dd>R$ {{product.last_bid.value}}</dd>
 														<dt>Arrematante</dt>
-														<dd>(foobar)</dd>
+														<dd>({{product.last_bid.user}})</dd>
 														<dt>Total de Lances</dt>
-														<dd>9</dd>
+														<dd>{{product.bid_count}}</dd>
 													</dl>
 												</div><!-- /.col-md-6 -->
 			
@@ -126,21 +126,13 @@
 												</thead>
 
 												<tbody>
+													{% for bid in product.bids.all %}
 													<tr>
-														<td>20/10/2015 10:22:34</td>
-														<td>joao</td>
-														<td><span class="pull-right">R$ 8.890,00</span></td>
+														<td>{{bid.created_at}}</td>
+														<td>{{bid.user}}</td>
+														<td><span class="pull-right">R$ {{bid.value}}</span></td>
 													</tr>
-													<tr>
-														<td>20/10/2015 10:22:34</td>
-														<td>joao</td>
-														<td><span class="pull-right">R$ 8.890,00</span></td>
-													</tr>
-													<tr>
-														<td>20/10/2015 10:22:34</td>
-														<td>joao</td>
-														<td><span class="pull-right">R$ 8.890,00</span></td>
-													</tr>
+													{% endfor %}
 												</tbody>
 											</table>
 										</div><!-- /#h2tab3 -->
