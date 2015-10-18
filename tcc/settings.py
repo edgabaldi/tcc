@@ -42,6 +42,9 @@ INSTALLED_APPS = (
     'website',
     'account',
     'product',
+
+    #3rd party
+    'bootstrapform',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,7 +98,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
