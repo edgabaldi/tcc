@@ -1,43 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- main-container start -->
+
+<!-- main start -->
 <!-- ================ -->
-<section class="main-container">
+<div class="main col-md-12">
 
-	<div class="container">
-		<div class="row">
-
-			<!-- main start -->
-			<!-- ================ -->
-			<div class="main col-md-12">
-
-				<div class="row">
-					<div class="col-md-3">
-						<h3 class="title">Opções</h3>
-						<div class="separator-2"></div>
-						<nav>
-							<ul class="nav nav-pills nav-stacked">
-								<li {% if not menu_active %} class="active"{%endif%}><a href="{% url 'dashboard' %}">Visão Geral</a></li>
-								<li {% if menu_active == 'customer' %}class="active"{% endif %}><a href="{% url 'customer_list' %}">Clientes</a></li>
-								<li {% if menu_active == 'product' %}class="active"{%endif%}><a href="{% url 'product_list' %}">Lotes</a></li>
-								<li><a href="#">Marcas</a></li>
-								<li><a href="#">Modelos</a></li>
-							</ul>
-						</nav>
-					</div><!-- /.col-md-3 -->
-					<div class="col-md-9">
-						{% block app %}{% endblock app %}
-					</div>
-				</div><!-- /.row -->
+	<div class="row">
+		<div class="col-md-3">
+			<h3 class="title">Opções</h3>
+			<div class="separator-2"></div>
+			<nav>
+				<ul class="nav nav-pills nav-stacked">
+					<li {% if not menu_active %} class="active"{%endif%}><a href="{% url 'dashboard' %}">Visão Geral</a></li>
+					<li {% if menu_active == 'customer' %}class="active"{% endif %}><a href="{% url 'customer_list' %}">Clientes</a></li>
+					<li {% if menu_active == 'product' %}class="active"{%endif%}><a href="{% url 'product_list' %}">Lotes</a></li>
+					<li><a href="#">Marcas</a></li>
+					<li><a href="#">Modelos</a></li>
+				</ul>
+			</nav>
+		</div><!-- /.col-md-3 -->
+		<div class="col-md-9">
+			{% block app %}{% endblock app %}
+		</div>
+	</div><!-- /.row -->
 
 
-			</div><!-- /.main -->
-
-		</div><!-- /.row -->
-	</div><!-- /.container -->
-
-</section>
+</div><!-- /.main -->
 
 {% endblock content %}
 
