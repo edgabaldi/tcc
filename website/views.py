@@ -1,8 +1,11 @@
 from django.shortcuts import render_to_response
 from django.views.generic.list import ListView
 from django.views.generic import DetailView
+from django.views.generic.edit import CreateView
 
 from product.models import Product
+from account.models import User
+from account.forms import SignUpModelForm
 
 
 class ProductListView(ListView):
@@ -16,8 +19,11 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-def signin(request):
-    return render_to_response('website/signin.html')
+class SignUpCreateView(CreateView):
+    model = User
+    form_class = SignUpModelForm
+    template_name = 'website/signup.html'
+
 
 def login(request):
     return render_to_response('website/login.html')
