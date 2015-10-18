@@ -1,4 +1,8 @@
+import logging
 from settings import *
+
+logging.disable(logging.INFO)
+logging.disable(logging.WARNING)
 
 INSTALLED_APPS += (
     'django_nose',
