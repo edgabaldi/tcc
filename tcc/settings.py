@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'website',
     'account',
     'product',
+    'simple_search',
 
     #3rd party
     'bootstrapform',
