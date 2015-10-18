@@ -1,12 +1,13 @@
 from django.conf.urls import include, url, patterns
+from website import views
 
 urlpatterns = patterns('',
     url(regex=r'^$',
-        view = 'website.views.index',
+        view = views.ProductListView.as_view(),
         name = 'index'
     ),
-    url(regex=r'^show_product/$',
-        view = 'website.views.product',
+    url(regex=r'^product/(?P<pk>\d+)/$',
+        view = views.ProductDetailView.as_view(),
         name = 'product',
     ),
     url(regex=r'^cadastrar/$',
