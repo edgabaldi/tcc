@@ -3,50 +3,38 @@
 
 {% block content %}
 
-<!-- main-container start -->
+<!-- main start -->
 <!-- ================ -->
-<section class="main-container">
+<div class="main col-md-12">
 
-	<div class="container">
-		<div class="row">
+	<!-- page-title start -->
+	<!-- ================ -->
+	<h1 class="page-title">Próximos Lotes</h1>
+	<p class="lead">Confira nossas ofertas</p>
+	<div class="separator-2"></div>
+	<!-- page-title end -->
+	
+	<!-- shop items start -->
+	<div class="masonry-grid-fitrows row grid-space-20">
 
-			<!-- main start -->
-			<!-- ================ -->
-			<div class="main col-md-12">
+		{% for product in object_list %}
+			{% include 'website/_product_box.html' with product=product %}
+		{% endfor %}
 
-				<!-- page-title start -->
-				<!-- ================ -->
-				<h1 class="page-title">Próximos Lotes</h1>
-				<p class="lead">Confira nossas ofertas</p>
-				<div class="separator-2"></div>
-				<!-- page-title end -->
-				
-				<!-- shop items start -->
-				<div class="masonry-grid-fitrows row grid-space-20">
-
-					{% for product in object_list %}
-						{% include 'website/_product_box.html' with product=product %}
-					{% endfor %}
-
-				</div>
-				
-				<div class="clearfix"></div>
-
-				<ul class="pagination">
-					{% if page_obj.has_previous %}
-						<li><a href="?page={{page_obj.previous_page_number}}"><i class="fa fa-angle-double-left"></i> Anterior</a></li>
-					{% endif %}
-					{% if page_obj.has_next %}
-						<li><a href="?page={{page_obj.next_page_number}}">Próxima<i class="fa fa-angle-double-right"></i></a></li>
-					{% endif %}
-				</ul>
-
-			</div>
-			<!-- main end -->
-
-		</div>
 	</div>
-</section>
-<!-- main-container end -->
+	
+	<div class="clearfix"></div>
+
+	<ul class="pagination">
+		{% if page_obj.has_previous %}
+			<li><a href="?page={{page_obj.previous_page_number}}"><i class="fa fa-angle-double-left"></i> Anterior</a></li>
+		{% endif %}
+		{% if page_obj.has_next %}
+			<li><a href="?page={{page_obj.next_page_number}}">Próxima<i class="fa fa-angle-double-right"></i></a></li>
+		{% endif %}
+	</ul>
+
+</div>
+<!-- main end -->
 
 {% endblock content %}

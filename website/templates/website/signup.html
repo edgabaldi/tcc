@@ -2,136 +2,126 @@
 {% load bootstrap %}
 
 {% block content %}
-<!-- main-container start -->
+
+<!-- main start -->
 <!-- ================ -->
-<section class="main-container">
+<div class="main col-md-12">
 
-	<div class="container">
+	<h2 class="page-title">Cadastre-se</h2>
+	<div class="separator-2"></div>
+	<p class="lead">Para participar do leilão, você precisa se cadastrar no site. Seu cadastro está sujeito a aprovação previa.</p>
+
+	<form method="post">{% csrf_token %}
+
+	<fieldset>
+		<legend>Dados Pessoais</legend>
 		<div class="row">
-
-			<!-- main start -->
-			<!-- ================ -->
-			<div class="main col-md-12">
-
-				<h2 class="page-title">Cadastre-se</h2>
-				<div class="separator-2"></div>
-				<p class="lead">Para participar do leilão, você precisa se cadastrar no site. Seu cadastro está sujeito a aprovação previa.</p>
-
-				<form method="post">{% csrf_token %}
-
-				<fieldset>
-					<legend>Dados Pessoais</legend>
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="row">
-								<div class="col-lg-6">
-									{{ form.first_name|bootstrap }}
-								</div>
-								<div class="col-lg-6">
-									{{ form.last_name|bootstrap }}
-								</div>
-							</div><!-- /.row -->
-
-							{{form.email|bootstrap}}
-
-							<div class="row">
-								<div class="col-lg-4">
-									{{form.phone|bootstrap}}
-								</div>
-								<div class="col-lg-4">
-									{{form.birth_date|bootstrap}}
-								</div>
-								<div class="col-lg-4">
-									{{form.cpf_cnpj|bootstrap}}
-								</div>
-							</div><!-- /.row -->
-
-							<div class="row">
-								<div class="col-lg-6">
-									{{form.doc|bootstrap}}
-								</div>
-								<div class="col-lg-6">
-									{{form.doc_entity|bootstrap}}
-								</div>
-							</div><!-- /.row -->
-
-						</div><!-- /.col-lg-12 -->
-					</div><!-- /.row -->
-				</fieldset>
-
-				<fieldset>
-					<legend>Endereço</legend>
-					<div class="row">
-						<div class="col-lg-12">
-
-							<div class="row">
-								<div class="col-lg-9">
-									{{form.address|bootstrap}}
-								</div>
-								<div class="col-lg-3">
-									{{form.neighborhood|bootstrap}}
-								</div>
-							</div><!-- /.row -->
-
-							<div class="row">
-								<div class="col-lg-4">
-									{{form.city|bootstrap}}
-								</div>
-								<div class="col-lg-4">
-									{{form.state|bootstrap}}
-								</div>
-								<div class="col-lg-4">
-									{{form.cep|bootstrap}}
-								</div>
-							</div><!-- /.row -->
-
-						</div> <!-- /.col-lg-12 -->
-					</div><!-- /.row -->
-
-				</fieldset>
-
-				<fieldset>
-					<legend>Dados para Acesso</legend>
-					<div class="row">
-						<div class="col-lg-12">
-
-							{{form.username|bootstrap}}
-
-							<div class="row">
-								<div class="col-lg-6">
-									{{form.password|bootstrap}}
-								</div>
-								<div class="col-lg-6">
-									{{form.repeat_password|bootstrap}}
-								</div>
-							</div><!-- /.row -->
-
-						</div> <!-- /.col-lg-12 -->
-					</div><!-- /.row -->
-
-				</fieldset>
-
-				<fieldset>
-					<legend>Termos do Leilão</legend>
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="checkbox">
-								<label>{{form.accepted_terms}} Li, e concordo com os termos do leilão.</label>
-							</div>
-						</div>
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-lg-6">
+						{{ form.first_name|bootstrap }}
 					</div>
-				</fieldset>
+					<div class="col-lg-6">
+						{{ form.last_name|bootstrap }}
+					</div>
+				</div><!-- /.row -->
 
-				<div class="text-right">
-					<button class="btn btn-default">Cadastrar</button>
-				</div>
+				{{form.email|bootstrap}}
 
-			</form>
+				<div class="row">
+					<div class="col-lg-4">
+						{{form.phone|bootstrap}}
+					</div>
+					<div class="col-lg-4">
+						{{form.birth_date|bootstrap}}
+					</div>
+					<div class="col-lg-4">
+						{{form.cpf_cnpj|bootstrap}}
+					</div>
+				</div><!-- /.row -->
 
-			</div><!-- /.main -->
+				<div class="row">
+					<div class="col-lg-6">
+						{{form.doc|bootstrap}}
+					</div>
+					<div class="col-lg-6">
+						{{form.doc_entity|bootstrap}}
+					</div>
+				</div><!-- /.row -->
 
+			</div><!-- /.col-lg-12 -->
 		</div><!-- /.row -->
-	</div><!-- /.container -->
+	</fieldset>
 
-</section>
+	<fieldset>
+		<legend>Endereço</legend>
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="row">
+					<div class="col-lg-9">
+						{{form.address|bootstrap}}
+					</div>
+					<div class="col-lg-3">
+						{{form.neighborhood|bootstrap}}
+					</div>
+				</div><!-- /.row -->
+
+				<div class="row">
+					<div class="col-lg-4">
+						{{form.city|bootstrap}}
+					</div>
+					<div class="col-lg-4">
+						{{form.state|bootstrap}}
+					</div>
+					<div class="col-lg-4">
+						{{form.cep|bootstrap}}
+					</div>
+				</div><!-- /.row -->
+
+			</div> <!-- /.col-lg-12 -->
+		</div><!-- /.row -->
+
+	</fieldset>
+
+	<fieldset>
+		<legend>Dados para Acesso</legend>
+		<div class="row">
+			<div class="col-lg-12">
+
+				{{form.username|bootstrap}}
+
+				<div class="row">
+					<div class="col-lg-6">
+						{{form.password|bootstrap}}
+					</div>
+					<div class="col-lg-6">
+						{{form.repeat_password|bootstrap}}
+					</div>
+				</div><!-- /.row -->
+
+			</div> <!-- /.col-lg-12 -->
+		</div><!-- /.row -->
+
+	</fieldset>
+
+	<fieldset>
+		<legend>Termos do Leilão</legend>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="checkbox">
+					<label>{{form.accepted_terms}} Li, e concordo com os termos do leilão.</label>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+
+	<div class="text-right">
+		<button class="btn btn-default">Cadastrar</button>
+	</div>
+
+</form>
+
+</div><!-- /.main -->
+
 {% endblock content %}

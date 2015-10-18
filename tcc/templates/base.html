@@ -100,7 +100,38 @@
 			</header>
 			<!-- header end -->
 
-			{% block content %} {% endblock content %}
+
+			<!-- main-container start -->
+			<!-- ================ -->
+			<section class="main-container">
+
+				<div class="container">
+
+					<div class="row">
+
+						{% if messages %}
+						<div class="alert alert-info">
+							{% for message in messages %}
+								{{message}}
+							{% endfor %}
+						</div>
+						{% endif %}
+
+						{% if form.errors %}
+						<div class="alert alert-danger">
+							Corrija os erros abaixo.
+						</div>
+
+						{% endif %}
+
+						{% block content %} {% endblock content %}
+
+					</div><!-- /.row -->
+
+				</div><!-- /.container -->
+
+			</section><!-- /.main-container -->
+
 
 			<!-- footer start (Add "light" class to #footer in order to enable light footer) -->
 			<!-- ================ -->
