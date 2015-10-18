@@ -60,6 +60,11 @@ class Product(models.Model):
         return '{} - {}'.format(self.model, self.description)
 
 
+class Photo(models.Model):
+    product = models.ForeignKey('product.Product')
+    file = models.ImageField(upload_to='photos/')
+
+
 class Bid(models.Model):
     user = models.ForeignKey('account.User')
     product = models.ForeignKey('product.Product')
