@@ -5,7 +5,9 @@ from account.models import User
 
 class SignUpModelForm(forms.ModelForm):
 
-    repeat_password = forms.CharField(max_length=32,widget=forms.PasswordInput)
+    repeat_password = forms.CharField(max_length=32,
+                                      widget=forms.PasswordInput,
+                                      label='Repita a Senha')
 
     accepted_terms = forms.BooleanField()
 
