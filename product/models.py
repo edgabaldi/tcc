@@ -30,6 +30,7 @@ class Model(models.Model):
     def __unicode__(self):
         return '{} - {}'.format(self.brand.name, self.name)
 
+
 class Product(models.Model):
 
     model = models.ForeignKey('product.Model')
@@ -43,6 +44,15 @@ class Product(models.Model):
     clock_starts_at = models.DateTimeField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     reference = models.CharField(max_length=150)
+
+    @property
+    def last_bid(self):
+        return self.bids.order_by('-created_at').last()
+
+    @property
+    def bid_count(self):
+        return self.bids.count()
+
 
     def _generate_reference(self):
 
@@ -67,7 +77,7 @@ class Photo(models.Model):
 
 class Bid(models.Model):
     user = models.ForeignKey('account.User')
-    product = models.ForeignKey('product.Product')
+    product = models.ForeignKey('product.Product', related_name='bids')
     value = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
 
