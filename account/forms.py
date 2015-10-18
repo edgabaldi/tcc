@@ -16,3 +16,6 @@ class SignUpModelForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email', 'phone', 'birth_date', 
                   'cpf_cnpj', 'doc', 'doc_entity', 'address', 'city', 
                   'neighborhood', 'state', 'cep','username', 'password',)
+        widgets = {
+            'password': forms.PasswordInput,
+        }
