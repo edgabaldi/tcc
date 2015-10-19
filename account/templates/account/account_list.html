@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-md-6">
 		<div class="text-right">
-			<a href="{% url 'customer_form' %}" class="btn btn-default">Novo Cliente</a>
+			<a href="{% url 'user_form' %}" class="btn btn-default">Novo Cliente</a>
 		</div>
 	</div>
 </div>
@@ -55,7 +55,7 @@
 	<tbody>
 		{% for user in object_list %}
 		<tr>
-			<td><strong><a href="{% url 'customer_form' %}">{{user.username}}</a></strong></td>
+			<td><strong><a href="{% url 'user_form' %}">{{user.username}}</a></strong></td>
 			<td>{{user.first_name}}</td>
 			<td>{{user.last_name}}</td>
 			<td>{{user.email}}</td>
