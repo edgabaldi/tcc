@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'tcc',
+    'core',
     'website',
     'account',
     'product',
