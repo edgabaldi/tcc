@@ -15,7 +15,9 @@
 </div>
 
 <div class="sorting-filters">
-	<form class="form-inline">
+	<form class="form-inline" method="get">
+		{{form}}
+
 		<div class="form-group">
 			<label>Nome do usuário</label>
 			<input type="text" class="form-control">
@@ -51,28 +53,15 @@
 		</tr>
 	</thead>
 	<tbody>
+		{% for user in object_list %}
 		<tr>
-			<td><strong><a href="{% url 'customer_form' %}">eh_meu_cavalheiro</a></strong></td>
-			<td>Fulano</td>
-			<td>de Tal</td>
-			<td>fulano@detail.com</td>
+			<td><strong><a href="{% url 'customer_form' %}">{{user.username}}</a></strong></td>
+			<td>{{user.first_name}}</td>
+			<td>{{user.last_name}}</td>
+			<td>{{user.email}}</td>
 			<td><i class="fa fa-check text-success"></i></td>
 		</tr>
-		<tr>
-			<td><strong><a href="{% url 'customer_form' %}">john_due</a></strong></td>
-			<td>John</td>
-			<td>Due</td>
-			<td>john.due@gmail.com</td>
-			<td><i class="fa fa-close text-danger"></i></td>
-		</tr>
-		<tr>
-			<td><strong><a href="{% url 'customer_form' %}">patricia</a></strong></td>
-			<td>Patricia</td>
-			<td>Insp</td>
-			<td>patricia.insp@gmail.com</td>
-			<td><i class="fa fa-close text-danger"></i></td>
-		</tr>
-
+		{% endfor %}
 	</tbody>
 </table>
 
