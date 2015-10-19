@@ -10,5 +10,9 @@ urlpatterns = patterns('',
         view = views.UserCreateView.as_view(),
         name = 'user_add',
     ),
+    url(regex=r'^(?P<pk>\d+)/$',
+        view = views.UserUpdateView.as_view(),
+        name = 'user_edit',
+    ),
 
 )

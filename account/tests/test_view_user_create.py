@@ -1,3 +1,5 @@
+from unittest import skip
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
@@ -13,4 +15,9 @@ class UserCreateViewTestCase(TestCase):
 
     def test_template_used(self):
         self.assertTemplateUsed('account/user_form.html')
+
+    @skip('todo')
+    def test_post(self):
+        pass
+
 
