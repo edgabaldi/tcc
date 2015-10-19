@@ -1,14 +1,18 @@
 from django.shortcuts import render_to_response
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView
 
 from account.models import User
+from account.forms import UserModelForm 
 
-class AccountListView(ListView):
+
+class UserListView(ListView):
     model = User
-    template_name='account/account_list.html'
+    template_name='account/user_list.html'
     paginate_by=50
 
 
-def customer_form(request):
-    return render_to_response('customer/customer_form.html', context = {
-        'menu_active':'customer'})
+class UserCreateView(CreateView):
+    model = User
+    form_class = UserModelForm 
+    template_name='account/user_form.html'

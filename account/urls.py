@@ -3,12 +3,12 @@ from account import views
 
 urlpatterns = patterns('',
     url(regex=r'^$',
-        view = views.AccountListView.as_view(),
-        name = 'account_list',
+        view = views.UserListView.as_view(),
+        name = 'user_list',
     ),
     url(regex=r'^add/$',
-        view = 'account.views.customer_form',
-        name = 'user_form',
+        view = views.UserCreateView.as_view(),
+        name = 'user_add',
     ),
 
 )
