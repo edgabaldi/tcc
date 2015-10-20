@@ -1,9 +1,8 @@
-from django.shortcuts import render_to_response
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 from account.models import User
-from account.forms import UserModelForm 
+from account.forms import UserModelForm
 
 
 class UserListView(ListView):
@@ -13,7 +12,7 @@ class UserListView(ListView):
 
     model = User
     template_name='account/user_list.html'
-    paginate_by=50
+    paginate_by=25
 
 
 class UserActionMixin(object):
