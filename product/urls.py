@@ -10,4 +10,9 @@ urlpatterns = patterns('',
         view = views.ProductCreateView.as_view(),
         name = 'product_add',
     ),
+    url(regex = r'^(?P<pk>\d+)/$',
+        view = views.ProductUpdateView.as_view(),
+        name = 'product_edit',
+    ),
+
 )

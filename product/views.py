@@ -1,6 +1,9 @@
+from django.views.generic.edit import CreateView, UpdateView
+from django.core.urlresolvers import reverse_lazy
+
 from core.views import SearchableListView
 from product.models import Product
-from product.forms import ProductSearchForm
+from product.forms import ProductSearchForm, ProductModelForm
 
 
 class ProductSearchableListView(SearchableListView):
@@ -13,6 +16,23 @@ class ProductSearchableListView(SearchableListView):
     form_class = ProductSearchForm
 
 
-def product_form(request):
-    return render_to_response('product/product_form.html', context={
-        'menu_active': 'product'})
+class ProductActionMixin(object):
+    """
+    Common product attributs
+    """
+    model = Product
+    form_class = ProductModelForm
+    template_name='product/product_form.html'
+    success_url = reverse_lazy('product_list')
+
+
+class ProductCreateView(ProductActionMixin, CreateView):
+    """
+    View that allow create new products
+    """
+
+
+class ProductUpdateView(ProductActionMixin, UpdateView):
+    """
+    View that allow update products
+    """
