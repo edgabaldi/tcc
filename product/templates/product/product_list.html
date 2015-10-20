@@ -1,4 +1,5 @@
 {% extends 'backend.html' %}
+{% load bootstrap %}
 
 {% block app %}
 
@@ -9,30 +10,15 @@
 	</div>
 	<div class="col-md-6">
 		<div class="text-right">
-			<a href="{% url 'product_form' %}" class="btn btn-default">Novo Lote</a>
+			<a href="{% url 'product_add' %}" class="btn btn-default">Novo Lote</a>
 		</div>
 	</div>
 </div>
 
 <div class="sorting-filters">
 	<form class="form-inline">
-		<div class="form-group">
-			<label>Número do Lote</label>
-			<input type="text" class="form-control">
-		</div>
-		<div class="form-group">
-			<label>Descrição</label>
-			<input type="text" class="form-control">
-		</div>
 
-		<div class="form-group">
-			<label>Categoria</label>
-			<select class="form-control">
-				<option>LEVE</option>
-				<option>MÉDIO</option>
-				<option>PESADO</option>
-			</select>
-		</div>
+		{{form|bootstrap}}
 
 		<div class="form-group">
 			<button class="btn btn-default">Filtrar</button>
@@ -48,42 +34,21 @@
 			<th>Marca</th>
 			<th>Modelo</th>
 			<th>Valor Atual</th>
-			<th>Categoria</th>
+			<th>Estado Geral</th>
 		</tr>
 	</thead>
 	<tbody>
+
+		{% for product in object_list %}
 		<tr>
-			<td><strong><a href="{% url 'product_form' %}">123</a></strong></td>
-			<td>NISSAN FRONTIER 4X4 SE 2005/2005</td>
-			<td>NISSAN</td>
-			<td>FRONTIER 4X4</td>
-			<td class="text-right">22.000,00</td>
-			<td>VEICULO COM MOTOR</td>
+			<td><strong><a href="{% url 'product_add' %}">{{ product.product_number}}</a></strong></td>
+			<td>{{product.description}}</td>
+			<td>{{product.model.brand}}</td>
+			<td>{{product.model}}</td>
+			<td class="text-right">{{product.last_bid.value}}</td>
+			<td>{{product.general_state}}</td>
 		</tr>
-		<tr>
-			<td><strong><a href="{% url 'product_form' %}">124</a></strong></td>
-			<td>IMP HYUNDAI TUCSON GL 20L</td>
-			<td>HYUNDAI</td>
-			<td>TUCSON GL 20L</td>
-			<td class="text-right">25.750,00</td>
-			<td>VEICULO SEM MOTOR</td>
-		</tr>
-		<tr>
-			<td><strong><a href="{% url 'product_form' %}">125</a></strong></td>
-			<td>IMP FIAT SIENA EL 1.0 FLEX</td>
-			<td>FIAT</td>
-			<td>SIENA EL 1.0 FLEX</td>
-			<td class="text-right">12.200,00</td>
-			<td>SUCATA</td>
-		</tr>
-		<tr>
-			<td><strong><a href="{% url 'product_form' %}">126</a></strong></td>
-			<td>IMP CHERY FACE 1.3</td>
-			<td>CHERY</td>
-			<td>FACE 1.3</td>
-			<td class="text-right">7.000,00</td>
-			<td>VEICULO COM MOTOR</td>
-		</tr>
+		{% endfor %}
 	</tbody>
 </table>
 
