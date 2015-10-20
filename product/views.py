@@ -1,3 +1,4 @@
+#coding:utf-8
 from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 

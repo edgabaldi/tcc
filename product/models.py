@@ -16,7 +16,7 @@ STATUS_CHOICES = (
 
 class Brand(models.Model):
     name = models.CharField(max_length=50)
-    is_active = models.BooleanField()
+    is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name
@@ -25,10 +25,10 @@ class Brand(models.Model):
 class Model(models.Model):
     brand = models.ForeignKey('product.Brand')
     name = models.CharField(max_length=50)
-    is_active = models.BooleanField()
+    is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return '{} - {}'.format(self.brand.name, self.name)
+        return u'{} - {}'.format(self.brand.name, self.name)
 
 
 class Product(models.Model):

@@ -1,4 +1,5 @@
 {% extends 'backend.html' %}
+{% load bootstrap %}
 
 {% block app %}
 <!-- main-container start -->
@@ -7,89 +8,60 @@
 <h2 class="title">Lote</h2>
 <div class="separator-2"></div>
 
-<fieldset>
-	<legend>Dados do Veiculo</legend>
+<form method="post" action="#"> {%csrf_token%}
 
-	<div class="form-group">
-		<label class="control-label">Descrição</label>
-		<input type="password" class="form-control">
+	<fieldset>
+		<legend>Dados do Veiculo</legend>
+
+		{{form.description|bootstrap}}
+
+		{{form.model|bootstrap}}
+
+		{{form.color|bootstrap}}
+
+		{{form.year|bootstrap}}
+
+	</fieldset>
+
+	<fieldset>
+		<legend>Atributos do Lote</legend>
+
+		{{form.product_number|bootstrap}}
+
+		{{form.general_state|bootstrap}}
+
+		{{form.initial_price|bootstrap}}
+
+		{{form.clock_starts_at|bootstrap}}
+
+		{{form.status|bootstrap}}
+
+	</fieldset>
+
+	<h2 class="title">Fotos do Lote</h2>
+	<div class="separator-2"></div>
+
+
+	<table class="table table-bordered table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Foto</th>
+				<th>Arquivo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>(nenhum)</td>
+				<td><input type="file"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="text-right">
+		<button class="btn btn-default">Salvar</button>
 	</div>
 
-	<div class="form-group">
-		<label class="control-label">Modelo</label>
-		<select class="form-control">
-			<option>GOL</option>
-			<option>UNO</option>
-		</select>
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Cor</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Ano</label>
-		<input type="text" class="form-control">
-	</div>
-
-</fieldset>
-
-<fieldset>
-	<legend>Atributos do Lote</legend>
-
-	<div class="form-group">
-		<label class="control-label">Número do Lote</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Estado Geral</label>
-		<select class="form-control">
-			<option>VEÍCULO</option>
-			<option>SUCATA</option>
-		</select>
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Valor da Avalização</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Status</label>
-		<select class="form-control">
-			<option></option>
-			<option>EM LOTEAMENTO</option>
-			<option>LIBERADO PARA LANCES</option>
-		</select>
-	</div>
-
-
-</fieldset>
-
-<h2 class="title">Fotos do Lote</h2>
-<div class="separator-2"></div>
-
-
-<table class="table table-bordered table-striped table-hover">
-	<thead>
-		<tr>
-			<th>Foto</th>
-			<th>Arquivo</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>(nenhum)</td>
-			<td><input type="file"></td>
-		</tr>
-	</tbody>
-</table>
-
-<div class="text-right">
-	<button class="btn btn-default">Salvar</button>
-</div>
+</form>
 
 {% endblock app %}
 

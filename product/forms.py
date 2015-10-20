@@ -2,7 +2,7 @@
 from django import forms
 
 from core.forms import BaseSearchForm
-from product.models import Product, GENERAL_STATE_CHOICES
+from product.models import Product, Model, GENERAL_STATE_CHOICES
 
 
 class ProductSearchForm(BaseSearchForm):
@@ -34,3 +34,8 @@ class ProductModelForm(forms.ModelForm):
         fields = ('model', 'description', 'color', 'year', 
                   'product_number', 'initial_price', 
                   'general_state', 'clock_starts_at', 'status',)
+
+    def __init__(self, *args, **kwargs):
+        super(ProductModelForm, self).__init__(*args, **kwargs)
+        query_optimized = Model.objects.select_related('brand').order_by('brand', 'name')
+        self.fields['model'].queryset = query_optimized
