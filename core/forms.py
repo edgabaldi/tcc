@@ -20,11 +20,12 @@ class BaseSearchForm(forms.Form):
 
         args = []
 
-        print cleaned_data
-
         for field in cleaned_data:
-            args.append(Q(**{
-                '%s__icontains' % field : cleaned_data[field]}))
+
+            if cleaned_data[field]:
+
+                args.append(Q(**{
+                    '%s__icontains' % field : cleaned_data[field]}))
 
         return args
 
