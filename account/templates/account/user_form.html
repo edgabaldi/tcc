@@ -1,4 +1,5 @@
 {% extends 'backend.html' %}
+{% load bootstrap %}
 
 {% block app %}
 <!-- main-container start -->
@@ -7,110 +8,61 @@
 <h2 class="title">Cliente</h2>
 <div class="separator-2"></div>
 
-<fieldset>
-	<legend>Dados para Acesso</legend>
+<form method="post" action="#">{% csrf_token %}
 
-	<div class="form-group">
-		<label class="control-label">Usuário</label>
-		<input type="text" class="form-control">
+	<fieldset>
+		<legend>Dados para Acesso</legend>
+
+		{{form.username|bootstrap}}
+
+		{{form.password|bootstrap}}
+
+		{{form.is_active|bootstrap}}
+
+	</fieldset>
+
+
+	<fieldset>
+		<legend>Dados Pessoais</legend>
+
+		{{form.first_name|bootstrap}}
+
+		{{form.last_name|bootstrap}}
+
+		{{form.email|bootstrap}}
+
+		{{form.phone|bootstrap}}
+
+		{{form.birth_date|bootstrap}}
+
+		{{form.cpf_cnpj|bootstrap}}
+
+		{{form.doc|bootstrap}}
+
+		{{form.doc_entity|bootstrap}}
+
+	</fieldset>
+
+	<fieldset>
+
+		<legend>Endereço</legend>
+
+		{{form.address|bootstrap}}
+
+		{{form.neighborhood|bootstrap}}
+
+		{{form.city|bootstrap}}
+
+		{{form.state|bootstrap}}
+
+		{{form.cep|bootstrap}}
+
+	</fieldset>
+
+	<div class="text-right">
+		<button class="btn btn-default">Salvar</button>
 	</div>
 
-	<div class="form-group">
-		<label class="control-label">Senha</label>
-		<input type="password" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Ativo</label>
-		<select class="form-control">
-			<option>SIM</option>
-			<option>NÃO</option>
-		</select>
-	</div>
-
-</fieldset>
-
-
-<fieldset>
-	<legend>Dados Pessoais</legend>
-
-
-
-	<div class="form-group">
-		<label class="control-label">Nome</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Sobrenome</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">E-mail</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Telefone</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Data de Nascimento</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">CPF/CNPJ</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Identidade</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Orgão</label>
-		<input type="text" class="form-control">
-	</div>
-
-</fieldset>
-
-<fieldset>
-
-	<legend>Endereço</legend>
-
-	<div class="form-group">
-		<label class="control-label">Endereço</label>
-		<input type="text" class="form-control">
-	</div>
-	
-	<div class="form-group">
-		<label class="control-label">Bairro</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Cidade</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">Estado</label>
-		<input type="text" class="form-control">
-	</div>
-
-	<div class="form-group">
-		<label class="control-label">CEP</label>
-		<input type="text" class="form-control">
-	</div>
-
-</fieldset>
-
-<div class="text-right">
-	<button class="btn btn-default">Salvar</button>
-</div>
+</form>
 
 {% endblock app %}

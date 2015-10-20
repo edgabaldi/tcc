@@ -39,7 +39,7 @@
 	<tbody>
 		{% for user in object_list %}
 		<tr>
-			<td><strong><a href="{% url 'user_add' %}">{{user.username}}</a></strong></td>
+			<td><strong><a href="{% url 'user_edit' user.id %}">{{user.username}}</a></strong></td>
 			<td>{{user.first_name}}</td>
 			<td>{{user.last_name}}</td>
 			<td>{{user.email}}</td>
