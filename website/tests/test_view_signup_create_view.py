@@ -1,7 +1,4 @@
-from mock import patch
-
 from django.test import TestCase
-from django.test.client import RequestFactory
 from django.core.urlresolvers import reverse
 
 from website.views import SignUpCreateView
@@ -10,28 +7,24 @@ from website.views import SignUpCreateView
 class SignUpCreateViewTestCase(TestCase):
 
     def setUp(self):
-        self.factory = RequestFactory()
-        self.request = self.factory.get('/')
-
-    def test_url(self):
-        self.assertEqual('/cadastrar/', reverse('signup'))
+        self.url = reverse('signup')
+        self.response = self.client.get(self.url)
 
     def test_get(self):
-        response = SignUpCreateView.as_view()(self.request)
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(200, self.response.status_code)
 
-    @patch('website.views.messages')
-    def test_post_form_valid(self, messages):
-        messages.info.return_value=None
+    def test_template_used(self):
+        self.assertTemplateUsed(self.response, 'website/signup.html')
+
+    def test_post_form_valid(self):
         self._setup_form_valid()
-        request = self.factory.post('/', data = self.data)
-        response = SignUpCreateView.as_view()(request)
-        self.assertEqual(302, response.status_code)
+        response = self.client.post(self.url, self.data)
+        self.assertRedirects(response, reverse('index'))
 
     def test_post_form_invalid(self):
-        request = self.factory.post('/')
-        response = SignUpCreateView.as_view()(request)
+        response = self.client.post(self.url)
         self.assertEqual(200, response.status_code)
+
 
     def _setup_form_valid(self):
 

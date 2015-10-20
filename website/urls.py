@@ -6,7 +6,7 @@ urlpatterns = patterns('',
         view = views.ProductListView.as_view(),
         name = 'index'
     ),
-    url(regex=r'^product/(?P<pk>\d+)/$',
+    url(regex=r'^show/(?P<pk>\d+)/$',
         view = views.ProductDetailView.as_view(),
         name = 'product',
     ),

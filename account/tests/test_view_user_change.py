@@ -22,7 +22,8 @@ class UserUpdateViewTestCase(TestCase):
         pass
 
     def test_template_used(self):
-        self.assertTemplateUsed('account/user_form.html')
+        self.assertTemplateUsed(self.response,
+                                'account/user_form.html')
 
     def _setup_user(self):
         mommy.make(settings.AUTH_USER_MODEL, id=10)
