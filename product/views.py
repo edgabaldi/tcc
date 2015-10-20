@@ -1,6 +1,9 @@
 #coding:utf-8
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import (CreateView, 
+                                       UpdateView, 
+                                       DeleteView)
 from django.core.urlresolvers import reverse_lazy
+from django.contrib import messages
 
 from core.views import SearchableListView
 from product.models import Product
@@ -37,3 +40,7 @@ class ProductUpdateView(ProductActionMixin, UpdateView):
     """
     View that allow update products
     """
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('product_list')

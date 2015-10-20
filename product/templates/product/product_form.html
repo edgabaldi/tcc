@@ -57,8 +57,18 @@
 		</tbody>
 	</table>
 
-	<div class="text-right">
-		<button class="btn btn-default">Salvar</button>
+	<div class="row">
+		{% if object %} {# show delete button just if is editing #}
+		<div class="col-lg-6">
+			<a href="{% url 'product_delete' object.pk %}" class="btn btn-danger">Excluir</a>
+		</div>
+		{% endif %}
+
+		<div class="{% if object %}col-lg-6{%else%}col-lg-12{%endif%}">
+			<div class="text-right">
+				<button class="btn btn-default">Salvar</button>
+			</div>
+		</div>
 	</div>
 
 </form>

@@ -14,5 +14,10 @@ urlpatterns = patterns('',
         view = views.ProductUpdateView.as_view(),
         name = 'product_edit',
     ),
+    url(regex = r'^(?P<pk>\d+)/delete/$',
+        view = views.ProductDeleteView.as_view(),
+        name = 'product_delete',
+    ),
+
 
 )
