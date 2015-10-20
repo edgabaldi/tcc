@@ -1,8 +1,9 @@
 from django.conf.urls import include, url, patterns
+from product import views
 
 urlpatterns = patterns('',
     url(regex=r'^$',
-        view = 'product.views.product_list',
+        view = views.ProductSearchableListView.as_view(),
         name = 'product_list',
     ),
     url(regex = r'^add/$',

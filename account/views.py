@@ -1,4 +1,3 @@
-from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 from account.models import User
