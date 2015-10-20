@@ -14,7 +14,8 @@ class UserCreateViewTestCase(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template_used(self):
-        self.assertTemplateUsed('account/user_form.html')
+        self.assertTemplateUsed(self.response,
+                                'account/user_form.html')
 
     @skip('todo')
     def test_post(self):
