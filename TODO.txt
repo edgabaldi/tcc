@@ -4,4 +4,6 @@
 * add actived menus
 * active/inactive user feature
 * Add messages on views
-* 
+
+Core App
+* allow search filter work with foreignkeys and booleanfields
