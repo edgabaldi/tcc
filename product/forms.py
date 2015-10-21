@@ -2,8 +2,11 @@
 from django import forms
 
 from core.forms import BaseSearchForm
-from product.models import Product, Model, GENERAL_STATE_CHOICES
+from product import models
 
+#
+# Product Forms
+#
 
 class ProductSearchForm(BaseSearchForm):
 
@@ -18,24 +21,41 @@ class ProductSearchForm(BaseSearchForm):
 
     general_state = forms.CharField(
         max_length=20,
-        widget=forms.Select(choices=GENERAL_STATE_CHOICES), 
+        widget=forms.Select(choices=models.GENERAL_STATE_CHOICES), 
         required=False, 
         label='Estado Geral')
 
 
     class Meta:
-        queryset = Product.objects
+        queryset = models.Product.objects
 
 
 class ProductModelForm(forms.ModelForm):
 
     class Meta:
-        model = Product
+        model = models.Product
         fields = ('model', 'description', 'color', 'year', 
                   'product_number', 'initial_price', 
                   'general_state', 'clock_starts_at', 'status',)
 
     def __init__(self, *args, **kwargs):
         super(ProductModelForm, self).__init__(*args, **kwargs)
-        query_optimized = Model.objects.select_related('brand').order_by('brand', 'name')
+        query_optimized = models.Model.objects.select_related(
+            'brand').order_by('brand', 'name')
         self.fields['model'].queryset = query_optimized
+
+
+#
+# Brand Forms
+#
+
+class BrandSearchForm(BaseSearchForm):
+
+    name = forms.CharField(
+        max_length=100,
+        label='Nome',
+        required=False,)
+
+    class Meta:
+        queryset = models.Brand.objects
+

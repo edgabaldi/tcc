@@ -2,6 +2,11 @@ from django.conf.urls import include, url, patterns
 from product import views
 
 urlpatterns = patterns('',
+
+    #
+    # Product Views
+    #
+
     url(regex=r'^$',
         view = views.ProductSearchableListView.as_view(),
         name = 'product_list',
@@ -17,6 +22,14 @@ urlpatterns = patterns('',
     url(regex = r'^(?P<pk>\d+)/delete/$',
         view = views.ProductDeleteView.as_view(),
         name = 'product_delete',
+    ),
+
+    #
+    # Brand Views
+    #
+    url(regex=r'^brand/$',
+        view = views.BrandSearchableListView.as_view(),
+        name = 'brand_list',
     ),
 
 
