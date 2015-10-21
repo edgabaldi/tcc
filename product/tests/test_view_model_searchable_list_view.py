@@ -16,6 +16,3 @@ class ModelSearchableListViewTestCase(TestCase):
     def test_template_used(self):
         self.assertTemplateUsed(self.response, 
                                 'product/model_list.html')
-
-    def test_filter(self):
-        pass

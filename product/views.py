@@ -99,3 +99,13 @@ class ModelSearchableListView(SearchableListView):
     paginate_by=25
     form_class = forms.ModelSearchForm
 
+
+class ModelCreateView(CreateView):
+    """
+    View that allow create new models
+    """
+    model = models.Model
+    template_name = 'product/model_form.html'
+    form_class = forms.ModelModelForm
+    success_url = reverse_lazy('model_list')
+

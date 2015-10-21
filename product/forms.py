@@ -88,3 +88,10 @@ class ModelSearchForm(BaseSearchForm):
 
     class Meta:
         queryset = models.Model.objects
+
+
+class ModelModelForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Model
+        fields = ('brand', 'name',)

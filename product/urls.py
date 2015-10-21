@@ -51,6 +51,10 @@ urlpatterns = patterns('',
         name = 'model_list',
     ),
 
+    url(regex=r'^model/add/$',
+        view = views.ModelCreateView.as_view(),
+        name = 'model_add',
+    ),
 
 
 

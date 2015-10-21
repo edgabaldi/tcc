@@ -1,0 +1,25 @@
+{% extends 'backend.html' %}
+{% load bootstrap %}
+
+{% block app %}
+<!-- main-container start -->
+<!-- ================ -->
+
+<h2 class="title">Modelo</h2>
+<div class="separator-2"></div>
+
+<form method="post" action="#"> {%csrf_token%}
+
+	<fieldset>
+		<legend>Dados do Modelo</legend>
+
+		{{form|bootstrap}}
+
+	</fieldset>
+
+	<div class="text-right">
+		<button class="btn btn-default">Salvar</button>
+	</div>
+
+</form>
+{% endblock app %}
