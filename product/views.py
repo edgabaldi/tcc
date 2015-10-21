@@ -63,11 +63,23 @@ class BrandSearchableListView(SearchableListView):
     form_class = forms.BrandSearchForm
 
 
-class BrandCreateView(CreateView):
+class BrandActionMixin(object):
     """
-    View that allow create new brands
+    Commum attributes for Brand Edit Views
     """
     model = models.Brand
     template_name = 'product/brand_form.html'
     form_class = forms.BrandModelForm
     success_url = reverse_lazy('brand_list')
+
+
+class BrandCreateView(BrandActionMixin, CreateView):
+    """
+    View that allow create new brands
+    """
+
+
+class BrandUpdateView(BrandActionMixin, UpdateView):
+    """
+    View that allow change brands
+    """

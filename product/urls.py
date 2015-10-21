@@ -37,6 +37,12 @@ urlpatterns = patterns('',
         name = 'brand_add',
     ),
 
+    url(regex=r'^brand/(?P<pk>\d+)/$',
+        view = views.BrandUpdateView.as_view(),
+        name = 'brand_edit',
+    ),
+
+
 
 
 )

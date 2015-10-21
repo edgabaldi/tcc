@@ -36,7 +36,7 @@
 
 		{% for brand in object_list %}
 		<tr>
-			<td><strong><a href="#">{{ brand.name }}</a></strong></td>
+			<td><strong><a href="{% url 'brand_edit' brand.pk %}">{{ brand.name }}</a></strong></td>
 		</tr>
 		{% endfor %}
 	</tbody>
