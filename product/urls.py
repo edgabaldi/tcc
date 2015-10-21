@@ -42,6 +42,16 @@ urlpatterns = patterns('',
         name = 'brand_edit',
     ),
 
+    #
+    # Model Views
+    #
+
+    url(regex=r'^model/$',
+        view = views.ModelSearchableListView.as_view(),
+        name = 'model_list',
+    ),
+
+
 
 
 

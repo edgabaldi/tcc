@@ -16,7 +16,7 @@
 					<li {% if menu_active == 'customer' %}class="active"{% endif %}><a href="{% url 'user_list' %}">Usuários</a></li>
 					<li {% if menu_active == 'product' %}class="active"{%endif%}><a href="{% url 'product_list' %}">Lotes</a></li>
 					<li><a href="{% url 'brand_list' %}">Marcas</a></li>
-					<li><a href="#">Modelos</a></li>
+					<li><a href="{% url 'model_list' %}">Modelos</a></li>
 				</ul>
 			</nav>
 		</div><!-- /.col-md-3 -->

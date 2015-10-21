@@ -83,3 +83,19 @@ class BrandUpdateView(BrandActionMixin, UpdateView):
     """
     View that allow change brands
     """
+
+
+#
+# Model Views
+#
+
+
+class ModelSearchableListView(SearchableListView):
+    """
+    View that allow list and search models
+    """
+    model = models.Model
+    template_name = 'product/model_list.html'
+    paginate_by=25
+    form_class = forms.ModelSearchForm
+

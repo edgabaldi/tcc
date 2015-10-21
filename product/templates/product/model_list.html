@@ -1,0 +1,49 @@
+{% extends 'backend.html' %}
+{% load bootstrap %}
+
+{% block app %}
+
+<div class="row">
+	<div class="col-md-6">
+		<h2>Modelos</h2>
+		<div class="separator-2"></div>
+	</div>
+	<div class="col-md-6">
+		<div class="text-right">
+			<a href="#" class="btn btn-default">Nova Marca</a>
+		</div>
+	</div>
+</div>
+
+<div class="sorting-filters">
+	<form class="form-inline">
+
+		{{form|bootstrap}}
+
+		<div class="form-group">
+			<button class="btn btn-default">Filtrar</button>
+		</div>
+	</form>
+</div>
+
+<table class="table table-striped table-bordared table-hover">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Marca</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		{% for model in object_list %}
+		<tr>
+			<td><strong><a href="#">{{ model.name }}</a></strong></td>
+			<td>{{ model.brand }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% include '_pagination.html' %}
+
+{% endblock app %}

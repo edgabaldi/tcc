@@ -49,6 +49,7 @@ class ProductModelForm(forms.ModelForm):
 # Brand Forms
 #
 
+
 class BrandSearchForm(BaseSearchForm):
 
     name = forms.CharField(
@@ -59,8 +60,31 @@ class BrandSearchForm(BaseSearchForm):
     class Meta:
         queryset = models.Brand.objects
 
+
 class BrandModelForm(forms.ModelForm):
 
     class Meta:
         model = models.Brand
         fields = ('name',)
+
+
+#
+# Model Forms
+#
+
+
+class ModelSearchForm(BaseSearchForm):
+
+    name = forms.CharField(
+        max_length=100,
+        label='Nome',
+        required=False,)
+
+    brand = forms.ModelChoiceField(
+        queryset=models.Model.objects.select_related('brand'),
+        required=False,
+        label='Marca')
+
+
+    class Meta:
+        queryset = models.Model.objects
