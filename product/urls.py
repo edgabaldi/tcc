@@ -32,5 +32,11 @@ urlpatterns = patterns('',
         name = 'brand_list',
     ),
 
+    url(regex=r'^brand/add/$',
+        view = views.BrandCreateView.as_view(),
+        name = 'brand_add',
+    ),
+
+
 
 )

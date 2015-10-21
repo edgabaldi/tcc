@@ -61,3 +61,13 @@ class BrandSearchableListView(SearchableListView):
     template_name = 'product/brand_list.html'
     paginate_by=25
     form_class = forms.BrandSearchForm
+
+
+class BrandCreateView(CreateView):
+    """
+    View that allow create new brands
+    """
+    model = models.Brand
+    template_name = 'product/brand_form.html'
+    form_class = forms.BrandModelForm
+    success_url = reverse_lazy('brand_list')
