@@ -56,6 +56,11 @@ urlpatterns = patterns('',
         name = 'model_add',
     ),
 
+    url(regex=r'^model/(?P<pk>\d+)/$',
+        view = views.ModelUpdateView.as_view(),
+        name = 'model_edit',
+    ),
+
 
 
 

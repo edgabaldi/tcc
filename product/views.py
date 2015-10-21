@@ -100,12 +100,23 @@ class ModelSearchableListView(SearchableListView):
     form_class = forms.ModelSearchForm
 
 
-class ModelCreateView(CreateView):
+class ModelActionMixin(object):
     """
-    View that allow create new models
+    Commum attributes for Model edit views
     """
     model = models.Model
     template_name = 'product/model_form.html'
     form_class = forms.ModelModelForm
     success_url = reverse_lazy('model_list')
 
+
+class ModelCreateView(ModelActionMixin, CreateView):
+    """
+    View that allow create new models
+    """
+
+
+class ModelUpdateView(ModelActionMixin, UpdateView):
+    """
+    View that allow update models
+    """

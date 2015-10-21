@@ -37,7 +37,7 @@
 
 		{% for model in object_list %}
 		<tr>
-			<td><strong><a href="#">{{ model.name }}</a></strong></td>
+			<td><strong><a href="{% url 'model_edit' model.id %}">{{ model.name }}</a></strong></td>
 			<td>{{ model.brand }}</td>
 		</tr>
 		{% endfor %}
