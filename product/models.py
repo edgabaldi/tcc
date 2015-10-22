@@ -44,7 +44,7 @@ class Product(models.Model):
     initial_price = models.DecimalField(max_digits=10, decimal_places=2)
     general_state = models.CharField(max_length=20, 
                                      choices=GENERAL_STATE_CHOICES)
-    clock_starts_at = models.DateTimeField()
+    clock_starts_at = models.DateTimeField(null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     reference = models.CharField(max_length=150)
 
