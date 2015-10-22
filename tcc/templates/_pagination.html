@@ -2,17 +2,18 @@
 	<div class="col-md-6">
 
 		<ul class="pagination">
-			<li><a href="#">Anterior</a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">Próximo</a></li>
+			{% if page_obj.has_previous %}
+			<li><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+			{% endif %}
+
+			{% if page_obj.has_next %}
+			<li><a href="?page={{ page_obj.next_page_number }}">Próximo</a></li>
+			{% endif %}
 		</ul>
 	</div>
 
 	<div class="col-md-6" style="margin: 20px 0 40px;">
-		<p class="text-right">12567 Lotes</p>
+		<p class="text-right">{{page_obj.number}} de {{paginator.num_pages}} página(s) | {{paginator.count}} {{object_label}}</p>
 	</div>
-</div>
 
+</div>
