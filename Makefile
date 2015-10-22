@@ -4,5 +4,9 @@ run: clean
 test: clean
 	python manage.py test --settings=tcc.settings_test
 
+shell: clean
+	python manage.py shell --settings=tcc.settings_local
+
+
 clean:
 	find . -name "*.pyc" -exec rm -rf {} \;
