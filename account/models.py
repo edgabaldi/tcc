@@ -40,7 +40,6 @@ class UserManager(BaseUserManager):
             'neighborhood': 'Recreio',
             'state': 'RJ',
             'cep':'23000-000',
-            'accepted_terms': True,
             'is_superuser': True,
             'is_active': True,
         }
@@ -68,7 +67,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     state = models.CharField('Estado', max_length=2, choices=STATE_CHOICES)
     cep = models.CharField('CEP', max_length=10)
     is_active = models.BooleanField(default=False)
-    accepted_terms = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_marketing = models.BooleanField(default=False)
 
     objects = UserManager()
 

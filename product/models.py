@@ -37,6 +37,9 @@ class Product(models.Model):
     description = models.CharField(max_length=150)
     color = models.CharField(max_length=100)
     year = models.CharField(max_length=15)
+    fuel = models.CharField(max_length=50, default='N/I')
+    depot = models.CharField(max_length=100, default='N/I')
+
     product_number = models.PositiveIntegerField()
     initial_price = models.DecimalField(max_digits=10, decimal_places=2)
     general_state = models.CharField(max_length=20, 

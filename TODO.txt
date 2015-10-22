@@ -2,8 +2,20 @@
 * Product List View Slow
 * Product Delete View does not have form_valid ?
 * add actived menus
-* active/inactive user feature
 * Add messages on views
 
 Core App
 * allow search filter work with foreignkeys and booleanfields
+
+website app:
+* make a search field in home page
+* validate cpf/cnpj in user registration feature
+* validate age in user registration feature
+
+
+account app
+* add view: activate / deactivate account
+
+Fixtures (private):
+
+
