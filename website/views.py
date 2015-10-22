@@ -5,6 +5,7 @@ from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 from product.models import Product
 from account.models import User
@@ -22,16 +23,12 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-class SignUpCreateView(CreateView):
+class SignUpCreateView(SuccessMessageMixin, CreateView):
     model = User
     form_class = SignUpModelForm
     template_name = 'website/signup.html'
     success_url = reverse_lazy('index')
-    success_msg = u'Usuário Cadastrado, Aguarde a ativação!'
-
-    def form_valid(self, form):
-        messages.info(self.request, self.success_msg)
-        return super(SignUpCreateView, self).form_valid(form)
+    success_message = u'Usuário Cadastrado, Aguarde a ativação!'
 
 
 def login(request):
