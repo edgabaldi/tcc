@@ -56,6 +56,10 @@ class Product(models.Model):
     def bid_count(self):
         return self.bids.count()
 
+    @property
+    def photo_featured(self):
+        return self.photo_set.first()
+
 
     def _generate_reference(self):
 

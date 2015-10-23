@@ -23,18 +23,12 @@
 			<div class="tab-content clear-style">
 				<div class="tab-pane active" id="product-images">
 					<div class="owl-carousel content-slider-with-controls-bottom">
+						{% for photo in product.photo_set.all %}
 						<div class="overlay-container">
-							<img src="{% static 'fotos/foto1.JPG' %}" alt="">
-							<a href="{% static 'fotos/foto1.JPG' %}" class="popup-img overlay" title="image title"><i class="fa fa-search-plus"></i></a>
+							<img src="/media/{{photo.file}}" alt="">
+							<a href="/media/{{photo.file}}" class="popup-img overlay" title="image title"><i class="fa fa-search-plus"></i></a>
 						</div>
-						<div class="overlay-container">
-							<img src="{% static 'fotos/foto2.JPG' %}" alt="">
-							<a href="{% static 'fotos/foto2.JPG' %}" class="popup-img overlay" title="image title"><i class="fa fa-search-plus"></i></a>
-						</div>
-						<div class="overlay-container">
-							<img src="{% static 'fotos/foto3.JPG' %}" alt="">
-							<a href="{% static 'fotos/foto3.JPG' %}" class="popup-img overlay" title="image title"><i class="fa fa-search-plus"></i></a>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
