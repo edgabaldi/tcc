@@ -1,6 +1,7 @@
 #coding:utf-8
 from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
 from core.views import SearchableListView
@@ -32,13 +33,20 @@ class ProductActionMixin(object):
     success_url = reverse_lazy('product_list')
 
 
-class ProductCreateView(ProductActionMixin, CreateView):
+class BaseProductActionMixin(ProductActionMixin, SuccessMessageMixin):
+    """
+    Mixin of ProductActionMixin with success messages
+    """
+    success_message = 'Produto salvo com sucesso.'
+
+
+class ProductCreateView(BaseProductActionMixin, CreateView):
     """
     View that allow create new products
     """
 
 
-class ProductUpdateView(ProductActionMixin, UpdateView):
+class ProductUpdateView(BaseProductActionMixin, UpdateView):
     """
     View that allow update products
     """
