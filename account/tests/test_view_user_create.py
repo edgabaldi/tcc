@@ -1,3 +1,4 @@
+#coding:utf-8
 from unittest import skip
 
 from django.test import TestCase
@@ -17,8 +18,32 @@ class UserCreateViewTestCase(TestCase):
         self.assertTemplateUsed(self.response,
                                 'account/user_form.html')
 
-    @skip('todo')
-    def test_post(self):
-        pass
+    def test_post_form_valid(self):
+        response = self.client.post(self.url, self._valid_dict())
+        self.assertRedirects(response, reverse('user_list'))
 
+    def test_post_form_invalid(self):
+        response = self.client.post(self.url)
+        self.assertEqual(200, response.status_code)
+        self.assertFalse(response.context['form'].is_valid())
+
+    def _valid_dict(self):
+
+        return {
+            'username': 'foobar',
+            'is_active': '1',
+            'first_name': 'Foo',
+            'last_name': 'Bar',
+            'email': 'foo@bar.com',
+            'phone': 'xxx',
+            'birth_date': '02/08/1986',
+            'cpf_cnpj':'51763747654',
+            'doc': '1234',
+            'doc_entity': 'detran/rj',
+            'address': '3rd street',
+            'neighborhood': 'neighborhood',
+            'city': 'Rio de Janeiro',
+            'state': 'RJ',
+            'cep': '23000000',
+        }
 

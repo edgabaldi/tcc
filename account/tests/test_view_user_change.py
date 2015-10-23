@@ -17,14 +17,38 @@ class UserUpdateViewTestCase(TestCase):
     def test_get(self):
         self.assertEqual(200, self.response.status_code)
 
-    @skip('todo')
-    def test_post(self):
-        pass
-
     def test_template_used(self):
         self.assertTemplateUsed(self.response,
                                 'account/user_form.html')
 
+    def test_post_form_valid(self):
+        response = self.client.post(self.url, self._valid_dict())
+        self.assertRedirects(response, reverse('user_list'))
+
+    def test_post_form_invalid(self):
+        response = self.client.post(self.url)
+        self.assertEqual(200, response.status_code)
+        self.assertFalse(response.context['form'].is_valid())
+
     def _setup_user(self):
         mommy.make(settings.AUTH_USER_MODEL, id=10)
 
+    def _valid_dict(self):
+
+        return {
+            'username': 'foobar',
+            'is_active': '1',
+            'first_name': 'Foo',
+            'last_name': 'Bar',
+            'email': 'foo@bar.com',
+            'phone': 'xxx',
+            'birth_date': '02/08/1986',
+            'cpf_cnpj':'51763747654',
+            'doc': '1234',
+            'doc_entity': 'detran/rj',
+            'address': '3rd street',
+            'neighborhood': 'neighborhood',
+            'city': 'Rio de Janeiro',
+            'state': 'RJ',
+            'cep': '23000000',
+        }

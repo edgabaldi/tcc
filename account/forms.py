@@ -26,7 +26,7 @@ class SignUpModelForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'phone', 'birth_date', 
                   'cpf_cnpj', 'doc', 'doc_entity', 'address', 'city', 
-                  'neighborhood', 'state', 'cep','username', 'password',)
+                  'neighborhood', 'state', 'cep','username','password',)
         widgets = {
             'password': forms.PasswordInput,
         }
@@ -41,8 +41,7 @@ class UserModelForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'phone', 'birth_date', 
                   'cpf_cnpj', 'doc', 'doc_entity', 'address', 'city', 
-                  'neighborhood', 'state', 'cep','username', 'password',
-                  'is_active',)
+                  'neighborhood', 'state', 'cep','username', 'is_active',)
 
 
 class UserSearchForm(BaseSearchForm):

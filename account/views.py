@@ -1,4 +1,7 @@
+#coding:utf-8
 from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.urlresolvers import reverse_lazy
 
 from account.models import User
 from account.forms import UserModelForm, UserSearchForm
@@ -24,15 +27,22 @@ class UserActionMixin(object):
     model = User
     form_class = UserModelForm 
     template_name = 'account/user_form.html'
+    success_url = reverse_lazy('user_list')
 
 
-class UserCreateView(UserActionMixin, CreateView):
+class BaseUserActionMixin(UserActionMixin, SuccessMessageMixin):
+    """
+    Mixin of UserActionMixin with success messages
+    """
+    success_message = 'Usuário salvo com sucesso.'
+
+class UserCreateView(BaseUserActionMixin, CreateView):
     """
     View that allow create an user
     """
 
 
-class UserUpdateView(UserActionMixin, UpdateView):
+class UserUpdateView(BaseUserActionMixin, UpdateView):
     """
     User that allow update an user
     """
