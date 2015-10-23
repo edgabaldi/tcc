@@ -1,4 +1,3 @@
-* Product Photos in Product Forms
 * Product List View Slow
 * Product Delete View does not have form_valid ?
 * add actived menus
@@ -11,6 +10,7 @@ website app:
 * make a search field in home page
 * validate cpf/cnpj in user registration feature
 * validate age in user registration feature
+* no image placeholder
 
 
 account app
