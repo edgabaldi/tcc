@@ -9,6 +9,17 @@ class ProductCreateViewTestCase(TestCase):
     def setUp(self):
         self.url = reverse('product_add')
         self.response = self.client.get(self.url)
+
+        self.inline_dict = {
+            'photo_set-TOTAL_FORMS':'3',
+            'photo_set-INITIAL_FORMS':'0',
+            'photo_set-MAX_NUM_FORMS':'1000',
+            'photo_set-MIN_NUM_FORMS':'0',
+            'photo_set-0-file':'',
+            'photo_set-1-file':'',
+            'photo_set-2-file':'',
+        }
+
         
     def test_get(self):
         self.assertEqual(200, self.response.status_code)
@@ -23,7 +34,7 @@ class ProductCreateViewTestCase(TestCase):
         self.assertRedirects(response, reverse('product_list'))
 
     def test_post_form_invalid(self):
-        response = self.client.post(self.url)
+        response = self.client.post(self.url, self.inline_dict)
         self.assertEqual(200, response.status_code)
         self.assertFalse(response.context['form'].is_valid())
 
@@ -41,6 +52,9 @@ class ProductCreateViewTestCase(TestCase):
             'initial_price': '1234.50',
             'clock_starts_at': '16/10/2015 10:00:00',
             'status':'loteamento'
+
         }
+
+        self.valid_dict.update(self.inline_dict)
 
 

@@ -4,6 +4,8 @@ from django import forms
 from core.forms import BaseSearchForm
 from product import models
 
+from extra_views import InlineFormSet
+
 #
 # Product Forms
 #
@@ -43,6 +45,11 @@ class ProductModelForm(forms.ModelForm):
         query_optimized = models.Model.objects.select_related(
             'brand').order_by('brand', 'name')
         self.fields['model'].queryset = query_optimized
+
+
+class PhotoInline(InlineFormSet):
+    model = models.Photo
+    extra=3
 
 
 #

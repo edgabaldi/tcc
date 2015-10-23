@@ -8,6 +8,8 @@ from core.views import SearchableListView
 from product import models
 from product import forms
 
+from extra_views import CreateWithInlinesView, UpdateWithInlinesView
+
 #
 # Product Views
 #
@@ -29,6 +31,7 @@ class ProductActionMixin(object):
     """
     model = models.Product
     form_class = forms.ProductModelForm
+    inlines = [forms.PhotoInline,]
     template_name='product/product_form.html'
     success_url = reverse_lazy('product_list')
 
@@ -39,17 +42,24 @@ class BaseProductActionMixin(ProductActionMixin, SuccessMessageMixin):
     """
     success_message = 'Produto salvo com sucesso.'
 
+    def post(self, request, *args, **kwargs):
+        print request.POST
+        return super(BaseProductActionMixin, self).post(request, *args, **kwargs)
 
-class ProductCreateView(BaseProductActionMixin, CreateView):
+
+
+
+class ProductCreateView(BaseProductActionMixin, CreateWithInlinesView):
     """
     View that allow create new products
     """
 
 
-class ProductUpdateView(BaseProductActionMixin, UpdateView):
+class ProductUpdateView(BaseProductActionMixin, UpdateWithInlinesView):
     """
     View that allow update products
     """
+
 
 class ProductDeleteView(DeleteView):
     model = models.Product

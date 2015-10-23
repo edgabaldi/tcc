@@ -8,7 +8,7 @@
 <h2 class="title">Lote</h2>
 <div class="separator-2"></div>
 
-<form method="post" action="#"> {%csrf_token%}
+<form method="post" action="#" enctype="multipart/form-data"> {%csrf_token%}
 
 	<fieldset>
 		<legend>Dados do Veiculo</legend>
@@ -41,21 +41,36 @@
 	<h2 class="title">Fotos do Lote</h2>
 	<div class="separator-2"></div>
 
+	{% with inlines.0 as formset %}
+	{{formset.management_form}}
+
 
 	<table class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
 				<th>Foto</th>
 				<th>Arquivo</th>
+				<th>Excluir</th>
 			</tr>
 		</thead>
 		<tbody>
+			{% for form in formset %}
+			{{form.id}}
 			<tr>
-				<td>(nenhum)</td>
-				<td><input type="file"></td>
+				<td>{% if form.instance.file %}<img src="/media/{{form.instance.file }}" width="200">{%else%}(nenhum){% endif%}</td>
+				<td>{{form.file|bootstrap}}</td>
+				<td>{{form.DELETE|bootstrap}}</td>
 			</tr>
+			{% empty %}
+			<tr>
+				<td colspan="2">Nenhuma foto cadastrada</td>
+			</tr>
+			{% endfor %}
 		</tbody>
 	</table>
+
+	{% endwith %}
+
 
 	<div class="row">
 		{% if object %} {# show delete button just if is editing #}

@@ -16,7 +16,3 @@ class BrandSearchableListViewTestCase(TestCase):
     def test_template_used(self):
         self.assertTemplateUsed(self.response, 
                                 'product/brand_list.html')
-
-    @skip('todo')
-    def test_filter(self):
-        pass
