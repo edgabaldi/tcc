@@ -12,7 +12,6 @@ class Command(BaseCommand):
 
     def _download(self, url):
         response = requests.get(url)
-
         file = StringIO(response.content)
         file_content = ContentFile(file.read())
         return file_content
