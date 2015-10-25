@@ -82,6 +82,7 @@ class Photo(models.Model):
     file = models.ImageField(upload_to='photos/')
 
 
+
 class Bid(models.Model):
     user = models.ForeignKey('account.User')
     product = models.ForeignKey('product.Product', related_name='bids')

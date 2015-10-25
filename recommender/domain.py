@@ -1,10 +1,16 @@
 import pandas as pd
 
+from recommender.utils import sim_pearson
+
 
 class Recommender(object):
 
-    def top_matches(self, preferences, entity,n=5,
-                    similarity=sim_pearson):
+    def __init__(self, queryset):
+
+        self.queryset = queryset
+        self.dataset = pd.DataFrame(list(queryset))
+
+    def top_matches(self, preferences, entity,n=5, similarity=sim_pearson):
         """
         Returns the best matches for entity from the preferences 
         dictionary. 
@@ -12,14 +18,13 @@ class Recommender(object):
         params.
         """
 
-        scores=[(similarity(preferences, entity,other),other) 
+        scores=[(similarity(preferences, entity, other), other) 
             for other in preferences if other!=entity]
         scores.sort()
         scores.reverse()
         return scores[0:n]
 
-    def get_recommendations(self, preferences, entity, 
-                            similarity=sim_pearson):
+    def get_recommendations(self, preferences, entity, similarity=sim_pearson):
         """
         Gets recommendations for a entity(user or item) by using 
         a weighted average of every other user's rankings
@@ -56,7 +61,7 @@ class Recommender(object):
 
     def initialize_user_dict(self):
         di = {}
-        for user in set(self.dataset.User):
+        for user in self.dataset[self._unique_users_mask()].user__id:
             di[user] = {}
         return di
 
@@ -64,15 +69,12 @@ class Recommender(object):
 
         user_dict = self.initialize_user_dict()
 
-        all_products = set(self.dataset.Product)
-
         for user in user_dict.keys():
-            user_products = set(self.dataset[self.dataset.User == user].Product)
 
-            for product in all_products:
+            for product in self._all_products():
                 user_dict[user][product] = 0.0
 
-            for product in user_products:
+            for product in self._products_of_user(user):
                 user_dict[user][product] = 1.0
 
         return user_dict
@@ -87,3 +89,15 @@ class Recommender(object):
                 result[item][entity]=preferences[entity][item]
 
         return result
+
+    def _unique_users_mask(self):
+        return (self.dataset.user__id.duplicated()==False)
+
+    def _unique_products_mask(self):
+        return (self.dataset.product__reference.duplicated()==False)
+
+    def _products_of_user(self, user):
+        return set(self.dataset[self.dataset.user__id == user].product__reference)
+
+    def _all_products(self):
+        return self.dataset[self._unique_products_mask()].product__reference
