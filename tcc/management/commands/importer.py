@@ -38,7 +38,6 @@ class Command(BaseCommand):
         extra = {
             'model': model,
             'clock_starts_at': now,
-            'status': 'em_loteamento'
         }
 
         if each_dict.get('initial_price') is None:
@@ -83,7 +82,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """
-        * salvar pk do veiculo e endereço de download.
+         salvar pk do veiculo e endereço de download.
         """
 
         with open('data.pkl') as file:
@@ -114,4 +113,4 @@ class Command(BaseCommand):
             Bid.objects.bulk_create(bid_list)
 
         with open('photos.pkl', 'w') as arquivo:
-            data = pickle.dump(self.photo_list, arquivo)
+            pickle.dump(self.photo_list, arquivo)

@@ -1,3 +1,4 @@
+import os
 import pickle
 import requests
 from StringIO import StringIO
@@ -7,6 +8,7 @@ from django.core.management.base import BaseCommand
 
 from product.models import Product, Photo
 
+PHOTO_DIR = 'media/photos/'
 
 class Command(BaseCommand):
 
@@ -25,7 +27,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
 
-        with open('photo.pkl') as file:
+        with open('photos.pkl') as file:
 
             self.data = pickle.load(file)
 
@@ -37,8 +39,14 @@ class Command(BaseCommand):
             product = self._get_product(id)
             filename = self._get_filename(url)
 
-            file_content = self._download(url)
-
+        
             photo = Photo(product=product)
-            photo.file.save(filename, file_content)
+
+            if filename in os.listdir(PHOTO_DIR):
+                photo_path = '/'.join(['photos', filename])
+                photo.file = photo_path
+            else:
+                file_content = self._download(url)
+                photo.file.save(filename, file_content)
+
             photo.save()
