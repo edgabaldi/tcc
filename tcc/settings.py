@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'website',
     'account',
     'product',
+    'recommender',
 
     #3rd party
     'bootstrapform',

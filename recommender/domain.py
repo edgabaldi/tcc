@@ -1,21 +1,28 @@
 import pandas as pd
 
 from recommender.utils import sim_pearson
+from recommender.models import ProductSimilarity
+from product.models import Product, Bid
 
 
 class Recommender(object):
+    """
+    Find the similarities based on preferences.
+
+    Usage:
+        The recommender class wait a list of dictonaries with pattern:
+
+    Data Example:
+        [{'user__id': 123, 'product__reference': 'brand+model+general-state'}]
+    """
 
     def __init__(self, queryset):
 
-        self.queryset = queryset
         self.dataset = pd.DataFrame(list(queryset))
 
-    def top_matches(self, preferences, entity,n=5, similarity=sim_pearson):
+    def top_matches(self, preferences, entity, n=8, similarity=sim_pearson):
         """
-        Returns the best matches for entity from the preferences 
-        dictionary. 
-        Number of results and similarity function are optional 
-        params.
+        Returns the best matches for entity from the preferences dictionary.
         """
 
         scores=[(similarity(preferences, entity, other), other) 
@@ -101,3 +108,38 @@ class Recommender(object):
 
     def _all_products(self):
         return self.dataset[self._unique_products_mask()].product__reference
+
+
+class RecommendationCommand(object):
+
+    @staticmethod
+    def run():
+
+        queryset = Bid.objects.values('user__id', 'product__reference')
+
+        cmd = Recommender(queryset)
+        user_prefs = cmd.fill_products()
+        item_prefs = cmd.transform_preferences(user_prefs)
+
+        product_list = Product.objects.filter(status='liberado_lance')
+
+        for product in product_list:
+
+            recommendation = cmd.top_matches(item_prefs, product.reference)
+
+            for score, other_reference in recommendation:
+
+                other_list = product_list.filter(reference=other_reference)
+
+                if len(other_list) > 0:
+
+                    other_product = other_list[0]
+
+                    assert product != other_product
+
+                    similar = ProductSimilarity(
+                        score=score,
+                        product=product,
+                        is_similar_to=other_product)
+
+                    similar.save()
