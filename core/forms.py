@@ -1,5 +1,5 @@
 from django import forms
-from django.db.models import Q
+from django.db.models import Q, Model
 
 
 class BaseSearchForm(forms.Form):
@@ -24,8 +24,11 @@ class BaseSearchForm(forms.Form):
 
             if cleaned_data[field]:
 
-                args.append(Q(**{
-                    '%s__icontains' % field : cleaned_data[field]}))
+                if isinstance(cleaned_data[field], Model):
+                    args.append(Q(**{field: cleaned_data[field]}))
+                else:
+                    args.append(Q(**{
+                        '%s__icontains' % field : cleaned_data[field]}))
 
         return args
 

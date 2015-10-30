@@ -1,97 +1,117 @@
-from unittest import skip
-
 from django.test import TestCase
-from django.contrib.auth import get_user_model
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-
 from django import forms
 
 from core.forms import BaseSearchForm
+from product.models import (Product, GENERAL_STATE_CHOICES,
+                            Brand, Model)
 
 from model_mommy import mommy
 
-User = get_user_model()
 
+class ProductSearchForm(BaseSearchForm):
 
-class SingleFieldSearchForm(BaseSearchForm):
+    product_number = forms.IntegerField(required=False)
+
+    model__brand = forms.ModelChoiceField(
+        queryset = Brand.objects.all(),
+        required=False)
+
+    model = forms.ModelChoiceField(
+        queryset = Model.objects.select_related('brand'),
+        required=False)
+
+    general_state = forms.CharField(
+        max_length=20,
+        widget=forms.Select(choices=GENERAL_STATE_CHOICES), 
+        required=False) 
 
     class Meta:
-        queryset = User.objects
-
-    username = forms.CharField(max_length=32, required=False)
+        queryset = Product.objects
 
 
-class MultipleFieldSearchForm(BaseSearchForm):
-
-    class Meta:
-        queryset = User.objects
-
-    username = forms.CharField(max_length=32, required=False)
-    cpf_cnpj = forms.CharField(max_length=15, required=False)
-
-
-class SetupMixin(object):
-
-    form_class = None
-
-    def get_form_class(self):
-        if self.form_class:
-            return self.form_class
-        raise ImproperlyConfigured("You must define form_class attribute")
-
-    def _setup_users(self):
-
-        self.foobar = mommy.make(
-            settings.AUTH_USER_MODEL, 
-            username='foobar',
-            cpf_cnpj='12345')
-
-        self.baz = mommy.make(
-            settings.AUTH_USER_MODEL,
-            username='baz',
-            cpf_cnpj='67890')
-
-    def _setup_form(self, form_dict):
-        form_class = self.get_form_class()
-        self._setup_users()
-        self.form = form_class(form_dict)
-        self.form.is_valid()
-        return self.form.get_result_queryset()
-
-
-class SingleSearchFormTestCase(SetupMixin, TestCase):
+class ProductSearchFormTestCase(TestCase):
     """
-    Test a BaseSearchForm with only one search field
+    Test a BaseSearchForm
     """
 
-    form_class = SingleFieldSearchForm
+    def setUp(self):
 
-    def test_get_result_queryset(self):
-        form_dict = {'username': 'baz'}
-        result = self._setup_form(form_dict)
-        self.assertEqual(self.baz, result.get())
+        self.product = mommy.make(
+            'product.Product',
+            product_number = 1234,
+            brand__id=1,
+            model__id=1,
+            general_state='veiculo')
 
-    def test_get_result_queryset_icontains(self):
-        form_dict = {'username': 'foo'}
-        result = self._setup_form(form_dict)
-        self.assertEqual(self.foobar, result.get())
+    def test_empty_search(self):
+        answer = self._search_by({
+            'product_number':'',
+            'brand':'',
+            'model':'',
+            'general_state':''})
+
+        self.assertTrue(answer)
+
+    def test_search_by_product_number(self):
+
+        answer = self._search_by({
+            'product_number':'1234',
+            'brand':'',
+            'model':'',
+            'general_state':''})
+
+        self.assertTrue(answer)
+
+    def test_search_by_brand(self):
+
+        answer = self._search_by({
+            'product_number':'',
+            'model__brand':'1',
+            'model':'',
+            'general_state':''})
+
+        self.assertTrue(answer)
+
+    def test_search_by_model(self):
+
+        answer = self._search_by({
+            'product_number':'',
+            'model__brand':'',
+            'model':'1',
+            'general_state':''})
+
+        self.assertTrue(answer)
 
 
-class MultipleSearchFormTestCase(SetupMixin, TestCase):
-    """
-    Test a BaseSearchForm with more that one search field
-    """
+    def test_search_by_general_state(self):
 
-    form_class = MultipleFieldSearchForm
+        answer = self._search_by({
+            'product_number':'',
+            'model__brand':'',
+            'model':'',
+            'general_state':'veiculo'})
 
-    def test_get_result_queryset(self):
-        form_dict = {'username': 'baz', 'cpf_cnpj': '67890'}
-        result = self._setup_form(form_dict)
-        self.assertEqual(self.baz, result.get())
+        self.assertTrue(answer)
 
-    def test_get_result_queryset_icontains(self):
-        form_dict = {'username': 'foo', 'cpf_cnpj': '12345'}
-        result = self._setup_form(form_dict)
-        self.assertEqual(self.foobar, result.get())
+    def test_search_all_field_filled(self):
+
+        answer = self._search_by({
+            'product_number':'1234',
+            'model__brand':'1',
+            'model':'1',
+            'general_state':'veiculo'})
+
+        self.assertTrue(answer)
+
+    def _search_by(self, form_dict):
+
+        form = ProductSearchForm(form_dict)
+
+        self.assertTrue(form.is_valid())
+
+        result = form.get_result_queryset()
+
+        self.assertEqual([self.product], list(result))
+
+        return True
 

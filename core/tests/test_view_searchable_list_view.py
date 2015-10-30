@@ -2,12 +2,12 @@ from unittest import skip
 from django.test import TestCase
 from django.test.client import RequestFactory
 
-from core.tests.test_form_base_search_form import SingleFieldSearchForm
+from core.tests.test_form_base_search_form import ProductSearchForm
 from core.views import SearchableListView
 
-class MySearchableListView(SearchableListView):
+class ProductSearchableListView(SearchableListView):
 
-    form_class = SingleFieldSearchForm
+    form_class = ProductSearchForm
 
 
 class SearchableListViewTestCase(TestCase):
@@ -15,7 +15,7 @@ class SearchableListViewTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.request = self.factory.get('/')
-        self.view = MySearchableListView
+        self.view = ProductSearchableListView
 
     def test_get(self):
         response = self.view.as_view()(self.request)
