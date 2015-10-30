@@ -8,13 +8,16 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
 from product.models import Product
+from product.forms import ProductSearchForm
 from account.models import User
 from account.forms import SignUpModelForm
+from core.views import SearchableListView
 
 
-class ProductListView(ListView):
+class ProductListView(SearchableListView):
     template_name = 'website/index.html'
     model = Product
+    form_class = ProductSearchForm
     paginate_by = 8
 
 

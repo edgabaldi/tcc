@@ -16,9 +16,14 @@ class ProductSearchForm(BaseSearchForm):
         label='Número do Lote',
         required=False)
 
-    description = forms.CharField(
-        max_length=50,
-        label='Descrição',
+    brand = forms.ModelChoiceField(
+        queryset = models.Brand.objects.all(),
+        label='Marca',
+        required=False)
+
+    model = forms.ModelChoiceField(
+        queryset = models.Model.objects.select_related('brand'),
+        label='Model',
         required=False)
 
     general_state = forms.CharField(

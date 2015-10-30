@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load staticfiles bootstrap%}
 
 {% block content %}
 
@@ -7,11 +7,18 @@
 <!-- ================ -->
 <div class="main col-md-12">
 
-	<!-- page-title start -->
-	<!-- ================ -->
-	<h1 class="page-title">Próximos Lotes</h1>
-	<p class="lead">Confira nossas ofertas</p>
-	<div class="separator-2"></div>
+	<div class="sorting-filters">
+		<form class="form-inline">
+
+			{{form|bootstrap}}
+
+
+			<div class="form-group">
+				<button class="btn btn-default">Filtrar</button>
+			</div>
+		</form>
+	</div>
+
 	<!-- page-title end -->
 	
 	<!-- shop items start -->
