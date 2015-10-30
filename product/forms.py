@@ -16,7 +16,7 @@ class ProductSearchForm(BaseSearchForm):
         label='Número do Lote',
         required=False)
 
-    brand = forms.ModelChoiceField(
+    model__brand = forms.ModelChoiceField(
         queryset = models.Brand.objects.all(),
         label='Marca',
         required=False)
