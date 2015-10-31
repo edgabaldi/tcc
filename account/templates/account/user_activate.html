@@ -8,4 +8,26 @@
 <h2 class="title">Ativar/Rejeitar Cadastro</h2>
 <div class="separator-2"></div>
 
+<form method="post">{% csrf_token %}
+
+	{{form.observation|bootstrap}}
+
+	<div class="row">
+
+		<div class="col-md-6">
+			<div class="text-left">
+				<button class="btn btn-danger" name="is_active" value="0">Rejeitar</button>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="text-right">
+				<button class="btn btn-default" name="is_active" value="1">Ativar</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
+
 {% endblock app %}

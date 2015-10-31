@@ -15,7 +15,7 @@ urlpatterns = patterns('',
         name = 'user_edit',
     ),
     url(regex=r'^activate/(?P<pk>\d+)/$',
-        view = views.ActivateUserFormView.as_view(),
+        view = views.ActivateUserView.as_view(),
         name = 'activate_user',
     ),
 )

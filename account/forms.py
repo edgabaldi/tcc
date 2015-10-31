@@ -1,5 +1,6 @@
 #coding:utf-8
 from django import forms
+from django.core.mail import send_mail
 
 from core.forms import BaseSearchForm
 from account.models import User
@@ -58,8 +59,21 @@ class UserSearchForm(BaseSearchForm):
 
 class ActivateUserModelForm(forms.ModelForm):
 
-    observation = forms.CharField(label=u'Observação', required=False)
+    observation = forms.CharField(
+        label=u'Observação', 
+        required=False)
 
     class Meta:
         model = User
         fields = ('is_active',)
+
+    def send_email_activate(self, user):
+        from_email = 'naoresponda@brbid.com'
+        msg = "Sua conta está ativa. Você já pode participar dos leilões."
+        send_mail(u'Sua conta está ativa!', msg, from_email, [user.email]) 
+
+    def send_email_deactivate(self, user):
+        observation = self.cleaned_data.get('observation')
+        from_email = 'naoresponda@brbid.com'
+        msg = "Seu cadastro foi rejeitado. Motivo: {}".format(observation)
+        send_mail('Seu cadastro foi negado :(', msg, from_email, [user.email]) 
