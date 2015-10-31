@@ -59,13 +59,17 @@
 
 	<div class="row">
 
+		{% if object %}
+
 		<div class="col-md-6">
 			<div class="text-left">
-				<a href="#" class="btn btn-info">Ativar / Rejeitar Cadastro</a>
+				<a href="{% url 'activate_user' object.pk %}" class="btn btn-info">Ativar / Rejeitar Cadastro</a>
 			</div>
 		</div>
 
-		<div class="col-md-6">
+		{% endif %}
+
+		<div class="{% if object %}col-md-6{% else %}col-md-12{%endif%}">
 			<div class="text-right">
 				<button class="btn btn-default">Salvar</button>
 			</div>

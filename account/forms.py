@@ -53,4 +53,13 @@ class UserSearchForm(BaseSearchForm):
 
 
     class Meta:
-        queryset = User.objects.all().order_by('is_active') 
+        queryset = User.objects.all().order_by('is_active')
+
+
+class ActivateUserModelForm(forms.ModelForm):
+
+    observation = forms.CharField(label=u'Observação', required=False)
+
+    class Meta:
+        model = User
+        fields = ('is_active',)

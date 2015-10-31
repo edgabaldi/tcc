@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse_lazy
 
 from account.models import User
-from account.forms import UserModelForm, UserSearchForm
+from account import forms
 from core.views import SearchableListView
 
 
@@ -16,7 +16,7 @@ class UserListView(SearchableListView):
     model = User
     template_name='account/user_list.html'
     paginate_by=25
-    form_class=UserSearchForm
+    form_class=forms.UserSearchForm
     queryset = User.objects.all().order_by('is_active')
 
 
@@ -26,7 +26,7 @@ class UserActionMixin(object):
     """
 
     model = User
-    form_class = UserModelForm 
+    form_class = forms.UserModelForm 
     template_name = 'account/user_form.html'
     success_url = reverse_lazy('user_list')
 
@@ -47,3 +47,14 @@ class UserUpdateView(BaseUserActionMixin, UpdateView):
     """
     User that allow update an user
     """
+
+
+class ActivateUserFormView(UpdateView):
+    """
+    View that allow activate/deactivate user in system.
+
+    """
+    model = User
+    form_class=forms.ActivateUserModelForm
+    template_name = 'account/user_activate.html'
+    success_url = reverse_lazy('user_list')
