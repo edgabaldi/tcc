@@ -49,15 +49,13 @@ class UserUpdateView(BaseUserActionMixin, UpdateView):
     """
 
 
-class ActivateUserView(SuccessMessageMixin, UpdateView):
+class ActivateUserView(BaseUserActionMixin, UpdateView):
     """
     View that allow activate/deactivate user in system.
-
     """
-    model = User
+
     form_class=forms.ActivateUserModelForm
     template_name = 'account/user_activate.html'
-    success_url = reverse_lazy('user_list')
     success_message = 'Ativação/Rejeição de usuário salva!'
 
     def form_valid(self, form):
