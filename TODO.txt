@@ -3,19 +3,9 @@
 * add actived menus
 * Add messages on views
 
-Core App
-* allow search filter work with foreignkeys and booleanfields
-
 website app:
-* make a search field in home page
 * validate cpf/cnpj in user registration feature
 * validate age in user registration feature
-* no image placeholder
-
 
 account app
 * add view: activate / deactivate account
-
-Fixtures (private):
-
-
