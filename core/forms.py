@@ -19,16 +19,23 @@ class BaseSearchForm(forms.Form):
     def _contruct_filter_args(self, cleaned_data):
 
         args = []
+        
+        for key, value in cleaned_data.items():
 
-        for field in cleaned_data:
+            if self._is_boolean(value) or self._is_model_object(value):
+                args.append(Q(**{key:value}))
 
-            if cleaned_data[field]:
-
-                if isinstance(cleaned_data[field], Model):
-                    args.append(Q(**{field: cleaned_data[field]}))
-                else:
-                    args.append(Q(**{
-                        '%s__icontains' % field : cleaned_data[field]}))
-
+            if self._is_string(value):
+                args.append(Q(**{
+                    '%s__icontains' % key : value}))
         return args
+
+    def _is_boolean(self, value):
+        return isinstance(value, bool)
+
+    def _is_model_object(self, value):
+        return isinstance(value, Model)
+
+    def _is_string(self, value):
+        return isinstance(value, str) or isinstance(value, unicode)
 

@@ -23,7 +23,9 @@ class ProductSearchForm(BaseSearchForm):
     general_state = forms.CharField(
         max_length=20,
         widget=forms.Select(choices=GENERAL_STATE_CHOICES), 
-        required=False) 
+        required=False)
+
+    model__is_active = forms.BooleanField(required=False)
 
     class Meta:
         queryset = Product.objects
@@ -41,57 +43,44 @@ class ProductSearchFormTestCase(TestCase):
             product_number = 1234,
             brand__id=1,
             model__id=1,
+            model__is_active=False,
             general_state='veiculo')
 
     def test_empty_search(self):
-        answer = self._search_by({
-            'product_number':'',
-            'brand':'',
-            'model':'',
-            'general_state':''})
-
+        answer = self._search_by({})
         self.assertTrue(answer)
 
     def test_search_by_product_number(self):
-
-        answer = self._search_by({
-            'product_number':'1234',
-            'brand':'',
-            'model':'',
-            'general_state':''})
-
+        answer = self._search_by({'product_number':'1234'})
         self.assertTrue(answer)
 
     def test_search_by_brand(self):
-
-        answer = self._search_by({
-            'product_number':'',
-            'model__brand':'1',
-            'model':'',
-            'general_state':''})
-
+        answer = self._search_by({'model__brand':'1'})
         self.assertTrue(answer)
 
     def test_search_by_model(self):
-
-        answer = self._search_by({
-            'product_number':'',
-            'model__brand':'',
-            'model':'1',
-            'general_state':''})
-
+        answer = self._search_by({'model':'1'})
         self.assertTrue(answer)
-
 
     def test_search_by_general_state(self):
-
-        answer = self._search_by({
-            'product_number':'',
-            'model__brand':'',
-            'model':'',
-            'general_state':'veiculo'})
-
+        answer = self._search_by({'general_state':'veiculo'})
         self.assertTrue(answer)
+
+    def test_search_by_boolean_field_false(self):
+        answer = self._search_by({'model__is_active': False})
+        self.assertTrue(answer)
+
+    def search_by_boolean_field_false(self):
+        self.product2 = mommy.make(
+            'product.Product',
+            product_number = 1235,
+            brand__id=1,
+            model__id=1,
+            model__is_active=True,
+            general_state='veiculo')
+
+        answer = self._search_by({'model__is_active':True})
+        self.assertTrue(answer, [self.product2])
 
     def test_search_all_field_filled(self):
 
@@ -103,15 +92,28 @@ class ProductSearchFormTestCase(TestCase):
 
         self.assertTrue(answer)
 
-    def _search_by(self, form_dict):
+    def _search_by(self, form_dict, result_list=None):
 
-        form = ProductSearchForm(form_dict)
+        kwargs = {
+            'product_number':'',
+            'brand':'',
+            'model':'',
+            'general_state':'',
+            'model__is_active':'',
+        }
+
+        kwargs.update(form_dict)
+
+        form = ProductSearchForm(kwargs)
 
         self.assertTrue(form.is_valid())
 
         result = form.get_result_queryset()
 
-        self.assertEqual([self.product], list(result))
+        if result_list:
+            self.assertEqual(result_list, list(result))
+        else:
+            self.assertEqual([self.product], list(result))
 
         return True
 
