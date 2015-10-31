@@ -48,9 +48,9 @@ class UserSearchForm(BaseSearchForm):
 
     username = forms.CharField(max_length=40, label=u'Usuário', required=False)
     cpf_cnpj = forms.CharField(max_length=15, label=u'CPF/CNPJ', required=False)
-    is_active = forms.BooleanField(widget=forms.Select(
+    is_active = forms.NullBooleanField(widget=forms.Select(
         choices=YESNO_CHOICES),label=u'Está Ativo?', required=False)
 
 
     class Meta:
-        queryset = User.objects 
+        queryset = User.objects.all().order_by('is_active') 

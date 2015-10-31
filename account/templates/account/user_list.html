@@ -43,7 +43,13 @@
 			<td>{{user.first_name}}</td>
 			<td>{{user.last_name}}</td>
 			<td>{{user.email}}</td>
-			<td><i class="fa fa-check text-success"></i></td>
+			<td class="text-center">
+				{% if user.is_active %}
+				<i class="fa fa-circle text-success"></i>
+				{%else%}
+				<i class="fa fa-circle text-danger"></i>
+				{%endif%}
+			</td>
 		</tr>
 		{% endfor %}
 	</tbody>

@@ -17,6 +17,7 @@ class UserListView(SearchableListView):
     template_name='account/user_list.html'
     paginate_by=25
     form_class=UserSearchForm
+    queryset = User.objects.all().order_by('is_active')
 
 
 class UserActionMixin(object):
