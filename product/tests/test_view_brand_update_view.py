@@ -2,6 +2,7 @@ from unittest import skip
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from model_mommy import mommy
 
@@ -9,8 +10,10 @@ from model_mommy import mommy
 class BrandUpdateViewTestCase(TestCase):
 
     def setUp(self):
-        self.url = reverse('brand_edit', args=(18,))
         self._setup_brand()
+        self._setup_user()
+        self.client.login(username='user', password='secret')
+        self.url = reverse('brand_edit', args=(18,))
         self.response = self.client.get(self.url)
 
     def test_get(self):
@@ -28,3 +31,10 @@ class BrandUpdateViewTestCase(TestCase):
     def _setup_brand(self):
         mommy.make('product.Brand', id=18)
 
+    def _setup_user(self):
+        self.user = mommy.make(
+            settings.AUTH_USER_MODEL, 
+            username='user',
+            is_active=True)
+        self.user.set_password('secret')
+        self.user.save()

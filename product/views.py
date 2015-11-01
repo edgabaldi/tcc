@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
-from core.views import SearchableListView
+from core.views import SearchableListView, LoginRequiredMixin
 from product import models
 from product import forms
 
@@ -42,12 +42,6 @@ class BaseProductActionMixin(ProductActionMixin, SuccessMessageMixin):
     """
     success_message = 'Produto salvo com sucesso.'
 
-    def post(self, request, *args, **kwargs):
-        print request.POST
-        return super(BaseProductActionMixin, self).post(request, *args, **kwargs)
-
-
-
 
 class ProductCreateView(BaseProductActionMixin, CreateWithInlinesView):
     """
@@ -71,7 +65,7 @@ class ProductDeleteView(DeleteView):
 #
 
 
-class BrandSearchableListView(SearchableListView):
+class BrandSearchableListView(LoginRequiredMixin, SearchableListView):
     """
     View that allow list and search brands
     """
@@ -81,7 +75,7 @@ class BrandSearchableListView(SearchableListView):
     form_class = forms.BrandSearchForm
 
 
-class BrandActionMixin(object):
+class BrandActionMixin(LoginRequiredMixin, object):
     """
     Commum attributes for Brand Edit Views
     """
