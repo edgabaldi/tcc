@@ -1,4 +1,7 @@
 from django.conf.urls import include, url, patterns
+from django.contrib.auth import views as auth_views
+from account.forms import CustomAuthenticationForm
+
 from website import views
 
 urlpatterns = patterns('',
@@ -15,8 +18,14 @@ urlpatterns = patterns('',
         name = 'signup',
     ),
     url(regex=r'^login/$',
-        view = 'website.views.login',
+        view = auth_views.login,
         name = 'login',
+        kwargs = {'authentication_form': CustomAuthenticationForm},
+    ),
+    url(regex=r'^logout/$',
+        view = auth_views.logout,
+        name = 'logout',
+        kwargs = {'next_page': '/'},
     ),
     url(regex=r'^system/dashboard/$',
         view = 'website.views.dashboard',

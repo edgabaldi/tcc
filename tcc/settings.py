@@ -125,3 +125,11 @@ STATIC_URL = '/static/'
 #
 
 AUTH_USER_MODEL = 'account.User'
+
+#
+# Authentication Settings
+#
+
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/'

@@ -1,6 +1,7 @@
 #coding:utf-8
 from django import forms
 from django.core.mail import send_mail
+from django.contrib.auth.forms import AuthenticationForm
 
 from core.forms import BaseSearchForm
 from account.models import User
@@ -10,6 +11,23 @@ YESNO_CHOICES = (
     ('0', u'NÃO'),
     ('1', u'SIM'),
 )
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+
+    username = forms.CharField(
+        max_length=254, 
+        widget=forms.TextInput(attrs={
+            'class':'form-control',
+            'placeholder': 'Usuário'
+        }))
+
+    password = forms.CharField(
+        label="Senha",
+        widget=forms.PasswordInput(attrs={
+            'class':'form-control',
+            'placeholder':'Senha'
+        }))
 
 
 class SignUpModelForm(forms.ModelForm):
