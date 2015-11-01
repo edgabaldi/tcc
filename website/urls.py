@@ -28,7 +28,7 @@ urlpatterns = patterns('',
         kwargs = {'next_page': '/'},
     ),
     url(regex=r'^system/dashboard/$',
-        view = 'website.views.dashboard',
+        view = views.DashboardView.as_view(),
         name = 'dashboard',
     ),
 )

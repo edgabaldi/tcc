@@ -1,8 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-from website.views import ProductListView
-
 
 class ProductListViewTestCase(TestCase):
 
