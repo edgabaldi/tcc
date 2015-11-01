@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from model_mommy import mommy
 
@@ -7,6 +8,9 @@ from model_mommy import mommy
 class ProductCreateViewTestCase(TestCase):
 
     def setUp(self):
+        self._setup_user()
+        self.client.login(username='user', password='secret')
+
         self.url = reverse('product_add')
         self.response = self.client.get(self.url)
 
@@ -57,4 +61,10 @@ class ProductCreateViewTestCase(TestCase):
 
         self.valid_dict.update(self.inline_dict)
 
-
+    def _setup_user(self):
+        self.user = mommy.make(
+            settings.AUTH_USER_MODEL, 
+            username='user',
+            is_active=True)
+        self.user.set_password('secret')
+        self.user.save()

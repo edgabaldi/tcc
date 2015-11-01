@@ -15,7 +15,7 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 #
 
 
-class ProductSearchableListView(SearchableListView):
+class ProductSearchableListView(LoginRequiredMixin, SearchableListView):
     """
     View that allow list and search products
     """
@@ -25,7 +25,7 @@ class ProductSearchableListView(SearchableListView):
     form_class = forms.ProductSearchForm
 
 
-class ProductActionMixin(object):
+class ProductActionMixin(LoginRequiredMixin, object):
     """
     Common product attributs
     """
@@ -55,7 +55,7 @@ class ProductUpdateView(BaseProductActionMixin, UpdateWithInlinesView):
     """
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = models.Product
     success_url = reverse_lazy('product_list')
 
