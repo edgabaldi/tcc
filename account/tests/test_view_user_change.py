@@ -10,8 +10,11 @@ from model_mommy import mommy
 class UserUpdateViewTestCase(TestCase):
 
     def setUp(self):
-        self.url = reverse('user_edit', args=(10,))
         self._setup_user()
+        self.client.login(username='user', password='secret')
+
+        self.url = reverse('user_edit', args=(10,))
+        self._setup_user_to_edit()
         self.response = self.client.get(self.url)
 
     def test_get(self):
@@ -30,7 +33,7 @@ class UserUpdateViewTestCase(TestCase):
         self.assertEqual(200, response.status_code)
         self.assertFalse(response.context['form'].is_valid())
 
-    def _setup_user(self):
+    def _setup_user_to_edit(self):
         mommy.make(settings.AUTH_USER_MODEL, id=10)
 
     def _valid_dict(self):
@@ -52,3 +55,11 @@ class UserUpdateViewTestCase(TestCase):
             'state': 'RJ',
             'cep': '23000000',
         }
+
+    def _setup_user(self):
+        self.user = mommy.make(
+            settings.AUTH_USER_MODEL, 
+            username='user',
+            is_active=True)
+        self.user.set_password('secret')
+        self.user.save()

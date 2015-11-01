@@ -5,10 +5,10 @@ from django.core.urlresolvers import reverse_lazy
 
 from account.models import User
 from account import forms
-from core.views import SearchableListView
+from core.views import SearchableListView, LoginRequiredMixin
 
 
-class UserListView(SearchableListView):
+class UserListView(LoginRequiredMixin, SearchableListView):
     """
     View that list users and filter
     """
@@ -20,7 +20,7 @@ class UserListView(SearchableListView):
     queryset = User.objects.all().order_by('is_active')
 
 
-class UserActionMixin(object):
+class UserActionMixin(LoginRequiredMixin, object):
     """
     Common attributes for user actions
     """

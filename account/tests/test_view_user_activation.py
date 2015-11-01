@@ -13,7 +13,11 @@ User = get_user_model()
 class ActivateUserTestCase(TestCase):
 
     def setUp(self):
-        self.user = mommy.make(settings.AUTH_USER_MODEL, id=10, is_active=False)
+        self._setup_user()
+        self.client.login(username='user', password='secret')
+
+        self.user_to_active = mommy.make(
+            settings.AUTH_USER_MODEL, id=10, is_active=False)
         self.url = reverse('activate_user', args=(10,))
         
     def test_get(self):
@@ -28,7 +32,7 @@ class ActivateUserTestCase(TestCase):
     def test_post_activate(self):
         response = self.client.post(self.url, {'is_active':True})
         self.assertRedirects(response, reverse('user_list'))
-        self.assertTrue(self._get_user_is_active(self.user))
+        self.assertTrue(self._get_user_is_active(self.user_to_active))
 
     def test_post_deactivate(self):
         response = self.client.post(self.url, {
@@ -36,12 +40,12 @@ class ActivateUserTestCase(TestCase):
             'observation': 'Foo',
         })
         self.assertRedirects(response, reverse('user_list'))
-        self.assertFalse(self._get_user_is_active(self.user))
+        self.assertFalse(self._get_user_is_active(self.user_to_active))
 
     @patch('account.forms.ActivateUserModelForm.send_email_activate')
     def test_post_activate_send_email(self, _method):
         self.client.post(self.url, {'is_active':True})
-        _method.assert_called_once_with(self.user)
+        _method.assert_called_once_with(self.user_to_active)
 
     @patch('account.forms.ActivateUserModelForm.send_email_deactivate')
     def test_post_deactivate_send_email(self, _method):
@@ -49,8 +53,16 @@ class ActivateUserTestCase(TestCase):
             'is_active':False, 
             'observation': 'Foo bar'
         })
-        _method.assert_called_once_with(self.user)
+        _method.assert_called_once_with(self.user_to_active)
 
     def _get_user_is_active(self, user):
         user = User.objects.get(id=user.id)
         return user.is_active
+
+    def _setup_user(self):
+        self.user = mommy.make(
+            settings.AUTH_USER_MODEL, 
+            username='user',
+            is_active=True)
+        self.user.set_password('secret')
+        self.user.save()
