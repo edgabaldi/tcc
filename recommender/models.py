@@ -3,8 +3,8 @@ from django.db import models
 
 class ProductSimilarity(models.Model):
 
-    product = models.ForeignKey('product.Product')
-    is_similar_to = models.ForeignKey('product.Product', related_name='similars')
+    product = models.ForeignKey('product.Product', related_name='similars')
+    is_similar_to = models.ForeignKey('product.Product')
     score = models.DecimalField(decimal_places=5, max_digits=6)
 
     def __unicode__(self):
