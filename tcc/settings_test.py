@@ -16,7 +16,3 @@ DATABASES = {
         'NAME':':memory:',
     }
 }
-
-NOSE_ARGS = [
-    '--with-coverage',
-]

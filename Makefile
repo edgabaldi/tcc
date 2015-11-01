@@ -4,6 +4,9 @@ run: clean
 test: clean
 	python manage.py test --settings=tcc.settings_test
 
+coverage: clean
+	python manage.py test --settings=tcc.settings_coverage
+
 shell: clean
 	python manage.py shell --settings=tcc.settings_local
 
