@@ -1,5 +1,9 @@
+#coding:utf-8
 from django.views.generic.edit import FormMixin
 from django.views.generic.list import ListView
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
+from django.contrib import messages
 
 
 class SearchableListView(FormMixin, ListView):
@@ -28,3 +32,13 @@ class SearchableListView(FormMixin, ListView):
         )
 
         return self.render_to_response(context)
+
+
+class LoginRequiredMixin(object):
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated():
+            messages.warning(request, u'Você precisa estar autenticado para acessar essa página')
+            return HttpResponseRedirect(reverse_lazy('login'))
+        return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
