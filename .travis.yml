@@ -3,6 +3,12 @@ language: python
 python:
     - "2.7"
 
-install: pip install -r requirements_test.txt
+install: 
+    pip install -r requirements_test.txt
+    pip install converalls
 
-script: python manage.py test --settings=tcc.settings_test
+script:
+    python manage.py test --settings=tcc.settings_test
+
+after_success:
+    coveralls

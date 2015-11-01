@@ -17,3 +17,6 @@ DATABASES = {
     }
 }
 
+NOSE_ARGS = [
+    '--with-coverage',
+]
