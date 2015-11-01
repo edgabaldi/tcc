@@ -102,7 +102,7 @@ class BrandUpdateView(BrandActionMixin, UpdateView):
 #
 
 
-class ModelSearchableListView(SearchableListView):
+class ModelSearchableListView(LoginRequiredMixin, SearchableListView):
     """
     View that allow list and search models
     """
@@ -112,7 +112,7 @@ class ModelSearchableListView(SearchableListView):
     form_class = forms.ModelSearchForm
 
 
-class ModelActionMixin(object):
+class ModelActionMixin(LoginRequiredMixin, object):
     """
     Commum attributes for Model edit views
     """
