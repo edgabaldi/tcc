@@ -6,3 +6,4 @@ pandas==0.16.2
 Pillow==3.0.0
 pandas==0.16.2
 requests==2.8.1
+sqlitedict==1.4.0
