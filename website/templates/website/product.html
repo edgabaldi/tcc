@@ -5,7 +5,7 @@
 
 <!-- main start -->
 <!-- ================ -->
-<div class="main col-md-12">
+<div class="main col-md-12" ng-app="BidApp">
 
 	<!-- page-title start -->
 	<!-- ================ -->
@@ -42,14 +42,18 @@
 				<div class="side product-item vertical-divider-left">
 					<div class="tabs-style-2">
 						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
-							<li class="active"><a href="#h2tab1" role="tab" data-toggle="tab">Dê um Lance</a></li>
+						<ul id="tabs" class="nav nav-tabs" role="tablist">
+							{% if user.can_give_bid %}
+							<li><a href="#h2tab1" role="tab" data-toggle="tab">Dê um Lance</a></li>
+							{% endif %}
 							<li><a href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-5"></i>Descrição</a></li>
 							<li><a href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-users pr-5"></i>Histórico de Lances</a></li>
 						</ul>
+
+						{% if user.can_give_bid %}
 						<!-- Tab panes -->
 						<div class="tab-content padding-top-clear padding-bottom-clear">
-							<div class="tab-pane fade in active" id="h2tab1">
+							<div class="tab-pane fade in active" id="h2tab1" ng-controller="BidCtrl as bid">
 								<div class="row">
 									<div class="col-md-6">
 										<br>
@@ -64,6 +68,7 @@
 									</div><!-- /.col-md-6 -->
 
 									<div class="col-md-6">
+										{%verbatim%}{{bid.hello_world}}{%endverbatim%}
 										<br>
 										<form role="form">
 											<div class="form-group">
@@ -77,6 +82,7 @@
 									</div><!-- /.col-md-6 -->
 								</div><!-- /.row -->
 							</div><!-- /.tab-pane -->
+							{% endif %}
 
 							<div class="tab-pane fade in" id="h2tab2">
 								<h4 class="space-top">Descritivo do Lote</h4>
@@ -138,3 +144,21 @@
 
 
 {% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/angular/angular.min.js' %}"></script>
+<script type="text/javascript">
+(function($){
+	'use strict';
+	var $tabs = $("#tabs");
+	$tabs.find('li:first').addClass('active');
+
+	var app = angular.module('BidApp', []);
+
+	app.controller('BidCtrl', [function(){
+		this.hello_world = 'Hello World';
+	}]);
+
+})(jQuery);
+</script>
+{% endblock extra_js %}

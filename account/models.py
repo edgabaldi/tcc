@@ -72,5 +72,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
+    def can_give_bid(self):
+        return self.is_active and self.is_authenticated()
+
     def __unicode__(self):
         return self.username
