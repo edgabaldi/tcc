@@ -1,0 +1,20 @@
+{
+  "name": "tcc",
+  "version": "1.0.0",
+  "description": "Recommendation System made in Django",
+  "main": "index.js",
+  "dependencies": {
+    "bower": "^1.6.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/edgabaldi/tcc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/edgabaldi/tcc#readme"
+}
