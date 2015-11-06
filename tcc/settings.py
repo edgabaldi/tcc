@@ -133,3 +133,5 @@ AUTH_USER_MODEL = 'account.User'
 LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/'
+
+CLOCK_SECONDS = 20
