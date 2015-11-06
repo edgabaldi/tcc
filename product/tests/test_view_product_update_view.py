@@ -56,7 +56,7 @@ class ProductUpdateViewTestCase(TestCase):
             'product_number':'10',
             'general_state':'veiculo',
             'initial_price': '1234.50',
-            'clock_starts_at': '16/10/2015 10:00:00',
+            'clock_opened_at': '16/10/2015 10:00:00',
             'status':'loteamento'
         }
 
