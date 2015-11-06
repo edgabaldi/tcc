@@ -43,7 +43,7 @@ class ProductModelForm(forms.ModelForm):
         model = models.Product
         fields = ('model', 'description', 'color', 'year', 
                   'product_number', 'initial_price', 
-                  'general_state', 'status',)
+                  'general_state', 'status','clock_opened_at')
 
     def __init__(self, *args, **kwargs):
         super(ProductModelForm, self).__init__(*args, **kwargs)
