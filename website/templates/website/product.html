@@ -65,14 +65,14 @@
 										<dl class="dl-horizontal">
 											<dt>Lance atual</dt>
 											<dd id="bidValue"  animate-change="vm.last_value()" ng-bind="vm.last_value()|currency"></dd>
-											<dt>Arrematante</dt>
-											<dd ng-bind="'( ' +vm.last_user()+ ' )'"></dd>
+											<dt ng-if="vm.last_user()" >Arrematante</dt>
+											<dd ng-if="vm.last_user()" ng-bind="'( ' +vm.last_user()+ ' )'"></dd>
 											<dt>Total de Lances</dt>
 											<dd ng-bind="vm.bids.length"></dd>
 										</dl>
 									</div><!-- /.col-md-6 -->
 
-									<div class="col-md-6" ng-if="vm.clock_remaning_time < -1">
+									<div class="col-md-6" ng-if="(vm.clock_remaning_time && vm.clock_remaning_time < 0)">
 										<br/>
 										<h3 class="text-danger text-center"><strong>LOTE ENCERRADO</strong></h3>
 									</div>
@@ -186,11 +186,9 @@
 
 	app.filter('clock', ['$filter', function($filter){
 		return function(microseconds){
-			if(!isNaN(microseconds)){
-				if(microseconds < 0) return '';
-				return $filter('date')(microseconds, 'mm:ss');
-			}
-			if(typeof(microseconds) == 'string')return microseconds;
+			if(!microseconds || isNaN(microseconds) || microseconds < 0)
+				return '';
+			return $filter('date')(microseconds, 'mm:ss');
 		};
 	}])
 
@@ -245,14 +243,23 @@
 		var bid = {
 			list: list,
 			create: create,
-			get_remaning_bid_time: remaning_bid_time,
 			get_closed: get_closed
 		};
 		var clockTick = function(){
 			var request = list();
 			request.success(function(data){
-				var bids = _.sortBy(data['bids'], 'id').reverse();
-				$rootScope.$emit('BidClockTick', bids);
+				var bids = _.sortBy(data.bids, 'id').reverse();
+				var remaning_time = false;
+				if(data.first_clock_limit){
+					remaning_time = (bids.length)?
+						get_remaning_time(bids[0].close_at):
+						get_remaning_time(data.first_clock_limit);
+				}
+
+				$rootScope.$emit('BidClockTick', {
+					bids: bids,
+					remaning_time: remaning_time
+				});
 			    setTimeout(function(){
 					clockTick();
 				}, 1000);
@@ -265,14 +272,12 @@
 			return closed;
 		}
 
-		function remaning_bid_time(bid){
-			if(bid && bid.close_at){
-				var utc_close_time = new Date(bid.close_at).toISOString(),
-					utc_now = new Date(Date.now()).toISOString(),
-					close_time = new Date(utc_close_time),
-					now = new Date(utc_now);
-				return close_time.getTime() - now.getTime();
-			}
+		function get_remaning_time(close_at){
+			var utc_close_time = new Date(close_at).toISOString(),
+				utc_now = new Date(Date.now()).toISOString(),
+				close_time = new Date(utc_close_time),
+				now = new Date(utc_now);
+			return close_time.getTime() - now.getTime();
 		}
 		function list(){
 			return $http.get('bids/');
@@ -321,10 +326,9 @@
 		vm.make_bid = make_bid;
 		vm.open_clock = open_clock;
 
-		$rootScope.$on('BidClockTick', function load_bids(event, bids){
-			vm.bids=bids;
-			if(vm.bids && vm.bids.length)
-				vm.clock_remaning_time = get_clock_time(vm.bids[0]);
+		$rootScope.$on('BidClockTick', function load_bids(event, data){
+			vm.bids= data.bids;
+			vm.clock_remaning_time = data.remaning_time;
 		});
 
 		function last_bid(){
@@ -339,13 +343,6 @@
 			var last_bid = vm.last_bid();
 			if (last_bid) return last_bid.user_username;
 			return '';
-		}
-		function get_clock_time(){
-			var last_bid = vm.last_bid()
-			if (last_bid){
-				return Bid.get_remaning_bid_time(last_bid)
-			}
-			return '--:--';
 		}
 		function make_bid(){
 			Bid.create(vm.bidForm.value);

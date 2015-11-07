@@ -59,8 +59,12 @@ class OpenClockView(ProductMixin, View):
 
 class BidView(ProductMixin, View):
     def get(self, request, *args, **kwargs):
-        return JsonResponse({'bids':
-                    map(lambda x: x.to_dict(), self.product.bids.order_by('-id'))})
+        return JsonResponse({
+            'first_clock_limit': self.product.first_clock_limit(),
+            'bids': map(
+                lambda x: x.to_dict(),
+                self.product.bids.order_by('-id'))
+        })
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated():
