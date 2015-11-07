@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
 {% block content %}
 
 <!-- main start -->
@@ -65,20 +64,24 @@
 										<br>
 										<dl class="dl-horizontal">
 											<dt>Lance atual</dt>
-											<dd>{{vm.last_value()|currency}}</dd>
+											<dd id="bidValue"  animate-change="vm.last_value()" ng-bind="vm.last_value()|currency"></dd>
 											<dt>Arrematante</dt>
-											<dd>( {{vm.last_user()}} )</dd>
+											<dd ng-bind="'( ' +vm.last_user()+ ' )'"></dd>
 											<dt>Total de Lances</dt>
-											<dd>{{vm.bids.length}}</dd>
+											<dd ng-bind="vm.bids.length"></dd>
 										</dl>
 									</div><!-- /.col-md-6 -->
 
-									<div class="col-md-6">
+									<div class="col-md-6" ng-if="vm.clock_remaning_time < -1">
+										<br/>
+										<h3 class="text-danger text-center"><strong>LOTE ENCERRADO</strong></h3>
+									</div>
+									<div class="col-md-6" ng-if="(!vm.clock_remaning_time || vm.clock_remaning_time > -1)">
 										<br>
-										<form role="form" id="bid-form" ng-submit="vm.make_bid()">
+										<form role="form" id="bid-form" ng-submit="vm.make_bid()" >
 											<div class="form-group">
 												<label class="label-control">Valor do Lance</label>
-												<strong class="pull-right" id="clock-time" ng-bind="vm.get_clock_time()|clock" animate-clock-time="vm.get_clock_time()"></strong>
+												<strong class="pull-right" id="clock-time" ng-bind="vm.clock_remaning_time|clock" animate-clock-time="vm.clock_remaning_time"></strong>
 												<input type="text" class="form-control" ng-model="vm.bidForm.value" required>
 											</div>
 											<div class="form-group">
@@ -87,8 +90,8 @@
 										</form>
 								{% endverbatim %}
 								{% if user.is_staff or user.is_superuser %}
-										<form role="form" id="open-clock-form" ng-submit="vm.openClock()">
-												<input type="submit" value="Abrir relógio" class="btn btn-default">
+										<form role="form" id="open-clock-form" ng-submit="vm.open_clock()" ng-if="!vm.clock_remaning_time">
+											<input type="submit" value="Abrir relógio" class="btn btn-default">
 										</form>
 								{% endif %}
 									</div><!-- /.col-md-6 -->
@@ -157,35 +160,61 @@
 
 {% endblock %}
 
+{% block extra_css %}
+		<link href="{% static 'css/toastr.css' %}" rel="stylesheet">
+{% endblock extra_css %}
+
 {% block extra_js %}
 <script src="{% static 'js/underscore-min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/angular/angular.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/angular/angular-animate.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/angular/angular-locale_pt-br.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/toastr.js' %}"></script>
+
 <script type="text/javascript">
 (function($){
 	'use strict';
 	var $tabs = $("#tabs");
 	$tabs.find('li:first').addClass('active');
 
-	var app = angular.module('BidApp', []);
+	var app = angular.module('BidApp', ['ngAnimate']);
 	app.config(['$httpProvider', function($httpProvider){
 		$httpProvider.defaults.xsrfCookieName = 'csrftoken';
 		$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 	}]);
+
+
 	app.filter('clock', ['$filter', function($filter){
 		return function(microseconds){
 			if(!isNaN(microseconds)){
+				if(microseconds < 0) return '';
 				return $filter('date')(microseconds, 'mm:ss');
 			}
 			if(typeof(microseconds) == 'string')return microseconds;
 		};
 	}])
+
+
+	app.directive('animateChange', ['$animate', function($animate){
+		return function(scope, elem, attr){
+			scope.$watch(attr.animateChange, function(newv, oldv){
+				if(newv!=oldv){
+					$animate.addClass(elem, 'mudouvermelho').then(function(){
+						elem.removeClass('mudouvermelho');
+					});
+				}
+			});
+		}
+	}]);
+
+
 	app.directive('animateClockTime', ['$animate', function($animate){
 		return function(scope, elem, attr){
 			scope.$watch(attr.animateClockTime, function(newv, oldv){
-				if(newv == 'ENCERRADO' || newv < 5000){
+				if(newv < 5000){
 					elem.addClass('text-danger');
+				}else{
+					elem.removeClass('text-danger');
 				}
 				if(newv!=oldv){
 					$animate.addClass(elem, 'changedV').then(function(){
@@ -195,17 +224,42 @@
 			});
 		};
 	}]);
+
+	app.factory('toastr', ['$window', function($window){
+		// http://codeseven.github.io/toastr/demo.html
+		var tostr = $window.toastr;
+		toastr.options.closeButton=true;
+		toastr.options.closeDuration=1000;
+		toastr.options.preventDuplicates=true;
+		toastr.options.positionClass = "toast-top-center";
+		return toastr;
+	}]);
+
 	app.factory('_', ['$window', function($window){
 		return $window._;
 	}]);
-	app.factory('Bid', ['_', '$http', '$rootScope', function(_, $http, $rootScope){
+
+
+	app.factory('Bid', ['_', '$http', '$rootScope', 'toastr', function(_, $http, $rootScope, toastr){
+		var closed =false;
 		var bid = {
 			list: list,
 			create: create,
 			get_remaning_bid_time: remaning_bid_time,
 			get_closed: get_closed
+		};
+		var clockTick = function(){
+			var request = list();
+			request.success(function(data){
+				var bids = _.sortBy(data['bids'], 'id').reverse();
+				$rootScope.$emit('BidClockTick', bids);
+			    setTimeout(function(){
+					clockTick();
+				}, 1000);
+			});
 		}
-		var closed =false;
+		clockTick();
+		return bid;
 
 		function get_closed(){
 			return closed;
@@ -224,70 +278,81 @@
 			return $http.get('bids/');
 		}
 		function create(value){
-			return $http.post('bids/', {value: value});
+			return $http.post('bids/', {value: value})
+				.then(createBidSuccessFn, createBidErrorFn);
+			function createBidSuccessFn(response){
+				toastr.success('Lance efetuado com sucesso.');
+			}
+			function createBidErrorFn(response){
+				toastr.success('Não foi possivel efetuar o lance.', response.data);
+			}
 		}
-		var clockTick = function(){
-			var request = list();
-			request.success(function(data){
-				var bids = _.sortBy(data['bids'], 'id').reverse();
-				$rootScope.$emit('BidClockTick', bids);
-			    setTimeout(function(){
-					clockTick();
-				}, 700);
-			});
-		}
-		clockTick();
-		return bid;
 	}]);
-	app.factory('Product', ['$http', function($http){
+
+
+	app.factory('Product', ['$http','toastr', function($http, toastr){
 		var Product = {
-			openClock: openClock
+			open_clock: open_clock
 		}
-		function openClock(){
-			return $http.post('open-clock/');
+		function open_clock(){
+			return $http.post('open-clock/')
+				.then(openClockSuccessFn, openClockErrorFn);
+
+			function openClockSuccessFn(response){
+				toastr.success('Relógio aberto', 'Disputa iniciada');
+			}
+			function openClockErrorFn(response){
+				toastr.error('Não foi possivel abrir o relógio', response.data);
+			}
 		}
 		return Product;
 	}]);
+
 
 	app.controller('BidCtrl', ['$rootScope', 'Bid', 'Product',  function($rootScope, Bid, Product){
 		var vm = this;
 		vm.bids = false;
 		vm.bidForm = {};
-		vm.last_bid = function(){
+		vm.clock_remaning_time = false;
+
+		vm.last_bid = last_bid;
+		vm.last_value = last_value;
+		vm.last_user = last_user;
+		vm.make_bid = make_bid;
+		vm.open_clock = open_clock;
+
+		$rootScope.$on('BidClockTick', function load_bids(event, bids){
+			vm.bids=bids;
+			if(vm.bids && vm.bids.length)
+				vm.clock_remaning_time = get_clock_time(vm.bids[0]);
+		});
+
+		function last_bid(){
 			if(vm.bids.length) return vm.bids[0];
 		}
-		vm.last_value = function(){
+		function last_value(){
 			var last_bid = vm.last_bid();
 			if (last_bid) return last_bid.value;
 			return '';
 		}
-		vm.last_user = function(){
+		function last_user(){
 			var last_bid = vm.last_bid();
 			if (last_bid) return last_bid.user_username;
 			return '';
 		}
-		vm.get_clock_time = function(){
+		function get_clock_time(){
 			var last_bid = vm.last_bid()
 			if (last_bid){
-				var remaning = Bid.get_remaning_bid_time(last_bid)
-				if(remaning <0)return 'ENCERRADO';
-				return remaning;
+				return Bid.get_remaning_bid_time(last_bid)
 			}
 			return '--:--';
 		}
-		vm.make_bid = function(){
-			var request = Bid.create(vm.bidForm.value);
-			request.success(function(data){
-			});
+		function make_bid(){
+			Bid.create(vm.bidForm.value);
 		}
-		vm.openClock = function(){
-			var openClock = Product.openClock()
-			openClock.success(function(){});
+		function open_clock(){
+			var open_clock = Product.open_clock()
 		}
-		var load_bids = function(event, bids){
-			vm.bids=bids;
-		};
-		$rootScope.$on('BidClockTick', load_bids);
 
 	}]);
 
