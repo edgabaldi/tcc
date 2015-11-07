@@ -64,30 +64,16 @@ class BidView(ProductMixin, View):
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated():
-            if self.product.clock_opened_at:
-                now = timezone.now()
-                if now < self.product.first_clock_limit():
-                    closes_at = now + datetime.timedelta(
-                        seconds=settings.CLOCK_SECONDS)
-                    return self._create_bid(request, closes_at=closes_at)
-                return HttpResponse('Product is closed for Bids', status=403)
-            else:
-                return self._create_bid(request)
+            return self._create_bid(request)
         return HttpResponse('Authentication required', status=403)
 
-    def _create_bid(self, request, closes_at=None):
+    def _create_bid(self, request):
         body = json.loads(request.body)
         value = body.get('value')
         if not value:
             return HttpResponse('Bid needs a value', status=400)
         try:
-            attrs = {
-                'value' : Decimal(value),
-                'user' : request.user
-            }
-            if closes_at:
-                attrs['closes_at'] = closes_at
-            self.product.bids.create(**attrs)
+            self.product.bids.create(value=Decimal(value), user=request.user)
             return HttpResponse(status=200)
         except Exception as e:
             return HttpResponse('Bad request (%s)' % str(e), status=400)
