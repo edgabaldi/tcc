@@ -1,5 +1,6 @@
 from django.conf.urls import include, url, patterns
 from django.contrib.auth import views as auth_views
+from django.views.decorators.cache import never_cache
 from account.forms import CustomAuthenticationForm
 
 from website import views
@@ -18,7 +19,7 @@ urlpatterns = patterns('',
         name = 'open_clock',
     ),
     url(regex=r'^show/(?P<pk>\d+)/bids/$',
-        view = views.BidView.as_view(),
+        view = never_cache(views.BidView.as_view()),
         name = 'bids',
     ),
     url(regex=r'^cadastrar/$',

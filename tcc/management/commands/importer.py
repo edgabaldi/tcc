@@ -37,7 +37,7 @@ class Command(BaseCommand):
 
         extra = {
             'model': model,
-            'clock_starts_at': now,
+            'clock_opened_at': now,
         }
 
         if each_dict.get('initial_price') is None:

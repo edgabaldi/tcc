@@ -159,3 +159,18 @@ File Description: Custom Animations
   -webkit-animation-name: fadeInUpSmall;
   animation-name: fadeInUpSmall;
 }
+
+
+.mudouvermelho-add-active {
+  -webkit-animation: bounce 1s;
+  -moz-animation: bounce 1s;
+  -ms-animation: bounce 1s;
+  animation: bounce 1s;
+}
+.mudouvermelho-remove {
+  background-color: #fbbbb9;
+
+}
+.mudouvermelho-remove-active {
+  background-color: #f1f1f1;
+}
