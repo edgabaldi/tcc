@@ -8,8 +8,8 @@
 				<h2>Você também pode gostar...</h2>
 				<div class="separator-2"></div>
 				<div class="row grid-space-20">
-					{% for similar in product.similars.all %}
-						{% include 'website/_product_box.html' with product=similar.is_similar_to %}
+					{% for item in similars %}
+						{% include 'website/_product_box.html' with product=item.similar %}
 					{% endfor %}
 				</div>
 			</div>

@@ -20,6 +20,7 @@ from product.forms import ProductSearchForm
 from account.models import User
 from account.forms import SignUpModelForm
 from core.views import SearchableListView, LoginRequiredMixin
+from recommender.models import ProductSimilarity
 
 
 class ProductListView(SearchableListView):
@@ -32,6 +33,15 @@ class ProductListView(SearchableListView):
 class ProductDetailView(DetailView):
     template_name = 'website/product.html'
     model = Product
+
+    def get_similar_products(self):
+        return ProductSimilarity.objects.select_related('similar').filter(
+            reference=self.object.reference).order_by('-score')[:8]
+
+    def get_context_data(self, **kwargs):
+        return super(ProductDetailView, self).get_context_data(
+            similars = self.get_similar_products(),
+            **kwargs)
 
 
 class SignUpCreateView(SuccessMessageMixin, CreateView):
