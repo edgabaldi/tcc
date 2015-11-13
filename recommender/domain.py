@@ -199,30 +199,30 @@ class RecommendationCommand(object):
 
         for product in product_list:
 
-            print product.reference
+            if not ProductSimilarity.objects.filter(
+                reference=product.reference).exists():
 
-            # find similar products
-            similars = recommender.similar_items(product.reference, n=8)
+                # find similar products
+                similars = recommender.similar_items(product.reference, n=15)
 
-            # save similar products
-            instance_list = []
-            for score, other_reference in similars:
+                # save similar products
+                instance_list = []
+                for score, other_reference in similars:
 
-                if product.reference != other_reference:
+                    if product.reference != other_reference:
 
-                    other_products = product_list.filter(
-                        similars=None,
-                        reference=other_reference)
+                        print u'{} -> {}'.format(product.reference, other_reference)
 
-                    if len(other_products) > 0:
+                        other_products = product_list.filter(
+                            reference=other_reference)
 
-                        other_product = other_products[0]
+                        if len(other_products) > 0:
 
-                        print product.reference + ' -> ' + other_reference
+                            other_product = other_products[0]
 
-                        instance_list.append(ProductSimilarity(
-                            score=score,
-                            product=product,
-                            is_similar_to=other_product))
+                            instance_list.append(ProductSimilarity(
+                                score=score,
+                                reference=product.reference,
+                                similar=other_product))
 
-            ProductSimilarity.objects.bulk_create(instance_list)
+                ProductSimilarity.objects.bulk_create(instance_list)
