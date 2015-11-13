@@ -1,5 +1,4 @@
 import datetime
-from unittest import skip
 
 from django.test import TestCase
 
@@ -10,7 +9,6 @@ from model_mommy import mommy
 
 class ProductTestCase(TestCase):
 
-    @skip('try this after import right data')
     def test_last_bid(self):
         self._setup_bids()
         self.assertEqual(self.last_bid, self.product.last_bid)

@@ -35,12 +35,6 @@ class Model(models.Model):
         return u'{} - {}'.format(self.brand.name, self.name)
 
 
-class ProductManager(models.Manager):
-    def last_bid(self):
-        bids = self.bids.order_by('-id')
-        if bids:
-            return bids[0]
-
 class Product(models.Model):
 
     model = models.ForeignKey('product.Model')
@@ -60,7 +54,7 @@ class Product(models.Model):
 
     @property
     def last_bid(self):
-        return self.bids.order_by('-created_at').last()
+        return self.bids.order_by('id').last()
 
     @property
     def bid_count(self):
