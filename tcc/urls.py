@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^', include('website.urls')),
     url(r'^account/', include('account.urls')),
     url(r'^product/', include('product.urls')),
+    url(r'^recommender/', include('recommender.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

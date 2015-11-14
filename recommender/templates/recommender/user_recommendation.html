@@ -1,0 +1,42 @@
+{% extends 'backend.html' %}
+{% load bootstrap %}
+
+{% block app %}
+
+<div class="row">
+	<div class="col-md-6">
+		<h2>Recomendação para Usuários</h2>
+		<div class="separator-2"></div>
+	</div>
+</div>
+
+<div class="sorting-filters">
+	<form class="form-inline">
+
+		<div class="form-group">
+			<button class="btn btn-default">Filtrar</button>
+		</div>
+	</form>
+</div>
+
+<table class="table table-striped table-bordared table-hover">
+	<thead>
+		<tr>
+			<th>Nome</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		{% for item in object_list %}
+		<tr>
+			<td><strong><a href="#"></a></strong></td>
+		</tr>
+		{% empty %}
+		<tr>
+			<td>Empty</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock app %}

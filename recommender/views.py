@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class UserRecommendationView(TemplateView):
+    template_name = 'recommender/user_recommendation.html'
