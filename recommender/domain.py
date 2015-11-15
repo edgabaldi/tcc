@@ -2,9 +2,13 @@
 import pandas as pd
 import numpy as np
 
-from recommender.models import ProductSimilarity
+from django.contrib.auth import get_user_model
+
+from recommender.models import ProductSimilarity, UserSimilarity
 from recommender.cache import SQLiteCacheBackend
 from product.models import Product, Bid
+
+User = get_user_model()
 
 # constants
 ITEM_BASED, USER_BASED = 'ITEM_BASED', 'USER_BASED'
@@ -182,7 +186,7 @@ class Recommender(object):
         return sorted(similar, reverse=True)[:n]
 
 
-class RecommendationCommand(object):
+class ItemRecommendationCommand(object):
 
     @staticmethod
     def run():
@@ -226,3 +230,44 @@ class RecommendationCommand(object):
                                 similar=other_product))
 
                 ProductSimilarity.objects.bulk_create(instance_list)
+
+
+class UserRecommendationCommand(object):
+
+    @staticmethod
+    def run():
+
+        # train model
+        queryset = Bid.objects.values('user__id', 'product__reference').distinct()
+        model = Model(queryset)
+        model.create()
+
+        # prepare recommendation
+        recommender = Recommender(model.get_preferences())
+
+        user_list = User.objects.filter(is_active=True)
+
+        for user in user_list:
+
+            print u'User: {}'.format(user.id)
+
+            recommendation_list = recommender.recommend_items(user.id, n=10)
+
+            instance_list = []
+            for score, reference in recommendation_list:
+
+                product_list = Product.objects.filter(
+                    status='liberado_lance',
+                    reference=reference).distinct()
+
+                if product_list.exists():
+
+                    product = product_list[0]
+
+                    print product.reference
+
+                    instance_list.append(
+                        UserSimilarity(user=user, product=product, score=score)
+                    )
+
+            UserSimilarity.objects.bulk_create(instance_list)
