@@ -66,7 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     neighborhood = models.CharField('Bairro', max_length=100)
     state = models.CharField('Estado', max_length=2, choices=STATE_CHOICES)
     cep = models.CharField('CEP', max_length=10)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(u'Está Ativo?', default=False)
     is_staff = models.BooleanField(default=False)
     is_marketing = models.BooleanField(default=False)
 
