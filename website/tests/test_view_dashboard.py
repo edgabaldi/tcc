@@ -21,6 +21,11 @@ class ProductListViewTestCase(TestCase):
     def test_template_used(self):
         self.assertTemplateUsed(self.response, 'website/dashboard.html')
 
+    def test_dashboard_stats_shoud_be_in_context(self):
+        self.assertIn('product_count', self.response.context)
+        self.assertIn('user_count', self.response.context)
+        self.assertIn('bid_count', self.response.context)
+
     def _setup_user(self):
         self.user = mommy.make(
             settings.AUTH_USER_MODEL, 

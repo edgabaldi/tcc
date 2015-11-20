@@ -6,37 +6,30 @@
 
 <div class="stats row grid-space-10">
 
-	<div class="col-md-3 col-sm-6">
+	<div class="col-md-4">
 		<div class="box-style-1">
-			<h2 class="title">Clientes</h2>
+			<h2 class="title">Usuários</h2>
 			<i class="fa fa-users"></i>
-			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
+			<span class="stat-num" data-to="{{user_count}}" data-speed="3000">{{user_count}}</span>
 		</div>
 	</div>
 
-	<div class="col-md-3 col-sm-6">
+	<div class="col-md-4">
 		<div class="box-style-1">
 			<h2 class="title">Lotes</h2>
 			<i class="fa fa-car"></i>
-			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
+			<span class="stat-num" data-to="{{product_count}}" data-speed="3000">{{product_count}}</span>
 		</div>
 	</div>
 
-	<div class="col-md-3 col-sm-6">
+	<div class="col-md-4">
 		<div class="box-style-1">
 			<h2 class="title">Lances</h2>
 			<i class="fa fa-gavel"></i>
-			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
+			<span class="stat-num" data-to="{{bid_count}}" data-speed="3000">{{bid_count}}</span>
 		</div>
 	</div>
 
-	<div class="col-md-3 col-sm-6">
-		<div class="box-style-1">
-			<h2 class="title">Visualizações</h2>
-			<i class="fa fa-eye"></i>
-			<span class="stat-num" data-to="1234" data-speed="3000">1234</span>
-		</div>
-	</div>
 </div><br><br><br>
 {% endblock app %}
 

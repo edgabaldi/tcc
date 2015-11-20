@@ -15,7 +15,7 @@ from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.utils import timezone
 
-from product.models import Product
+from product.models import Product, Bid
 from product.forms import ProductSearchForm
 from account.models import User
 from account.forms import SignUpModelForm
@@ -54,6 +54,19 @@ class SignUpCreateView(SuccessMessageMixin, CreateView):
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'website/dashboard.html'
+
+    def get_dashboard_stats(self):
+
+        return {
+            'user_count': User.objects.count(),
+            'product_count': Product.objects.count(),
+            'bid_count': Bid.objects.count(),
+        }
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        context.update(self.get_dashboard_stats())
+        return context
 
 class ProductMixin(object):
     def dispatch(self, *args, **kwargs):
