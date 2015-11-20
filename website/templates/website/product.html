@@ -49,11 +49,12 @@
 							<li><a href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-users pr-5"></i>Histórico de Lances</a></li>
 						</ul>
 
-						{% if user.can_give_bid %}
 						<!-- Tab panes -->
 						<div class="tab-content padding-top-clear padding-bottom-clear">
+
+							{% if user.can_give_bid %}
 							<div class="tab-pane fade in active" id="h2tab1" ng-controller="BidCtrl as vm">
-							{% verbatim %}
+								{% verbatim %}
 								<div class="row" ng-hide="vm.bids">
 									<div class="col-lg-12 text-center">
 										<i class="fa fa-refresh fa-spin fa-2x space-lg" style="margin-top: 50px;"></i>
@@ -88,18 +89,19 @@
 												<input type="submit" value="Dê um Lance!" class="btn btn-default">
 											</div>
 										</form>
-								{% endverbatim %}
-								{% if user.is_staff or user.is_superuser %}
+
+										{% endverbatim %}
+										{% if user.is_staff or user.is_superuser %}
 										<form role="form" id="open-clock-form" ng-submit="vm.open_clock()" ng-if="!vm.clock_remaning_time">
 											<input type="submit" value="Abrir relógio" class="btn btn-default">
 										</form>
-								{% endif %}
+										{% endif %}
 									</div><!-- /.col-md-6 -->
 								</div><!-- /.row -->
 							</div><!-- /.tab-pane -->
 							{% endif %}
 
-							<div class="tab-pane fade in" id="h2tab2">
+							<div class="tab-pane fade in {% if not user.can_give_bid %} active {%endif%}" id="h2tab2">
 								<h4 class="space-top">Descritivo do Lote</h4>
 								<hr>
 
