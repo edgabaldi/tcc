@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<div class="alert alert-warning">
+	<strong>Atenção!</strong> Evite problemas no seu cadastro, confira todos os dados preenchidos antes
+	de enviar.
+</div>
+
+<p>Na página inicial, acima do formulário de pesquisa, possui um <a href="{% url 'signup' %}">link</a> 
+	para o formulário de cadastro.</p>
+
+<p>Preencha o formulário completamente e clique no botão Cadastrar. Seu cadastro será avaliado e em
+	menos de 48 horas será ativado.</p>

@@ -1,0 +1,36 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<p>Na página inicial da Brbid, oferecemos alguns filtros de pesquisa. São eles:</p>
+
+<ul>
+	<li>Número do Lote</li>
+	<li>Marca</li>
+	<li>Modelo</li>
+	<li>Estado Geral</li>
+</ul>
+
+	<div class="image-faq">
+		<img class="img-responsive center-block" src="{% static 'images/help/01_search_a_product.png' %}">
+		<caption>Formulário de Pesquisa da Página Inicial</caption>
+	</div>
+
+<p>Se esses filtros não forem o suficiente para atender seu critério de pesquisa, ainda
+	na página inicial, você pode navegar por todos os lotes disponíveis através nos
+	botões Próximo e Anterior localizados no final da listagem de veículos.</p>
+
+	<div class="image-faq">
+		<img class="img-responsive center-block" src="{% static 'images/help/01_pagination.png' %}">
+		<caption>Botões de navegação na listagem da página inicial</caption>
+	</div>
+
