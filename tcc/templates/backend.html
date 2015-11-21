@@ -12,11 +12,11 @@
 			<div class="separator-2"></div>
 			<nav>
 				<ul class="nav nav-pills nav-stacked">
-					<li {% if not menu_active %} class="active"{%endif%}><a href="{% url 'dashboard' %}">Visão Geral</a></li>
-					<li {% if menu_active == 'customer' %}class="active"{% endif %}><a href="{% url 'user_list' %}">Usuários</a></li>
-					<li {% if menu_active == 'product' %}class="active"{%endif%}><a href="{% url 'product_list' %}">Lotes</a></li>
-					<li><a href="{% url 'brand_list' %}">Marcas</a></li>
-					<li><a href="{% url 'model_list' %}">Modelos</a></li>
+					<li {% if not submenu_active %} class="active"{%endif%}><a href="{% url 'dashboard' %}">Visão Geral</a></li>
+					<li {% if submenu_active == 'user' %}class="active"{% endif %}><a href="{% url 'user_list' %}">Usuários</a></li>
+					<li {% if submenu_active == 'product' %}class="active"{%endif%}><a href="{% url 'product_list' %}">Lotes</a></li>
+					<li {% if submenu_active == 'brand' %}class="active"{%endif%}><a href="{% url 'brand_list' %}">Marcas</a></li>
+					<li {% if submenu_active == 'model' %}class="active"{%endif%}><a href="{% url 'model_list' %}">Modelos</a></li>
 				</ul>
 			</nav>
 
@@ -24,7 +24,7 @@
 			<div class="separator-2"></div>
 			<nav>
 				<ul class="nav nav-pills nav-stacked">
-					<li><a href="{% url 'user_recommendation' %}">Recomendação para Cliente</a></li>
+					<li {% if submenu_active == 'user_recommendation' %}class="active"{% endif %}><a href="{% url 'user_recommendation' %}">Recomendação para Cliente</a></li>
 				</ul>
 			</nav>
 		</div><!-- /.col-md-3 -->

@@ -5,10 +5,10 @@ from django.core.urlresolvers import reverse_lazy
 
 from account.models import User
 from account import forms
-from core.views import SearchableListView, LoginRequiredMixin
+from core.views import SearchableListView, LoginRequiredMixin, MenuActiveMixin
 
 
-class UserListView(LoginRequiredMixin, SearchableListView):
+class UserListView(MenuActiveMixin, LoginRequiredMixin, SearchableListView):
     """
     View that list users and filter
     """
@@ -17,6 +17,8 @@ class UserListView(LoginRequiredMixin, SearchableListView):
     template_name='account/user_list.html'
     paginate_by=25
     form_class=forms.UserSearchForm
+    menu_active="dashboard"
+    submenu_active="user"
     queryset = User.objects.all().order_by('is_active')
 
 
@@ -31,11 +33,14 @@ class UserActionMixin(LoginRequiredMixin, object):
     success_url = reverse_lazy('user_list')
 
 
-class BaseUserActionMixin(UserActionMixin, SuccessMessageMixin):
+class BaseUserActionMixin(MenuActiveMixin, UserActionMixin, SuccessMessageMixin):
     """
     Mixin of UserActionMixin with success messages
     """
     success_message = 'Usuário salvo com sucesso.'
+    menu_active="dashboard"
+    submenu_active="user"
+
 
 class UserCreateView(BaseUserActionMixin, CreateView):
     """
