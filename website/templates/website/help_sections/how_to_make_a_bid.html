@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<div class="alert alert-warning">
+	<strong>Atenção!</strong> Você precisa estar autenticado e com cadastro ativo para efetuar lances no site.
+</div>
+
+<p>Uma vez que você está logado no site e seu cadastro está ativo, você pode efetuar lances no site.</p>
+
+<p>Na página do produto, quando você está autenticado no site, aparece uma nova aba "Dê um lance".</p>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/03_product-bid_make_01.png' %}">
+	<caption>Aba dê um lance.</caption>
+</div>
+
+<h5>Como efetuar um lance?</h5>
+<p>Informe um valor do seu lance e clique no botão "Dê um Lance".</p>
+
+<h5>Sobre a disputa</h5>
+<p>Não é necessário o relógio estar aberto para efetuar um lance no lote. Uma vez que o relógio está aberto, 
+	acontece a disputa pelo lote. A cada novo lance, o relógio é reiniciado. O ultimo usuário que deu um lance
+	e o relógio zerar será o arrematante do lote.</p>
+
+<h5>Algumas observações</h5>
+<ul>
+	<li>O valor do lance deve ser pelo menos R$1,00 maior que o lance anterior.</li>
+	<li>O valor do lance não pode ser 10 vezes maior do que o ultimo lance.</li>
+</ul>

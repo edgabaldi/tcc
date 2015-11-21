@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<p>Você pode encontrar mais informações referente ao lote, na página do produto na aba Descrição.</p>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/04_product-description.png' %}">
+	<caption>Detalhes sobre o produto</caption>
+</div>
+
+<p>Aconselhamos que alem das informações no site, você não deixe de ir visitar o veículo no pátio.</p>
+
+							

@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<p>Prezando pela transparência de nossas operações, mantemos o histórico de lances disponíveis na
+	página do produto,na aba "Histórico de Lances".</p>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/05_product-bid-history.png' %}">
+	<caption>Aba dê um lance.</caption>
+</div>
