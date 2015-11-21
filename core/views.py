@@ -47,11 +47,16 @@ class LoginRequiredMixin(object):
 class MenuActiveMixin(object):
 
     menu_active = None
+    submenu_active = None
 
     def get_menu_active(self):
         return self.menu_active
 
+    def get_submenu_active(self):
+        return self.submenu_active
+
     def get_context_data(self, **kwargs):
         return super(MenuActiveMixin, self).get_context_data(
             menu_active=self.get_menu_active(),
+            submenu_active = self.get_submenu_active(),
             **kwargs)
