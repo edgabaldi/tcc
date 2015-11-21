@@ -16,119 +16,70 @@
 			<div class="panel-group" id="accordion-faq">
 
 				<!-- starts panel -->
-				{% with head_id="headingOne" collapse_id="collapseOne" %}
-				<div class="panel panel-default">
 
-					<div class="panel-heading" role="tab" id="{{head_id}}">
-						<h4 class="pane-title">
-							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
-								<i class="fa fa-question-circle pr-10"></i>
-								Como pesquisar um Lote?
-							</a>
-						</h4>
-					</div><!-- /.panel-heading -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading1" collapse_id="collapse1" manpage='website/help_sections/how_to_search_a_product.html' title="Como pesquisar um Lote?" %}
 
-					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
-						<div class="panel-body">
-							{% include 'website/help_sections/how_to_search_a_product.html' %}
-						</div><!-- /.panel-body -->
-					</div><!-- /#collapseOne -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading2" collapse_id="collapse2" manpage='website/help_sections/how_to_sign_up.html' title="Como se cadastrar na Brbid?" %}
 
-				</div><!-- /.panel -->
-				{% endwith %}
-				<!-- end panel -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading3" collapse_id="collapse3" manpage='website/help_sections/how_to_make_a_bid.html' title="Como efetuar um lance?" %}
 
-				<!-- starts panel -->
-				{% with head_id="headingTwo" collapse_id="collapseTwo" %}
-				<div class="panel panel-default">
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading4" collapse_id="collapse4" manpage='website/help_sections/how_to_see_more_product_informations.html' title="Como ver mais detalhes sobre o produto?" %}
 
-					<div class="panel-heading" role="tab" id="{{head_id}}">
-						<h4 class="pane-title">
-							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
-								<i class="fa fa-question-circle pr-10"></i>
-								Como se cadastrar no site?
-							</a>
-						</h4>
-					</div><!-- /.panel-heading -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading5" collapse_id="collapse5" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como ver o histórico de lances do produto?" %}
 
-					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
-						<div class="panel-body">
-							{% include 'website/help_sections/how_to_sign_up.html' %}
-						</div><!-- /.panel-body -->
-					</div><!-- /#collapseOne -->
 
-				</div><!-- /.panel -->
-				{% endwith %}
-				<!-- end panel -->
+				{% if user.is_staff or user.is_superuser %}
 
-				<!-- starts panel -->
-				{% with head_id="headingThree" collapse_id="collapseThree" %}
-				<div class="panel panel-default">
+				<h3>Manual da Área Administrativa</h3>
 
-					<div class="panel-heading" role="tab" id="{{head_id}}">
-						<h4 class="pane-title">
-							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
-								<i class="fa fa-question-circle pr-10"></i>
-								Como efetuar um lance?
-							</a>
-						</h4>
-					</div><!-- /.panel-heading -->
+				<h4>Usuários</h4>
 
-					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
-						<div class="panel-body">
-							{% include 'website/help_sections/how_to_make_a_bid.html' %}
-						</div><!-- /.panel-body -->
-					</div><!-- /#collapseOne -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading6" collapse_id="collapse6" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como pesquisar um usuário?" %}
 
-				</div><!-- /.panel -->
-				{% endwith %}
-				<!-- end panel -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading7" collapse_id="collapse7" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como ativar ou rejeitar um cadastro de usuário?" %}
 
-				<!-- starts panel -->
-				{% with head_id="headingFour" collapse_id="collapseFour" %}
-				<div class="panel panel-default">
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading8" collapse_id="collapse8" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como cadastrar um usuário pela área administrativa?" %}
 
-					<div class="panel-heading" role="tab" id="{{head_id}}">
-						<h4 class="pane-title">
-							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
-								<i class="fa fa-question-circle pr-10"></i>
-								Como ver mais informações sobre um Lote?
-							</a>
-						</h4>
-					</div><!-- /.panel-heading -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading9" collapse_id="collapse9" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como editar o cadastro de um usuário?" %}
 
-					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
-						<div class="panel-body">
-							{% include 'website/help_sections/how_to_see_more_product_informations.html' %}
-						</div><!-- /.panel-body -->
-					</div><!-- /#collapseOne -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading10" collapse_id="collapse10" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como vincular um usuário a um grupo especifico?" %}
 
-				</div><!-- /.panel -->
-				{% endwith %}
-				<!-- end panel -->
+				<h4>Lotes</h4>
 
-				<!-- starts panel -->
-				{% with head_id="headingFive" collapse_id="collapseFive" %}
-				<div class="panel panel-default">
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading11" collapse_id="collapse11" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como pesquisar lotes na área administrativa?" %}
 
-					<div class="panel-heading" role="tab" id="{{head_id}}">
-						<h4 class="pane-title">
-							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
-								<i class="fa fa-question-circle pr-10"></i>
-								Como faço para ver o histórico de lances de um lote?
-							</a>
-						</h4>
-					</div><!-- /.panel-heading -->
 
-					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
-						<div class="panel-body">
-							{% include 'website/help_sections/how_to_see_bid_history_of_a_product.html' %}
-						</div><!-- /.panel-body -->
-					</div><!-- /#collapseOne -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading12" collapse_id="collapse12" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como cadastrar um novo lote para leilão?" %}
 
-				</div><!-- /.panel -->
-				{% endwith %}
-				<!-- end panel -->
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading13" collapse_id="collapse13" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como editar um lote?" %}
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading14" collapse_id="collapse14" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como apagar um lote?" %}
+
+				<h4>Marca</h4>
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading15" collapse_id="collapse15" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como pesquisar uma marca?" %}
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading16" collapse_id="collapse16" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como cadastrar uma nova marca?" %}
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading17" collapse_id="collapse17" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como editar uma marca?" %}
+
+				<h4>Modelo</h4>
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading18" collapse_id="collapse18" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como pesquisar um Modelo?" %}
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading19" collapse_id="collapse19" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como cadastrar um novo modelo?" %}
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading20" collapse_id="collapse20" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como editar um modelo existente?" %}
+
+				<h4>Recomendações</h4>
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading21" collapse_id="collapse21" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como pesquisar recomendações para usuários?" %}
+
+				{% include 'website/help_sections/_base_help_section.html' with head_id="heading22" collapse_id="collapse22" manpage='website/help_sections/how_to_see_bid_history_of_a_product.html' title="Como funciona a recomendação de produtos?" %}
+
+
+
+				{% endif %}
 	
 			</div><!-- ./panel-group -->
 

@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading" role="tab" id="{{head_id}}">
+		<h4 class="pane-title">
+			<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
+				<i class="fa fa-question-circle pr-10"></i>
+				{{title}}
+			</a>
+		</h4>
+	</div><!-- /.panel-heading -->
+
+	<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
+		<div class="panel-body">
+			{% include manpage %}
+		</div><!-- /.panel-body -->
+	</div><!-- /#collapseOne -->
+
+</div><!-- /.panel -->
+
