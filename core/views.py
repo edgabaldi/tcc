@@ -42,3 +42,16 @@ class LoginRequiredMixin(object):
             messages.warning(request, u'Você precisa estar autenticado para acessar essa página')
             return HttpResponseRedirect(reverse_lazy('login'))
         return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
+
+
+class MenuActiveMixin(object):
+
+    menu_active = None
+
+    def get_menu_active(self):
+        return self.menu_active
+
+    def get_context_data(self, **kwargs):
+        return super(MenuActiveMixin, self).get_context_data(
+            menu_active=self.get_menu_active(),
+            **kwargs)
