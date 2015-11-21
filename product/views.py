@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
-from core.views import SearchableListView, LoginRequiredMixin
+from core.views import SearchableListView, LoginRequiredMixin, MenuActiveMixin
 from product import models
 from product import forms
 
@@ -15,7 +15,8 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 #
 
 
-class ProductSearchableListView(LoginRequiredMixin, SearchableListView):
+class ProductSearchableListView(MenuActiveMixin, LoginRequiredMixin, 
+                                SearchableListView):
     """
     View that allow list and search products
     """
@@ -23,6 +24,8 @@ class ProductSearchableListView(LoginRequiredMixin, SearchableListView):
     template_name = 'product/product_list.html'
     paginate_by=25
     form_class = forms.ProductSearchForm
+    menu_active = 'dashboard'
+    submenu_active = 'product'
 
 
 class ProductActionMixin(LoginRequiredMixin, object):
@@ -36,11 +39,14 @@ class ProductActionMixin(LoginRequiredMixin, object):
     success_url = reverse_lazy('product_list')
 
 
-class BaseProductActionMixin(ProductActionMixin, SuccessMessageMixin):
+class BaseProductActionMixin(MenuActiveMixin, ProductActionMixin, 
+                             SuccessMessageMixin):
     """
     Mixin of ProductActionMixin with success messages
     """
     success_message = 'Produto salvo com sucesso.'
+    menu_active = 'dashboard'
+    submenu_active = 'product'
 
 
 class ProductCreateView(BaseProductActionMixin, CreateWithInlinesView):
@@ -55,9 +61,12 @@ class ProductUpdateView(BaseProductActionMixin, UpdateWithInlinesView):
     """
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(MenuActiveMixin, LoginRequiredMixin, DeleteView):
     model = models.Product
     success_url = reverse_lazy('product_list')
+    menu_active = 'dashboard'
+    submenu_active = 'product'
+
 
 
 #
@@ -65,7 +74,8 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 #
 
 
-class BrandSearchableListView(LoginRequiredMixin, SearchableListView):
+class BrandSearchableListView(MenuActiveMixin, LoginRequiredMixin, 
+                              SearchableListView):
     """
     View that allow list and search brands
     """
@@ -73,9 +83,12 @@ class BrandSearchableListView(LoginRequiredMixin, SearchableListView):
     template_name = 'product/brand_list.html'
     paginate_by=25
     form_class = forms.BrandSearchForm
+    menu_active = 'dashboard'
+    submenu_active = 'brand'
 
 
-class BrandActionMixin(LoginRequiredMixin, object):
+
+class BrandActionMixin(MenuActiveMixin, LoginRequiredMixin, object):
     """
     Commum attributes for Brand Edit Views
     """
@@ -83,6 +96,9 @@ class BrandActionMixin(LoginRequiredMixin, object):
     template_name = 'product/brand_form.html'
     form_class = forms.BrandModelForm
     success_url = reverse_lazy('brand_list')
+    menu_active = 'dashboard'
+    submenu_active = 'brand'
+
 
 
 class BrandCreateView(BrandActionMixin, CreateView):
@@ -102,7 +118,8 @@ class BrandUpdateView(BrandActionMixin, UpdateView):
 #
 
 
-class ModelSearchableListView(LoginRequiredMixin, SearchableListView):
+class ModelSearchableListView(MenuActiveMixin, LoginRequiredMixin, 
+                              SearchableListView):
     """
     View that allow list and search models
     """
@@ -110,9 +127,11 @@ class ModelSearchableListView(LoginRequiredMixin, SearchableListView):
     template_name = 'product/model_list.html'
     paginate_by=25
     form_class = forms.ModelSearchForm
+    menu_active = 'dashboard'
+    submenu_active = 'model'
 
 
-class ModelActionMixin(LoginRequiredMixin, object):
+class ModelActionMixin(MenuActiveMixin, LoginRequiredMixin, object):
     """
     Commum attributes for Model edit views
     """
@@ -120,6 +139,8 @@ class ModelActionMixin(LoginRequiredMixin, object):
     template_name = 'product/model_form.html'
     form_class = forms.ModelModelForm
     success_url = reverse_lazy('model_list')
+    menu_active = 'dashboard'
+    submenu_active = 'model'
 
 
 class ModelCreateView(ModelActionMixin, CreateView):
