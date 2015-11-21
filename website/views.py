@@ -104,3 +104,7 @@ class BidView(ProductMixin, View):
             return HttpResponse(status=200)
         except Exception as e:
             return HttpResponse('Bad request (%s)' % str(e), status=400)
+
+
+class HelpView(TemplateView):
+    template_name='website/help.html'

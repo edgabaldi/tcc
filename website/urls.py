@@ -40,6 +40,10 @@ urlpatterns = patterns('',
         view = views.DashboardView.as_view(),
         name = 'dashboard',
     ),
+    url(regex=r'^ajuda/$',
+        view = views.HelpView.as_view(),
+        name = 'help'
+    ),
 )
 
 

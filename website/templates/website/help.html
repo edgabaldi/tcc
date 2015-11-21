@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main col-md-12">
+
+	<div class="row">
+
+		<div class="col-md-10 col-md-offset-1">
+
+			<h1>Ajuda</h1>
+
+			<p>Dúvidas frequentes e passo-a-passo de como utilizar o site.</p>
+
+			<div class="panel-group" id="accordion-faq">
+
+				<!-- starts panel -->
+				{% with head_id="headingOne" collapse_id="collapseOne" %}
+				<div class="panel panel-default">
+
+					<div class="panel-heading" role="tab" id="{{head_id}}">
+						<h4 class="pane-title">
+							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
+								<i class="fa fa-question-circle pr-10"></i>
+								Como pesquisar um Lote?
+							</a>
+						</h4>
+					</div><!-- /.panel-heading -->
+
+					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
+						<div class="panel-body">
+							Foo
+						</div><!-- /.panel-body -->
+					</div><!-- /#collapseOne -->
+
+				</div><!-- /.panel -->
+				{% endwith %}
+				<!-- end panel -->
+
+				<!-- starts panel -->
+				{% with head_id="headingTwo" collapse_id="collapseTwo" %}
+				<div class="panel panel-default">
+
+					<div class="panel-heading" role="tab" id="{{head_id}}">
+						<h4 class="pane-title">
+							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
+								<i class="fa fa-question-circle pr-10"></i>
+								Como se cadastrar no site?
+							</a>
+						</h4>
+					</div><!-- /.panel-heading -->
+
+					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
+						<div class="panel-body">
+							Foo
+						</div><!-- /.panel-body -->
+					</div><!-- /#collapseOne -->
+
+				</div><!-- /.panel -->
+				{% endwith %}
+				<!-- end panel -->
+
+				<!-- starts panel -->
+				{% with head_id="headingThree" collapse_id="collapseThree" %}
+				<div class="panel panel-default">
+
+					<div class="panel-heading" role="tab" id="{{head_id}}">
+						<h4 class="pane-title">
+							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
+								<i class="fa fa-question-circle pr-10"></i>
+								Como efetuar um lance?
+							</a>
+						</h4>
+					</div><!-- /.panel-heading -->
+
+					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
+						<div class="panel-body">
+							Foo
+						</div><!-- /.panel-body -->
+					</div><!-- /#collapseOne -->
+
+				</div><!-- /.panel -->
+				{% endwith %}
+				<!-- end panel -->
+
+				<!-- starts panel -->
+				{% with head_id="headingFour" collapse_id="collapseFour" %}
+				<div class="panel panel-default">
+
+					<div class="panel-heading" role="tab" id="{{head_id}}">
+						<h4 class="pane-title">
+							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
+								<i class="fa fa-question-circle pr-10"></i>
+								Como ver mais informações sobre um Lote?
+							</a>
+						</h4>
+					</div><!-- /.panel-heading -->
+
+					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
+						<div class="panel-body">
+							Foo
+						</div><!-- /.panel-body -->
+					</div><!-- /#collapseOne -->
+
+				</div><!-- /.panel -->
+				{% endwith %}
+				<!-- end panel -->
+
+				<!-- starts panel -->
+				{% with head_id="headingFive" collapse_id="collapseFive" %}
+				<div class="panel panel-default">
+
+					<div class="panel-heading" role="tab" id="{{head_id}}">
+						<h4 class="pane-title">
+							<a data-toggle="collapse" data-parent="#accordion-faq" href="#{{collapse_id}}" class="collapsed" aria-expanded="true" aria-controls="{{collapse_id}}">
+								<i class="fa fa-question-circle pr-10"></i>
+								Como faço para ver o histórico de lances de um lote?
+							</a>
+						</h4>
+					</div><!-- /.panel-heading -->
+
+					<div id="{{collapse_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{collapse_id}}">
+						<div class="panel-body">
+							Foo
+						</div><!-- /.panel-body -->
+					</div><!-- /#collapseOne -->
+
+				</div><!-- /.panel -->
+				{% endwith %}
+				<!-- end panel -->
+	
+			</div><!-- ./panel-group -->
+
+		</div><!-- /.col-md-6 -->
+
+	</div><!-- /.row -->
+
+</div><!-- /.main -->
+
+{% endblock content %}
