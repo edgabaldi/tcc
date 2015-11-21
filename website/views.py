@@ -19,18 +19,20 @@ from product.models import Product, Bid
 from product.forms import ProductSearchForm
 from account.models import User
 from account.forms import SignUpModelForm
-from core.views import SearchableListView, LoginRequiredMixin
+from core.views import SearchableListView, LoginRequiredMixin, MenuActiveMixin
 from recommender.models import ProductSimilarity
 
 
-class ProductListView(SearchableListView):
+class ProductListView(MenuActiveMixin, SearchableListView):
+    menu_active='index'
     template_name = 'website/index.html'
     model = Product
     form_class = ProductSearchForm
     paginate_by = 8
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(MenuActiveMixin, DetailView):
+    menu_active='index'
     template_name = 'website/product.html'
     model = Product
 
@@ -44,15 +46,17 @@ class ProductDetailView(DetailView):
             **kwargs)
 
 
-class SignUpCreateView(SuccessMessageMixin, CreateView):
+class SignUpCreateView(MenuActiveMixin, SuccessMessageMixin, CreateView):
     model = User
     form_class = SignUpModelForm
     template_name = 'website/signup.html'
+    menu_active = 'signup'
     success_url = reverse_lazy('index')
     success_message = u'Usuário Cadastrado, Aguarde a ativação!'
 
 
-class DashboardView(LoginRequiredMixin, TemplateView):
+class DashboardView(MenuActiveMixin, LoginRequiredMixin, TemplateView):
+    menu_active = 'dashboard'
     template_name = 'website/dashboard.html'
 
     def get_dashboard_stats(self):
@@ -106,5 +110,6 @@ class BidView(ProductMixin, View):
             return HttpResponse('Bad request (%s)' % str(e), status=400)
 
 
-class HelpView(TemplateView):
+class HelpView(MenuActiveMixin, TemplateView):
+    menu_active='help'
     template_name='website/help.html'

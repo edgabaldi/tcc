@@ -82,17 +82,18 @@
 
 											<div class="pull-right">
 												<ul class="nav nav-pills">
+													<li {% if menu_active == 'index'%} class="active"{%endif%}><a href="{% url 'index' %}">Inicio</a></li>
 													{% if user.is_authenticated %}
 														{% if user.is_staff or user.is_superuser %}
-															<li><a href="{% url 'dashboard' %}">Administrar</a></li>
+														<li {% if menu_active == 'dashboard' %}class="active"{% endif %}><a href="{% url 'dashboard' %}">Administrar</a></li>
 														{% endif %}
 														<li><a>{{ user.username }}</a></li>
 														<li><a href="{% url 'logout' %}">Sair</a></li>
 													{% else %}
-														<li class="active"><a href="{% url 'signup' %}">Cadastre-se</a></li>
-														<li><a href="{% url 'login' %}">Entrar</a></li>
+													<li {% if menu_active == 'signup' %}class="active"{% endif %}><a href="{% url 'signup' %}">Cadastre-se</a></li>
+													<li {% if menu_active == 'login' %}class="active"{%endif%}><a href="{% url 'login' %}">Entrar</a></li>
 													{% endif %}
-													<li><a href="{% url 'help' %}">Ajuda</a></li>
+													<li {% if menu_active == 'help'%}class="active"{%endif%}><a href="{% url 'help' %}">Ajuda</a></li>
 												</ul>
 											</div>
 
