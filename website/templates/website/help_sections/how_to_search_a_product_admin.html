@@ -1,0 +1,34 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<h4>Passos</h4>
+<ol>
+	<li>Acesse a área administrativa do sistema.</li>
+	<li>Acesse menu <strong>Opções > Lotes</strong></li>
+
+</ol>
+
+<p>No inicio da listagem de produtos, aparece um filtro de pesquisa com as opções:</p>
+
+<ul>
+	<li>Número do Lote</li>
+	<li>Marca</li>
+	<li>Modelo</li>
+	<li>Estado Geral</li>
+</ul>
+
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/01_search_a_product.png' %}">
+	<caption>Formulário de Pesquisa de Lotes</caption>
+</div>
