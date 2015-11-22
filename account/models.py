@@ -67,8 +67,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     state = models.CharField('Estado', max_length=2, choices=STATE_CHOICES)
     cep = models.CharField('CEP', max_length=10)
     is_active = models.BooleanField(u'Está Ativo?', default=False)
-    is_staff = models.BooleanField(default=False)
-    is_marketing = models.BooleanField(default=False)
+    is_staff = models.BooleanField(u'Operacional', default=False)
+    is_marketing = models.BooleanField(u'Marketing', default=False)
 
     objects = UserManager()
 
