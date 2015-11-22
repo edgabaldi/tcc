@@ -1,0 +1,36 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<h4>Passos</h4>
+<ol>
+	<li>Acesse a área administrativa do sistema.</li>
+	<li>Acesse menu <strong>opções > Usuários</strong></li>
+
+</ol>
+
+<p>No inicio da listagem de usuários, aparece um filtro de pesquisa com as opções:</p>
+
+<ul>
+	<li>Nome do usuário</li>
+	<li>CPF/CNPJ</li>
+	<li>Está ativo?</li>
+</ul>
+
+
+	<div class="image-faq">
+		<img class="img-responsive center-block" src="{% static 'images/help/06_user_list_filter.png' %}">
+		<caption>Filtro de pesquisa de Usuário</caption>
+	</div>
+
+
+	<p>Ao preencher o filtro de pesquisa e clicar no botão <strong>Filtrar</strong>, a listagem de usuários exibirá apenas os resultados que correspondem a pesquisa.</p>

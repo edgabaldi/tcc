@@ -1,0 +1,47 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<h4>Motivação:</h4>
+
+<p>Todo cadastro realizado no site deve ser avaliado, para evitar problemas legais durante
+	a regularização dos bens arrematados, assim como problemas com a emissão de notas de arrematação.
+	É necessário verificar se todos os dados de documentação e endereço estão corretos. Caso não esteja,
+o cadastro deve ser rejeitado, até que o usuário confirme as informações solicitadas.</p>
+
+<h4>Passos</h4>
+
+<ol>
+	<li>Acesse a área administrativa do sistema.</li>
+	<li>Acesse menu <strong>opções > Usuários</strong></li>
+	<li>Na listagem de usuários, selecione um usuário inativo.</li>
+	<li>No final do formulário de edição, clique no botão <strong>Aceitar/Rejeitar Cadastro</strong>.</li>
+	<li>Avalie o cadastro, se tiver dentro dos conformes, clique no botão <strong>Ativar</strong> caso contrário, informe um motivo da rejeção no campo observações e clique no botão <strong>Rejeitar</strong>. 
+</ol>
+
+<div class="alert alert-info">
+	<p>Para facilitar a verificação de quais usuários precisam ser avaliados, faça um filtro por usuários inativos.</p>
+</div>
+
+<h4>Imagens:</h4>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/08_01.png' %}">
+	<caption>Botão Aprovar/Rejeitar Cadastro no final do formulário de edição.</caption>
+</div>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/08_02.png' %}">
+	<caption>Formulário de Aprovação/Rejeição de cadastro.</caption>
+</div>
+
+
