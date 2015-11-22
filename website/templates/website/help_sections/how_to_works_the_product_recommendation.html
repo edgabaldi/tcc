@@ -1,0 +1,21 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<p>Todos os dias a meia noite, inicia-se uma tarefa automatizada: o processamento das recomendações de produtos dos lotes que estão liberados para lance no site.</p>
+
+<p>Esse é um processo automático que não depende de intervenção do usuário. Você pode consultar os produtos recomendados acessando a página do produto, veja a sessão: "Você també pode gostar..."</p>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/22_01.png' %}">
+	<caption>Lotes Recomendados</caption>
+</div>

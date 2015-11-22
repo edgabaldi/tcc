@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+{% block extra_css %}
+<style>
+	.image-faq{
+		border:1px solid #CCC;
+		margin:20px 0 20px 0;
+		text-align: center;
+	}
+
+</style>
+{% endblock extra_css %}
+
+<h4>Passos</h4>
+<ol>
+	<li>Acesse a área administrativa do sistema.</li>
+	<li>Acesse menu <strong>Opções > Lotes</strong></li>
+	<li>Clique no número do lote que você deseja editar.</li>
+	<li>Aparecerá um formulário com os dados do lote preenchido, no final do formulário, clique no botão <strong>Excluir Lote</strong>.</li>	<li>Aparecerá uma tela de confirmação de exclusão, caso você realmente tenha interesse em excluir esse lote, precione <strong>DELETAR PERMANENTEMENTE</strong>, caso contrário, precione <strong>CANCELAR</strong>.</li>
+</ol>
+
+<h4>Imagens:</h4>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/14_01.png' %}">
+	<caption>Botão Excluir no final do formulário d edição do Produto.</caption>
+</div>
+
+<div class="image-faq">
+	<img class="img-responsive center-block" src="{% static 'images/help/14_02.png' %}">
+	<caption>Confirmação de exclusão de produto.</caption>
+</div>
+
