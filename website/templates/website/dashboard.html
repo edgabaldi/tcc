@@ -8,7 +8,7 @@
 
 <div class="stats row grid-space-10">
 
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="box-style-1">
 			<h2 class="title">Usuários</h2>
 			<i class="fa fa-users"></i>
@@ -16,7 +16,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="box-style-1">
 			<h2 class="title">Lotes</h2>
 			<i class="fa fa-car"></i>
@@ -24,13 +24,22 @@
 		</div>
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="box-style-1">
 			<h2 class="title">Lances</h2>
 			<i class="fa fa-gavel"></i>
 			<span class="stat-num" data-to="{{bid_count}}" data-speed="3000">{{bid_count}}</span>
 		</div>
 	</div>
+
+	<div class="col-md-3">
+		<div class="box-style-1">
+			<h2 class="title">Fotos</h2>
+			<i class="fa fa-picture-o"></i>
+			<span class="stat-num" data-to="{{photo_count}}" data-speed="3000">{{photo_count}}</span>
+		</div>
+	</div>
+
 
 </div><br><br><br>
 {% endblock app %}

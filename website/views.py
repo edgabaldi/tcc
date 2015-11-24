@@ -15,7 +15,7 @@ from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.utils import timezone
 
-from product.models import Product, Bid
+from product.models import Product, Bid, Photo
 from product.forms import ProductSearchForm
 from account.models import User
 from account.forms import SignUpModelForm
@@ -65,6 +65,7 @@ class DashboardView(MenuActiveMixin, LoginRequiredMixin, TemplateView):
             'user_count': User.objects.count(),
             'product_count': Product.objects.count(),
             'bid_count': Bid.objects.count(),
+            'photo_count': Photo.objects.count(),
         }
 
     def get_context_data(self, **kwargs):
