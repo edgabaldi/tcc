@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin,)
 
-from account.validators import validate_birth_date
+from account.validators import validate_birth_date, validate_cpf_cnpj
 
 STATE_CHOICES = (
     ('RJ', 'Rio de Janeiro'),
@@ -61,7 +61,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField('Telefone', max_length=30)
     birth_date = models.DateField('Data de Nascimento', validators=[
         validate_birth_date])
-    cpf_cnpj = models.CharField('CPF/CNPJ', max_length=15)
+    cpf_cnpj = models.CharField('CPF/CNPJ', max_length=15, validators=[
+        validate_cpf_cnpj])
     doc = models.CharField('Identidade', max_length=20, blank=True)
     doc_entity = models.CharField('Orgão Expedidor', max_length=20, blank=True)
     address = models.CharField('Endereço', max_length=200)
