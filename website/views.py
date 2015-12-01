@@ -106,11 +106,25 @@ class BidView(ProductMixin, View):
             return self._create_bid(request)
         return HttpResponse('Authentication required', status=403)
 
+    def _bid_value_is_valid(self, value):
+        value = Decimal(value)
+        last_bid = self.product.last_bid
+        max_value = last_bid.value * 10
+        min_value = last_bid.value + 1
+        print value, type(value), max_value, min_value
+        print value < min_value, value > max_value
+        return not (value < min_value or value > max_value)
+
     def _create_bid(self, request):
         body = json.loads(request.body)
         value = body.get('value')
+
         if not value:
             return HttpResponse('Bid needs a value', status=400)
+
+        if not self._bid_value_is_valid(value):
+            return HttpResponse('Valor do Lance Inválido', status=400)
+
         try:
             self.product.bids.create(value=Decimal(value), user=request.user)
             return HttpResponse(status=200)

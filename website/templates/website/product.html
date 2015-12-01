@@ -292,7 +292,7 @@
 				toastr.success('Lance efetuado com sucesso.');
 			}
 			function createBidErrorFn(response){
-				toastr.success('Não foi possivel efetuar o lance.', response.data);
+				toastr.error('Não foi possivel efetuar o lance.', response.data);
 			}
 		}
 	}]);
