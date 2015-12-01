@@ -111,8 +111,6 @@ class BidView(ProductMixin, View):
         last_bid = self.product.last_bid
         max_value = last_bid.value * 10
         min_value = last_bid.value + 1
-        print value, type(value), max_value, min_value
-        print value < min_value, value > max_value
         return not (value < min_value or value > max_value)
 
     def _create_bid(self, request):
