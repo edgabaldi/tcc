@@ -3,7 +3,7 @@ from decimal import Decimal
 import datetime
 import json
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, TemplateView, View
 from django.views.generic.edit import CreateView
@@ -53,6 +53,13 @@ class SignUpCreateView(MenuActiveMixin, SuccessMessageMixin, CreateView):
     menu_active = 'signup'
     success_url = reverse_lazy('index')
     success_message = u'Usuário Cadastrado, Aguarde a ativação!'
+
+    def form_valid(self, form):
+        passwd = form.cleaned_data.get('password')
+        self.object = form.save()
+        self.object.set_password(passwd)
+        self.object.save()
+        return redirect(self.get_success_url())
 
 
 class DashboardView(MenuActiveMixin, LoginRequiredMixin, TemplateView):

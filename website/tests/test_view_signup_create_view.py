@@ -21,6 +21,9 @@ class SignUpCreateViewTestCase(TestCase):
         response = self.client.post(self.url, self.data)
         self.assertRedirects(response, reverse('index'))
 
+    def test_post_form_valid_should_set_password(self):
+        pass
+
     def test_post_form_invalid(self):
         response = self.client.post(self.url)
         self.assertEqual(200, response.status_code)
