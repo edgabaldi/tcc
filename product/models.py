@@ -19,17 +19,17 @@ STATUS_CHOICES = (
 
 
 class Brand(models.Model):
-    name = models.CharField(max_length=50)
-    is_active = models.BooleanField(default=True)
+    name = models.CharField('Nome', max_length=50)
+    is_active = models.BooleanField(u'Está Ativo', default=True)
 
     def __unicode__(self):
         return self.name
 
 
 class Model(models.Model):
-    brand = models.ForeignKey('product.Brand')
-    name = models.CharField(max_length=50)
-    is_active = models.BooleanField(default=True)
+    brand = models.ForeignKey('product.Brand', verbose_name='Marca')
+    name = models.CharField('Nome', max_length=50)
+    is_active = models.BooleanField(u'Está Ativo', default=True)
 
     def __unicode__(self):
         return u'{} - {}'.format(self.brand.name, self.name)
@@ -37,20 +37,20 @@ class Model(models.Model):
 
 class Product(models.Model):
 
-    model = models.ForeignKey('product.Model')
-    description = models.CharField(max_length=150)
-    color = models.CharField(max_length=100)
-    year = models.CharField(max_length=15)
-    fuel = models.CharField(max_length=50, default='N/I')
-    depot = models.CharField(max_length=100, default='N/I')
+    model = models.ForeignKey('product.Model', verbose_name='Modelo')
+    description = models.CharField('Descrição', max_length=150)
+    color = models.CharField('Cor', max_length=100)
+    year = models.CharField('Ano', max_length=15)
+    fuel = models.CharField('Combustível', max_length=50, default='N/I')
+    depot = models.CharField('Depósito', max_length=100, default='N/I')
 
-    product_number = models.PositiveIntegerField()
-    initial_price = models.DecimalField(max_digits=10, decimal_places=2)
-    general_state = models.CharField(max_length=20, 
+    product_number = models.PositiveIntegerField('Número do Lote')
+    initial_price = models.DecimalField('Preço Inicial', max_digits=10, decimal_places=2)
+    general_state = models.CharField('Estado Geral', max_length=20, 
                                      choices=GENERAL_STATE_CHOICES)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    reference = models.CharField(max_length=150)
-    clock_opened_at = models.DateTimeField(null=True)
+    status = models.CharField('Status', max_length=20, choices=STATUS_CHOICES)
+    reference = models.CharField('Referência', max_length=150)
+    clock_opened_at = models.DateTimeField('Data Abertura do Relógio', null=True)
 
     @property
     def last_bid(self):
@@ -91,15 +91,16 @@ class Product(models.Model):
 
 
 class Photo(models.Model):
-    product = models.ForeignKey('product.Product')
-    file = models.ImageField(upload_to='photos/')
+    product = models.ForeignKey('product.Product', verbose_name='Produto')
+    file = models.ImageField('Arquivo', upload_to='photos/')
 
 
 
 class Bid(models.Model):
-    user = models.ForeignKey('account.User')
-    product = models.ForeignKey('product.Product', related_name='bids')
-    value = models.DecimalField(max_digits=10, decimal_places=2)
+    user = models.ForeignKey('account.User', verbose_name='Usuário')
+    product = models.ForeignKey('product.Product', related_name='bids', 
+                                verbose_name='Produto',)
+    value = models.DecimalField('Valor', max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     closes_at = models.DateTimeField(null=True)
 
